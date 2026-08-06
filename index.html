@@ -1,0 +1,1406 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>全部商品 照抄包</title>
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif; background:#f5f5f5; padding:16px 12px 40px; }
+.header { text-align:center; padding:14px 0 6px; }
+.header h1 { font-size:20px; font-weight:800; }
+.header p { font-size:12px; color:#999; margin-top:4px; }
+.product-tabs { display:flex; gap:8px; padding:10px 0 6px; overflow-x:auto; -webkit-overflow-scrolling:touch; }
+.product-tab { flex:1; min-width:90px; padding:10px 12px; border:none; border-radius:10px; background:#fff; font-size:14px; font-weight:700; color:#666; cursor:pointer; box-shadow:0 1px 4px rgba(0,0,0,0.06); white-space:nowrap; -webkit-tap-highlight-color:transparent; }
+.product-tab.active { background:#ff6b35; color:#fff; }
+.tab-cnt { display:inline-block; margin-left:4px; font-size:11px; background:rgba(0,0,0,0.08); border-radius:10px; padding:1px 6px; }
+.product-tab.active .tab-cnt { background:rgba(255,255,255,0.25); }
+.section-title { font-size:15px; font-weight:800; color:#fff; background:#ff6b35; padding:10px 14px; border-radius:10px; margin:14px 0 10px; }
+.acc-fold { background:#fff; border-radius:12px; margin:12px 0; box-shadow:0 2px 10px rgba(0,0,0,0.06); overflow:hidden; }
+.acc-fold summary { padding:13px 14px; font-size:15px; font-weight:800; color:#333; cursor:pointer; list-style:none; display:flex; align-items:center; justify-content:space-between; -webkit-tap-highlight-color:transparent; }
+.acc-fold summary::-webkit-details-marker { display:none; }
+.acc-fold summary::after { content:'▾'; font-size:13px; color:#999; transition:transform 0.2s; }
+.acc-fold[open] summary::after { transform:rotate(180deg); }
+.acc-inner { padding:0 14px 14px; }
+.card, .account-card, .video-card { background:#fff; border-radius:14px; padding:14px; margin:12px 0; box-shadow:0 2px 10px rgba(0,0,0,0.06); }
+.card-label { font-size:13px; color:#666; font-weight:600; margin-bottom:8px; }
+.copy-area { background:#f8f9fa; border-radius:8px; padding:12px; font-size:14px; line-height:1.8; color:#333; word-break:break-all; border:1px solid #e8e8e8; white-space:pre-wrap; }
+.copy-btn { display:block; width:100%; padding:13px; background:#07c160; color:#fff; border:none; border-radius:10px; font-size:15px; font-weight:700; cursor:pointer; margin-top:10px; -webkit-tap-highlight-color:transparent; }
+.copy-btn:active { background:#06ad56; }
+.copy-btn.copied { background:#999; }
+.beat-btn { display:flex; align-items:center; justify-content:center; gap:8px; width:100%; padding:15px; background:linear-gradient(135deg,#ff2d55,#ff6b35); color:#fff; border:none; border-radius:12px; font-size:16px; font-weight:800; cursor:pointer; text-decoration:none; margin-top:12px; box-shadow:0 4px 14px rgba(255,45,85,0.3); -webkit-tap-highlight-color:transparent; }
+.beat-btn:active { opacity:0.9; }
+.account-card { border-left:4px solid #ff6b35; }
+.acc-top { display:flex; align-items:center; gap:12px; margin-bottom:10px; }
+.acc-avatar { width:64px; height:64px; border-radius:50%; object-fit:cover; border:2px solid #eee; }
+.acc-avatar-placeholder { width:64px; height:64px; border-radius:50%; background:#f0f0f0; display:flex; align-items:center; justify-content:center; font-size:24px; }
+.acc-nick { font-size:17px; font-weight:800; }
+.acc-meta { font-size:12px; color:#999; margin-top:3px; }
+.video-head { display:flex; justify-content:space-between; align-items:center; margin-bottom:8px; }
+.video-no { font-size:13px; font-weight:700; color:#ff6b35; background:#fff3ee; padding:3px 10px; border-radius:20px; }
+.video-stats { font-size:12px; color:#999; }
+.name-row { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:4px; }
+.name-chip { padding:8px 14px; background:#fff7f0; border:1px solid #ffd8c2; border-radius:20px; font-size:13px; font-weight:600; color:#e85d1f; cursor:pointer; -webkit-tap-highlight-color:transparent; }
+.name-chip:active { background:#ffe8d8; }
+.name-chip.copied { background:#999; color:#fff; border-color:#999; }
+.name-chip-none { font-size:12px; color:#bbb; }
+.dl-btn { display:inline-block; padding:10px 16px; background:#f0f7ff; color:#1565c0; border:1px solid #b3d4f7; border-radius:8px; font-size:14px; font-weight:600; text-decoration:none; margin-bottom:4px; -webkit-tap-highlight-color:transparent; }
+.dl-btn:active { background:#dcebfa; }
+.footer { text-align:center; font-size:11px; color:#bbb; margin-top:16px; }
+</style>
+</head>
+<body>
+<div class="header">
+  <h1>📦 全部商品 · 照抄包</h1>
+  <p>点商品标签 → 看该商品的账号素材 + 内容包 + 拍同款</p>
+</div>
+
+<div class="product-tabs"><button class="product-tab active" data-product="p0" onclick="switchProduct(this)">石斛牛蒡茶<span class="tab-cnt">6</span></button><button class="product-tab" data-product="p1" onclick="switchProduct(this)">杏仁粉<span class="tab-cnt">11</span></button><button class="product-tab" data-product="p2" onclick="switchProduct(this)">姜枣茶<span class="tab-cnt">1</span></button><button class="product-tab" data-product="p3" onclick="switchProduct(this)">五指毛桃茯苓糕<span class="tab-cnt">3</span></button><button class="product-tab" data-product="p4" onclick="switchProduct(this)">鸡内金<span class="tab-cnt">4</span></button><button class="product-tab" data-product="p5" onclick="switchProduct(this)">肉桂粉<span class="tab-cnt">6</span></button><button class="product-tab" data-product="p6" onclick="switchProduct(this)">当归黑豆<span class="tab-cnt">6</span></button><button class="product-tab" data-product="p7" onclick="switchProduct(this)">四宝粉<span class="tab-cnt">1</span></button><button class="product-tab" data-product="p8" onclick="switchProduct(this)">未分类<span class="tab-cnt">5</span></button><button class="product-tab" data-product="p9" onclick="switchProduct(this)">酸枣仁<span class="tab-cnt">2</span></button></div>
+<div id="product-sections">
+<div class="product-section" data-product="p0">
+  <details class="acc-fold">
+    <summary>👤 爆过的账号（6个 · 点击展开）</summary>
+    <div class="acc-inner">
+      
+<div class="account-card">
+  <div class="acc-top">
+    <img class="acc-avatar" src="media/avatar_5b119cb603.jpg" alt="头像" onerror="this.style.display=&apos;none&apos;">
+    <div class="acc-info">
+      <div class="acc-nick">倪师说养生</div>
+      <div class="acc-meta">抖音号 40425718432 · 粉丝 3000+</div>
+    </div>
+  </div>
+  <div class="card-label">🖼 头像（直接下载上传）</div>
+  <a class="dl-btn" href="media/avatar_5b119cb603.jpg" download>⬇️ 下载此头像</a>
+  <div class="card-label" style="margin-top:10px">✨ 相似名字（点击即复制，风格一致）</div>
+  <div class="name-row"><button class="name-chip" onclick="copyTextByName(&apos;倪师讲养生&apos;, this)">倪师讲养生</button><button class="name-chip" onclick="copyTextByName(&apos;倪师谈养生&apos;, this)">倪师谈养生</button><button class="name-chip" onclick="copyTextByName(&apos;倪师话养生&apos;, this)">倪师话养生</button><button class="name-chip" onclick="copyTextByName(&apos;倪师道养生&apos;, this)">倪师道养生</button><button class="name-chip" onclick="copyTextByName(&apos;倪师聊养生&apos;, this)">倪师聊养生</button></div>
+  <div class="card-label" style="margin-top:10px">📝 简介（照抄，一键复制）</div>
+  <div class="copy-area" id="acc-sig-p0-1">所有作品，仅学习交流分享，不做任何指导作用
+👀购买同款点她 👉👉@倪师养生说 
+👀购买同款点她 👉👉@倪师养生说</div>
+  <button class="copy-btn" onclick="copyText('acc-sig-p0-1', this)">📋 复制简介</button>
+</div>
+<div class="account-card">
+  <div class="acc-top">
+    <img class="acc-avatar" src="media/avatar_30dd7183bc.jpg" alt="头像" onerror="this.style.display=&apos;none&apos;">
+    <div class="acc-info">
+      <div class="acc-nick">倪师传风起</div>
+      <div class="acc-meta">抖音号 96430804182 · 粉丝 1.3万+</div>
+    </div>
+  </div>
+  <div class="card-label">🖼 头像（直接下载上传）</div>
+  <a class="dl-btn" href="media/avatar_30dd7183bc.jpg" download>⬇️ 下载此头像</a>
+  <div class="card-label" style="margin-top:10px">✨ 相似名字（点击即复制，风格一致）</div>
+  <div class="name-row"><button class="name-chip" onclick="copyTextByName(&apos;倪师传风号&apos;, this)">倪师传风号</button><button class="name-chip" onclick="copyTextByName(&apos;倪师传风起日常&apos;, this)">倪师传风起日常</button><button class="name-chip" onclick="copyTextByName(&apos;倪师传风起说&apos;, this)">倪师传风起说</button></div>
+  <div class="card-label" style="margin-top:10px">📝 简介（照抄，一键复制）</div>
+  <div class="copy-area" id="acc-sig-p0-2">感谢关注🙏仅学习交流分享，不做任何指导作用
+👇👇👇（下方橱窗）购买视频同款
+👇👇👇（下方橱窗）购买视频同款</div>
+  <button class="copy-btn" onclick="copyText('acc-sig-p0-2', this)">📋 复制简介</button>
+</div>
+<div class="account-card">
+  <div class="acc-top">
+    <img class="acc-avatar" src="media/avatar_d9517a1df5.jpg" alt="头像" onerror="this.style.display=&apos;none&apos;">
+    <div class="acc-info">
+      <div class="acc-nick">感恩倪师</div>
+      <div class="acc-meta">抖音号 32007762426 · 粉丝 7000+</div>
+    </div>
+  </div>
+  <div class="card-label">🖼 头像（直接下载上传）</div>
+  <a class="dl-btn" href="media/avatar_d9517a1df5.jpg" download>⬇️ 下载此头像</a>
+  <div class="card-label" style="margin-top:10px">✨ 相似名字（点击即复制，风格一致）</div>
+  <div class="name-row"><button class="name-chip" onclick="copyTextByName(&apos;感恩倪号&apos;, this)">感恩倪号</button><button class="name-chip" onclick="copyTextByName(&apos;感恩倪师日常&apos;, this)">感恩倪师日常</button><button class="name-chip" onclick="copyTextByName(&apos;感恩倪师说&apos;, this)">感恩倪师说</button></div>
+  <div class="card-label" style="margin-top:10px">📝 简介（照抄，一键复制）</div>
+  <div class="copy-area" id="acc-sig-p0-3">所有作品，仅学习交流分享，不做任何指导作用
+👀购买同款点她👉👉@倪师传风起 
+👀购买同款点她👉👉@倪师传风起</div>
+  <button class="copy-btn" onclick="copyText('acc-sig-p0-3', this)">📋 复制简介</button>
+</div>
+<div class="account-card">
+  <div class="acc-top">
+    <img class="acc-avatar" src="media/avatar_be2534583e.jpg" alt="头像" onerror="this.style.display=&apos;none&apos;">
+    <div class="acc-info">
+      <div class="acc-nick">感恩倪师11</div>
+      <div class="acc-meta">抖音号 73975905661 · 粉丝 1000+</div>
+    </div>
+  </div>
+  <div class="card-label">🖼 头像（直接下载上传）</div>
+  <a class="dl-btn" href="media/avatar_be2534583e.jpg" download>⬇️ 下载此头像</a>
+  <div class="card-label" style="margin-top:10px">✨ 相似名字（点击即复制，风格一致）</div>
+  <div class="name-row"><button class="name-chip" onclick="copyTextByName(&apos;感恩倪师1号&apos;, this)">感恩倪师1号</button><button class="name-chip" onclick="copyTextByName(&apos;感恩倪师11日常&apos;, this)">感恩倪师11日常</button><button class="name-chip" onclick="copyTextByName(&apos;感恩倪师11说&apos;, this)">感恩倪师11说</button></div>
+  <div class="card-label" style="margin-top:10px">📝 简介（照抄，一键复制）</div>
+  <div class="copy-area" id="acc-sig-p0-4">大家好，👇👇👇视频同款好物这里厨窗购买
+朋友：@倪师讲养生 （👈同款在这里）
+朋友：@倪师讲养生 （👈同款在这里)</div>
+  <button class="copy-btn" onclick="copyText('acc-sig-p0-4', this)">📋 复制简介</button>
+</div>
+<div class="account-card">
+  <div class="acc-top">
+    <img class="acc-avatar" src="media/avatar_33a92f8b91.jpg" alt="头像" onerror="this.style.display=&apos;none&apos;">
+    <div class="acc-info">
+      <div class="acc-nick">凝霜</div>
+      <div class="acc-meta">抖音号 96799262214 · 粉丝 2000+</div>
+    </div>
+  </div>
+  <div class="card-label">🖼 头像（直接下载上传）</div>
+  <a class="dl-btn" href="media/avatar_33a92f8b91.jpg" download>⬇️ 下载此头像</a>
+  <div class="card-label" style="margin-top:10px">✨ 相似名字（点击即复制，风格一致）</div>
+  <div class="name-row"><button class="name-chip" onclick="copyTextByName(&apos;凝霜说&apos;, this)">凝霜说</button><button class="name-chip" onclick="copyTextByName(&apos;凝霜日常&apos;, this)">凝霜日常</button></div>
+  <div class="card-label" style="margin-top:10px">📝 简介（照抄，一键复制）</div>
+  <div class="copy-area" id="acc-sig-p0-5">欢迎来到我的世界</div>
+  <button class="copy-btn" onclick="copyText('acc-sig-p0-5', this)">📋 复制简介</button>
+</div>
+<div class="account-card">
+  <div class="acc-top">
+    <img class="acc-avatar" src="media/avatar_472c3e0fb2.jpg" alt="头像" onerror="this.style.display=&apos;none&apos;">
+    <div class="acc-info">
+      <div class="acc-nick">感恩遇见倪师</div>
+      <div class="acc-meta">抖音号 37806530511 · 粉丝 3000+</div>
+    </div>
+  </div>
+  <div class="card-label">🖼 头像（直接下载上传）</div>
+  <a class="dl-btn" href="media/avatar_472c3e0fb2.jpg" download>⬇️ 下载此头像</a>
+  <div class="card-label" style="margin-top:10px">✨ 相似名字（点击即复制，风格一致）</div>
+  <div class="name-row"><button class="name-chip" onclick="copyTextByName(&apos;感恩遇见倪号&apos;, this)">感恩遇见倪号</button><button class="name-chip" onclick="copyTextByName(&apos;感恩遇见倪师日常&apos;, this)">感恩遇见倪师日常</button><button class="name-chip" onclick="copyTextByName(&apos;感恩遇见倪师说&apos;, this)">感恩遇见倪师说</button></div>
+  <div class="card-label" style="margin-top:10px">📝 简介（照抄，一键复制）</div>
+  <div class="copy-area" id="acc-sig-p0-6">所🈶作品，仅学习交流分享，不做任何指导作用
+👀购买同款点他👉👉@暖暖的生活 
+👀购买同款点他👉👉@暖暖的生活</div>
+  <button class="copy-btn" onclick="copyText('acc-sig-p0-6', this)">📋 复制简介</button>
+</div>
+    </div>
+  </details>
+  <div class="section-title">🎬 爆过的视频（6个）</div>
+  
+<div class="video-card">
+  <div class="video-head"><span class="video-no">视频1</span></div>
+  <div class="card-label">🖼 画面上的字</div>
+  <div class="copy-area" id="ocr-p0-7663091978016192177">养肝就是补肾
+肝肾同补</div>
+  <button class="copy-btn" onclick="copyText('ocr-p0-7663091978016192177', this)">📋 复制画面字</button>
+  <div class="card-label" style="margin-top:10px">📦 内容包（文案+标签）</div>
+  <div class="copy-area" id="pack-p0-7663091978016192177">WNBA 常规赛达拉斯飞翼主场以96-91逆转战胜芝加哥天空， 中国球员李月汝替补出战23分钟，高效砍下10分10篮板，外加1抢断1盖帽，正负值＋17全场最高，助球队取胜2。
+#李月汝 #中国女篮 #为国争光 #女篮姑娘太棒了</div>
+  <button class="copy-btn" onclick="copyText('pack-p0-7663091978016192177', this)">📋 复制内容包</button>
+  <a class="beat-btn" href="https://www.douyin.com/video/7663091978016192177" target="_blank" rel="noopener">🎬 去原视频拍同款 →</a>
+</div>
+<div class="video-card">
+  <div class="video-head"><span class="video-no">视频2</span></div>
+  <div class="card-label">🖼 画面上的字</div>
+  <div class="copy-area" id="ocr-p0-7648917541129733093">开水加它泡着喝
+养肝就是养命</div>
+  <button class="copy-btn" onclick="copyText('ocr-p0-7648917541129733093', this)">📋 复制画面字</button>
+  <div class="card-label" style="margin-top:10px">📦 内容包（文案+标签）</div>
+  <div class="copy-area" id="pack-p0-7648917541129733093">#上热门#澳门乒乓球单打世界杯女单1/4决 赛！孙颖莎鏖战七
+#上热门 #澳门乒乓球单打世界杯女单1/4决</div>
+  <button class="copy-btn" onclick="copyText('pack-p0-7648917541129733093', this)">📋 复制内容包</button>
+  <a class="beat-btn" href="https://www.douyin.com/video/7648917541129733093" target="_blank" rel="noopener">🎬 去原视频拍同款 →</a>
+</div>
+<div class="video-card">
+  <div class="video-head"><span class="video-no">视频3</span><div class="video-stats">👍6353 评0 藏0</div></div>
+  <div class="card-label">🖼 画面上的字</div>
+  <div class="copy-area" id="ocr-p0-7669369820463356081">养肝就是补肾
+肝肾同源</div>
+  <button class="copy-btn" onclick="copyText('ocr-p0-7669369820463356081', this)">📋 复制画面字</button>
+  <div class="card-label" style="margin-top:10px">📦 内容包（文案+标签）</div>
+  <div class="copy-area" id="pack-p0-7669369820463356081">2026年斯诺克上海大师赛半决赛， 中国选手吴宜泽以6比10不敌世界排名第一的英国名将贾德·特鲁姆普，止步四强，无缘决赛。半决赛：吴宜泽6比10不敌特鲁姆普
+#吴宜泽 #特鲁姆普 #斯诺克 #上海大师赛 #吴宜泽杀进四强</div>
+  <button class="copy-btn" onclick="copyText('pack-p0-7669369820463356081', this)">📋 复制内容包</button>
+  <a class="beat-btn" href="https://www.douyin.com/video/7669369820463356081" target="_blank" rel="noopener">🎬 去原视频拍同款 →</a>
+</div>
+<div class="video-card">
+  <div class="video-head"><span class="video-no">视频4</span><div class="video-stats">👍4663 评0 藏0</div></div>
+  <div class="card-label">🖼 画面上的字</div>
+  <div class="copy-area" id="ocr-p0-7645611457916734803">滋肝养肾</div>
+  <button class="copy-btn" onclick="copyText('ocr-p0-7645611457916734803', this)">📋 复制画面字</button>
+  <div class="card-label" style="margin-top:10px">📦 内容包（文案+标签）</div>
+  <div class="copy-area" id="pack-p0-7645611457916734803">2026斯诺克世锦赛决赛，吴宜泽18:17双赛点绝杀肖恩•墨菲，夺得冠军！
+#吴宜泽 #肖恩墨菲 #斯诺克世锦赛 #斯诺克</div>
+  <button class="copy-btn" onclick="copyText('pack-p0-7645611457916734803', this)">📋 复制内容包</button>
+  <a class="beat-btn" href="https://www.douyin.com/video/7645611457916734803" target="_blank" rel="noopener">🎬 去原视频拍同款 →</a>
+</div>
+<div class="video-card">
+  <div class="video-head"><span class="video-no">视频5</span></div>
+  <div class="card-label">🖼 画面上的字</div>
+  <div class="copy-area" id="ocr-p0-7642887617982331994">养肝就是养命</div>
+  <button class="copy-btn" onclick="copyText('ocr-p0-7642887617982331994', this)">📋 复制画面字</button>
+  <div class="card-label" style="margin-top:10px">📦 内容包（文案+标签）</div>
+  <div class="copy-area" id="pack-p0-7642887617982331994">斯诺克世锦赛1/4决赛，吴宜泽13-8瓦菲，晋级四强，当全员</div>
+  <button class="copy-btn" onclick="copyText('pack-p0-7642887617982331994', this)">📋 复制内容包</button>
+  <a class="beat-btn" href="https://www.douyin.com/video/7642887617982331994" target="_blank" rel="noopener">🎬 去原视频拍同款 →</a>
+</div>
+<div class="video-card">
+  <div class="video-head"><span class="video-no">视频6</span></div>
+  <div class="card-label">🖼 画面上的字</div>
+  <div class="copy-area" id="ocr-p0-7662014313331594202">养肝就是补肾
+肝肾同源</div>
+  <button class="copy-btn" onclick="copyText('ocr-p0-7662014313331594202', this)">📋 复制画面字</button>
+  <div class="card-label" style="margin-top:10px">📦 内容包（文案+标签）</div>
+  <div class="copy-area" id="pack-p0-7662014313331594202">WNBA 常规赛达拉斯飞翼主场以96-91逆转战胜芝加哥天空， 中国球员李月汝替补出战23分钟，高效砍下10分10篮板，外加1抢断1盖帽，正负值＋17全场最高，助球队取胜2。
+#李月汝 #中国女篮 #为国争光 #女篮姑娘太棒了</div>
+  <button class="copy-btn" onclick="copyText('pack-p0-7662014313331594202', this)">📋 复制内容包</button>
+  <a class="beat-btn" href="https://www.douyin.com/video/7662014313331594202" target="_blank" rel="noopener">🎬 去原视频拍同款 →</a>
+</div>
+</div>
+<div class="product-section" data-product="p1">
+  <details class="acc-fold">
+    <summary>👤 爆过的账号（9个 · 点击展开）</summary>
+    <div class="acc-inner">
+      
+<div class="account-card">
+  <div class="acc-top">
+    <img class="acc-avatar" src="media/avatar_928cfca412.jpg" alt="头像" onerror="this.style.display=&apos;none&apos;">
+    <div class="acc-info">
+      <div class="acc-nick">倪老课堂</div>
+      <div class="acc-meta">抖音号 66820439991 · 粉丝 1000+</div>
+    </div>
+  </div>
+  <div class="card-label">🖼 头像（直接下载上传）</div>
+  <a class="dl-btn" href="media/avatar_928cfca412.jpg" download>⬇️ 下载此头像</a>
+  <div class="card-label" style="margin-top:10px">✨ 相似名字（点击即复制，风格一致）</div>
+  <div class="name-row"><button class="name-chip" onclick="copyTextByName(&apos;倪老讲堂&apos;, this)">倪老讲堂</button><button class="name-chip" onclick="copyTextByName(&apos;倪老小课堂&apos;, this)">倪老小课堂</button><button class="name-chip" onclick="copyTextByName(&apos;倪老公开课&apos;, this)">倪老公开课</button></div>
+  <div class="card-label" style="margin-top:10px">📝 简介（照抄，一键复制）</div>
+  <div class="copy-area" id="acc-sig-p1-1">需要购买杏仁七白饮点击👉@山野居士.肃炽 
+需要购买杏仁七白饮点击👉@山野居士.肃炽 
+... 更多</div>
+  <button class="copy-btn" onclick="copyText('acc-sig-p1-1', this)">📋 复制简介</button>
+</div>
+<div class="account-card">
+  <div class="acc-top">
+    <img class="acc-avatar" src="media/avatar_8809c0b429.jpg" alt="头像" onerror="this.style.display=&apos;none&apos;">
+    <div class="acc-info">
+      <div class="acc-nick">倪师经典分享</div>
+      <div class="acc-meta">抖音号 63963170571 · 粉丝 700+</div>
+    </div>
+  </div>
+  <div class="card-label">🖼 头像（直接下载上传）</div>
+  <a class="dl-btn" href="media/avatar_8809c0b429.jpg" download>⬇️ 下载此头像</a>
+  <div class="card-label" style="margin-top:10px">✨ 相似名字（点击即复制，风格一致）</div>
+  <div class="name-row"><button class="name-chip" onclick="copyTextByName(&apos;倪师经典日记&apos;, this)">倪师经典日记</button><button class="name-chip" onclick="copyTextByName(&apos;倪师经典手记&apos;, this)">倪师经典手记</button><button class="name-chip" onclick="copyTextByName(&apos;倪师经典笔记&apos;, this)">倪师经典笔记</button></div>
+  <div class="card-label" style="margin-top:10px">📝 简介（照抄，一键复制）</div>
+  <div class="copy-area" id="acc-sig-p1-2">需要购买商品点击这里👉👉@倪师语 👈👈的橱窗下单
+需要购买商品点击这里👉👉@倪师语 👈👈... 更多</div>
+  <button class="copy-btn" onclick="copyText('acc-sig-p1-2', this)">📋 复制简介</button>
+</div>
+<div class="account-card">
+  <div class="acc-top">
+    <img class="acc-avatar" src="media/avatar_8cfe945243.jpg" alt="头像" onerror="this.style.display=&apos;none&apos;">
+    <div class="acc-info">
+      <div class="acc-nick">颐养安和</div>
+      <div class="acc-meta">抖音号 35277573659 · 粉丝 4000+</div>
+    </div>
+  </div>
+  <div class="card-label">🖼 头像（直接下载上传）</div>
+  <a class="dl-btn" href="media/avatar_8cfe945243.jpg" download>⬇️ 下载此头像</a>
+  <div class="card-label" style="margin-top:10px">✨ 相似名字（点击即复制，风格一致）</div>
+  <div class="name-row"><button class="name-chip" onclick="copyTextByName(&apos;颐养安号&apos;, this)">颐养安号</button><button class="name-chip" onclick="copyTextByName(&apos;颐养安和日常&apos;, this)">颐养安和日常</button><button class="name-chip" onclick="copyTextByName(&apos;颐养安和说&apos;, this)">颐养安和说</button></div>
+  <div class="card-label" style="margin-top:10px">📝 简介（照抄，一键复制）</div>
+  <div class="copy-area" id="acc-sig-p1-3">视频中提到的肉桂粉和蜂蜜到@清养斋 橱窗购买
+  视频中提到的肉桂粉和蜂蜜到@清养斋 橱窗购买
+     视频中提到的肉桂粉和蜂蜜到@清养斋 橱窗购买</div>
+  <button class="copy-btn" onclick="copyText('acc-sig-p1-3', this)">📋 复制简介</button>
+</div>
+<div class="account-card">
+  <div class="acc-top">
+    <img class="acc-avatar" src="media/avatar_6f72a142e2.jpg" alt="头像" onerror="this.style.display=&apos;none&apos;">
+    <div class="acc-info">
+      <div class="acc-nick">倪师讲健康</div>
+      <div class="acc-meta">抖音号 75997863560 · 粉丝 7000+</div>
+    </div>
+  </div>
+  <div class="card-label">🖼 头像（直接下载上传）</div>
+  <a class="dl-btn" href="media/avatar_6f72a142e2.jpg" download>⬇️ 下载此头像</a>
+  <div class="card-label" style="margin-top:10px">✨ 相似名字（点击即复制，风格一致）</div>
+  <div class="name-row"><button class="name-chip" onclick="copyTextByName(&apos;倪师说健康&apos;, this)">倪师说健康</button><button class="name-chip" onclick="copyTextByName(&apos;倪师谈健康&apos;, this)">倪师谈健康</button><button class="name-chip" onclick="copyTextByName(&apos;倪师话健康&apos;, this)">倪师话健康</button><button class="name-chip" onclick="copyTextByName(&apos;倪师道健康&apos;, this)">倪师道健康</button></div>
+  <div class="card-label" style="margin-top:10px">📝 简介（照抄，一键复制）</div>
+  <div class="copy-area" id="acc-sig-p1-4">祝大家身体健康！
+视频同款商品在下面橱窗购买，可自行下单
+⬇️⬇️⬇️⬇️</div>
+  <button class="copy-btn" onclick="copyText('acc-sig-p1-4', this)">📋 复制简介</button>
+</div>
+<div class="account-card">
+  <div class="acc-top">
+    <img class="acc-avatar" src="media/avatar_65fe20a34c.jpg" alt="头像" onerror="this.style.display=&apos;none&apos;">
+    <div class="acc-info">
+      <div class="acc-nick">倪师精华录</div>
+      <div class="acc-meta">抖音号 96351914959 · 粉丝 2000+</div>
+    </div>
+  </div>
+  <div class="card-label">🖼 头像（直接下载上传）</div>
+  <a class="dl-btn" href="media/avatar_65fe20a34c.jpg" download>⬇️ 下载此头像</a>
+  <div class="card-label" style="margin-top:10px">✨ 相似名字（点击即复制，风格一致）</div>
+  <div class="name-row"><button class="name-chip" onclick="copyTextByName(&apos;倪师精华号&apos;, this)">倪师精华号</button><button class="name-chip" onclick="copyTextByName(&apos;倪师精华录日常&apos;, this)">倪师精华录日常</button><button class="name-chip" onclick="copyTextByName(&apos;倪师精华录说&apos;, this)">倪师精华录说</button></div>
+  <div class="card-label" style="margin-top:10px">📝 简介（照抄，一键复制）</div>
+  <div class="copy-area" id="acc-sig-p1-5">视频同款在橱窗，私信太多，有需要请自主下单</div>
+  <button class="copy-btn" onclick="copyText('acc-sig-p1-5', this)">📋 复制简介</button>
+</div>
+<div class="account-card">
+  <div class="acc-top">
+    <img class="acc-avatar" src="media/avatar_5efdfc96ba.jpg" alt="头像" onerror="this.style.display=&apos;none&apos;">
+    <div class="acc-info">
+      <div class="acc-nick">倪师传承</div>
+      <div class="acc-meta">抖音号 53271739624 · 粉丝 1万+</div>
+    </div>
+  </div>
+  <div class="card-label">🖼 头像（直接下载上传）</div>
+  <a class="dl-btn" href="media/avatar_5efdfc96ba.jpg" download>⬇️ 下载此头像</a>
+  <div class="card-label" style="margin-top:10px">✨ 相似名字（点击即复制，风格一致）</div>
+  <div class="name-row"><button class="name-chip" onclick="copyTextByName(&apos;倪师传号&apos;, this)">倪师传号</button><button class="name-chip" onclick="copyTextByName(&apos;倪师传承日常&apos;, this)">倪师传承日常</button><button class="name-chip" onclick="copyTextByName(&apos;倪师传承说&apos;, this)">倪师传承说</button></div>
+  <div class="card-label" style="margin-top:10px">📝 简介（照抄，一键复制）</div>
+  <div class="copy-area" id="acc-sig-p1-6">（无简介）</div>
+  <button class="copy-btn" onclick="copyText('acc-sig-p1-6', this)">📋 复制简介</button>
+</div>
+<div class="account-card">
+  <div class="acc-top">
+    <img class="acc-avatar" src="media/avatar_679f18fe9d.jpg" alt="头像" onerror="this.style.display=&apos;none&apos;">
+    <div class="acc-info">
+      <div class="acc-nick">大道至简，中医传承</div>
+      <div class="acc-meta">抖音号 1864253745 · 粉丝 1.1万+</div>
+    </div>
+  </div>
+  <div class="card-label">🖼 头像（直接下载上传）</div>
+  <a class="dl-btn" href="media/avatar_679f18fe9d.jpg" download>⬇️ 下载此头像</a>
+  <div class="card-label" style="margin-top:10px">✨ 相似名字（点击即复制，风格一致）</div>
+  <div class="name-row"><button class="name-chip" onclick="copyTextByName(&apos;大说至简，中医传承&apos;, this)">大说至简，中医传承</button><button class="name-chip" onclick="copyTextByName(&apos;大讲至简，中医传承&apos;, this)">大讲至简，中医传承</button><button class="name-chip" onclick="copyTextByName(&apos;大谈至简，中医传承&apos;, this)">大谈至简，中医传承</button><button class="name-chip" onclick="copyTextByName(&apos;大话至简，中医传承&apos;, this)">大话至简，中医传承</button></div>
+  <div class="card-label" style="margin-top:10px">📝 简介（照抄，一键复制）</div>
+  <div class="copy-area" id="acc-sig-p1-7">中医养生</div>
+  <button class="copy-btn" onclick="copyText('acc-sig-p1-7', this)">📋 复制简介</button>
+</div>
+<div class="account-card">
+  <div class="acc-top">
+    <img class="acc-avatar" src="media/avatar_fb16924fe8.jpg" alt="头像" onerror="this.style.display=&apos;none&apos;">
+    <div class="acc-info">
+      <div class="acc-nick">倪师健康频道🚩</div>
+      <div class="acc-meta">抖音号 38984358377 · 粉丝 1000+</div>
+    </div>
+  </div>
+  <div class="card-label">🖼 头像（直接下载上传）</div>
+  <a class="dl-btn" href="media/avatar_fb16924fe8.jpg" download>⬇️ 下载此头像</a>
+  <div class="card-label" style="margin-top:10px">✨ 相似名字（点击即复制，风格一致）</div>
+  <div class="name-row"><button class="name-chip" onclick="copyTextByName(&apos;倪师健康频说🚩&apos;, this)">倪师健康频说🚩</button><button class="name-chip" onclick="copyTextByName(&apos;倪师健康频讲🚩&apos;, this)">倪师健康频讲🚩</button><button class="name-chip" onclick="copyTextByName(&apos;倪师健康频谈🚩&apos;, this)">倪师健康频谈🚩</button><button class="name-chip" onclick="copyTextByName(&apos;倪师健康频话🚩&apos;, this)">倪师健康频话🚩</button></div>
+  <div class="card-label" style="margin-top:10px">📝 简介（照抄，一键复制）</div>
+  <div class="copy-area" id="acc-sig-p1-8">视频同款杏仁粉找👉@倪师推荐杏仁粉（同款点这里） 视频同款杏仁粉找他👉@倪师推荐杏仁粉（同款点这里） @倪师推荐杏仁粉（同款点这里）</div>
+  <button class="copy-btn" onclick="copyText('acc-sig-p1-8', this)">📋 复制简介</button>
+</div>
+<div class="account-card">
+  <div class="acc-top">
+    <img class="acc-avatar" src="media/avatar_70caa7d32c.jpg" alt="头像" onerror="this.style.display=&apos;none&apos;">
+    <div class="acc-info">
+      <div class="acc-nick">倪之师</div>
+      <div class="acc-meta">抖音号 25172570176 · 粉丝 900+</div>
+    </div>
+  </div>
+  <div class="card-label">🖼 头像（直接下载上传）</div>
+  <a class="dl-btn" href="media/avatar_70caa7d32c.jpg" download>⬇️ 下载此头像</a>
+  <div class="card-label" style="margin-top:10px">✨ 相似名字（点击即复制，风格一致）</div>
+  <div class="name-row"><button class="name-chip" onclick="copyTextByName(&apos;倪之师说&apos;, this)">倪之师说</button><button class="name-chip" onclick="copyTextByName(&apos;倪之师日常&apos;, this)">倪之师日常</button></div>
+  <div class="card-label" style="margin-top:10px">📝 简介（照抄，一键复制）</div>
+  <div class="copy-area" id="acc-sig-p1-9">需要购杏仁粉的点击👉@倪师_净心《同款在这里》 
+需要购杏仁粉的点击👉@倪师_净心《同款在这里》 
+需要购杏仁粉的点击👉@倪师_净心《同款在这里》</div>
+  <button class="copy-btn" onclick="copyText('acc-sig-p1-9', this)">📋 复制简介</button>
+</div>
+    </div>
+  </details>
+  <div class="section-title">🎬 爆过的视频（11个）</div>
+  
+<div class="video-card">
+  <div class="video-head"><span class="video-no">视频1</span><div class="video-stats">👍2740 评0 藏0</div></div>
+  <div class="card-label">🖼 画面上的字</div>
+  <div class="copy-area" id="ocr-p1-7669630768456562929">肺部最怕的</div>
+  <button class="copy-btn" onclick="copyText('ocr-p1-7669630768456562929', this)">📋 复制画面字</button>
+  <div class="card-label" style="margin-top:10px">📦 内容包（文案+标签）</div>
+  <div class="copy-area" id="pack-p1-7669630768456562929">少年意气挥如剑问鼎乒坛天下惊！国乒男团3:0横扫日本队夺得伦敦世乒赛团体冠军!12连冠！
+#乒乓球 #国乒 #伦敦世乒赛 #梁靖崀 #冠军</div>
+  <button class="copy-btn" onclick="copyText('pack-p1-7669630768456562929', this)">📋 复制内容包</button>
+  <a class="beat-btn" href="https://www.douyin.com/video/7669630768456562929" target="_blank" rel="noopener">🎬 去原视频拍同款 →</a>
+</div>
+<div class="video-card">
+  <div class="video-head"><span class="video-no">视频2</span><div class="video-stats">👍2881 评0 藏0</div></div>
+  <div class="card-label">🖼 画面上的字</div>
+  <div class="copy-area" id="ocr-p1-7669041823234668712">肺好人美
+不显老
+肺津液不足</div>
+  <button class="copy-btn" onclick="copyText('ocr-p1-7669041823234668712', this)">📋 复制画面字</button>
+  <div class="card-label" style="margin-top:10px">📦 内容包（文案+标签）</div>
+  <div class="copy-area" id="pack-p1-7669041823234668712">马刺还是太年轻了，关键失误&amp;绝杀不中，马刺主场再负尼克斯
+#文班亚马错失绝杀 #尼克斯105比104险胜马刺 #尼克斯2比0马刺 #文</div>
+  <button class="copy-btn" onclick="copyText('pack-p1-7669041823234668712', this)">📋 复制内容包</button>
+  <a class="beat-btn" href="https://www.douyin.com/video/7669041823234668712" target="_blank" rel="noopener">🎬 去原视频拍同款 →</a>
+</div>
+<div class="video-card">
+  <div class="video-head"><span class="video-no">视频3</span><div class="video-stats">👍17243 评0 藏0</div></div>
+  <div class="card-label">🖼 画面上的字</div>
+  <div class="copy-area" id="ocr-p1-7669046549053303784">体内炎症
+都消退</div>
+  <button class="copy-btn" onclick="copyText('ocr-p1-7669046549053303784', this)">📋 复制画面字</button>
+  <div class="card-label" style="margin-top:10px">📦 内容包（文案+标签）</div>
+  <div class="copy-area" id="pack-p1-7669046549053303784">票房已破18亿，相关部门统计估算有望突破30亿。
+#短视频变现 #功夫女足 #周星</div>
+  <button class="copy-btn" onclick="copyText('pack-p1-7669046549053303784', this)">📋 复制内容包</button>
+  <a class="beat-btn" href="https://www.douyin.com/video/7669046549053303784" target="_blank" rel="noopener">🎬 去原视频拍同款 →</a>
+</div>
+<div class="video-card">
+  <div class="video-head"><span class="video-no">视频4</span><div class="video-stats">👍15753 评0 藏0</div></div>
+  <div class="card-label">🖼 画面上的字</div>
+  <div class="copy-area" id="ocr-p1-7663093427618187941">便秘不在肠子
+在肺里</div>
+  <button class="copy-btn" onclick="copyText('ocr-p1-7663093427618187941', this)">📋 复制画面字</button>
+  <div class="card-label" style="margin-top:10px">📦 内容包（文案+标签）</div>
+  <div class="copy-area" id="pack-p1-7663093427618187941">文班亚马毫无悬念当选西决MVP，马刺抢七淘汰雷霆荣获西部冠军，高歌猛进闯入总决赛面对尼克斯#
+#文班亚马获得西决MVP #NBA总决赛马刺vS尼克斯 #马刺抢七淘汰雷霆晋级总决赛</div>
+  <button class="copy-btn" onclick="copyText('pack-p1-7663093427618187941', this)">📋 复制内容包</button>
+  <a class="beat-btn" href="https://www.douyin.com/video/7663093427618187941" target="_blank" rel="noopener">🎬 去原视频拍同款 →</a>
+</div>
+<div class="video-card">
+  <div class="video-head"><span class="video-no">视频5</span></div>
+  <div class="card-label">🖼 画面上的字</div>
+  <div class="copy-area" id="ocr-p1-7664530388455573672">便秘不在肠子
+在肺里</div>
+  <button class="copy-btn" onclick="copyText('ocr-p1-7664530388455573672', this)">📋 复制画面字</button>
+  <div class="card-label" style="margin-top:10px">📦 内容包（文案+标签）</div>
+  <div class="copy-area" id="pack-p1-7664530388455573672">绝境封神!孙颖莎上演史诗级大逆转 2026伦敦世乒赛女团赛场</div>
+  <button class="copy-btn" onclick="copyText('pack-p1-7664530388455573672', this)">📋 复制内容包</button>
+  <a class="beat-btn" href="https://www.douyin.com/video/7664530388455573672" target="_blank" rel="noopener">🎬 去原视频拍同款 →</a>
+</div>
+<div class="video-card">
+  <div class="video-head"><span class="video-no">视频6</span><div class="video-stats">👍4293 评0 藏0</div></div>
+  <div class="card-label">🖼 画面上的字</div>
+  <div class="copy-area" id="ocr-p1-7667983694674340480">便秘不在肠子
+在肺里</div>
+  <button class="copy-btn" onclick="copyText('ocr-p1-7667983694674340480', this)">📋 复制画面字</button>
+  <div class="card-label" style="margin-top:10px">📦 内容包（文案+标签）</div>
+  <div class="copy-area" id="pack-p1-7667983694674340480">CBA季后赛G2广东VS北京，徐杰抢下关键篮板，助攻张皓嘉3分加时绝杀北京！广东宏远赢下季后赛第二场，拒绝横扫！
+#广东宏远绝杀北京 #张皓嘉绝杀 #广东绝杀北京 #广东加时赛</div>
+  <button class="copy-btn" onclick="copyText('pack-p1-7667983694674340480', this)">📋 复制内容包</button>
+  <a class="beat-btn" href="https://www.douyin.com/video/7667983694674340480" target="_blank" rel="noopener">🎬 去原视频拍同款 →</a>
+</div>
+<div class="video-card">
+  <div class="video-head"><span class="video-no">视频7</span><div class="video-stats">👍3779 评0 藏0</div></div>
+  <div class="card-label">🖼 画面上的字</div>
+  <div class="copy-area" id="ocr-p1-7664656847026394298">便秘不在肠子
+在肺里</div>
+  <button class="copy-btn" onclick="copyText('ocr-p1-7664656847026394298', this)">📋 复制画面字</button>
+  <div class="card-label" style="margin-top:10px">📦 内容包（文案+标签）</div>
+  <div class="copy-area" id="pack-p1-7664656847026394298">文班亚马毫无悬念当选西决MVP，马刺抢七淘汰雷霆荣获西部冠军，高歌猛进闯入总决赛面对尼克斯
+#文班亚马获得西决MVP #NBA总决赛马刺vS尼克斯 #马刺抢七淘汰雷霆晋级总决赛</div>
+  <button class="copy-btn" onclick="copyText('pack-p1-7664656847026394298', this)">📋 复制内容包</button>
+  <a class="beat-btn" href="https://www.douyin.com/video/7664656847026394298" target="_blank" rel="noopener">🎬 去原视频拍同款 →</a>
+</div>
+<div class="video-card">
+  <div class="video-head"><span class="video-no">视频8</span></div>
+  <div class="card-label">🖼 画面上的字</div>
+  <div class="copy-area" id="ocr-p1-7648536249091654245">便秘不在肠里
+肺和大肠相表里</div>
+  <button class="copy-btn" onclick="copyText('ocr-p1-7648536249091654245', this)">📋 复制画面字</button>
+  <div class="card-label" style="margin-top:10px">📦 内容包（文案+标签）</div>
+  <div class="copy-area" id="pack-p1-7648536249091654245">#水运船舶
+#水运船舶</div>
+  <button class="copy-btn" onclick="copyText('pack-p1-7648536249091654245', this)">📋 复制内容包</button>
+  <a class="beat-btn" href="https://www.douyin.com/video/7648536249091654245" target="_blank" rel="noopener">🎬 去原视频拍同款 →</a>
+</div>
+<div class="video-card">
+  <div class="video-head"><span class="video-no">视频9</span><div class="video-stats">👍3006 评0 藏0</div></div>
+  <div class="card-label">🖼 画面上的字</div>
+  <div class="copy-area" id="ocr-p1-7669852230786571001">便秘不在肠子
+在肺里</div>
+  <button class="copy-btn" onclick="copyText('ocr-p1-7669852230786571001', this)">📋 复制画面字</button>
+  <div class="card-label" style="margin-top:10px">📦 内容包（文案+标签）</div>
+  <div class="copy-area" id="pack-p1-7669852230786571001">CBA季后赛G2广东VS北京，徐杰抢下关键篮板，助攻张皓嘉3分加时绝杀北京!广东宏远赢下季后赛第二场，拒绝横扫!
+#广东宏远绝杀北京 #张皓嘉绝杀 #广东绝杀北京 #广东加时赛</div>
+  <button class="copy-btn" onclick="copyText('pack-p1-7669852230786571001', this)">📋 复制内容包</button>
+  <a class="beat-btn" href="https://www.douyin.com/video/7669852230786571001" target="_blank" rel="noopener">🎬 去原视频拍同款 →</a>
+</div>
+<div class="video-card">
+  <div class="video-head"><span class="video-no">视频10</span><div class="video-stats">👍2373 评0 藏0</div></div>
+  <div class="card-label">🖼 画面上的字</div>
+  <div class="copy-area" id="ocr-p1-7666027265185401061">便秘不在肠子
+在肺里</div>
+  <button class="copy-btn" onclick="copyText('ocr-p1-7666027265185401061', this)">📋 复制画面字</button>
+  <div class="card-label" style="margin-top:10px">📦 内容包（文案+标签）</div>
+  <div class="copy-area" id="pack-p1-7666027265185401061">文班亚马毫无悬念当选西决MVP，马刺抢七淘汰雷霆荣获西部冠军，高歌猛进闯入总决赛面对尼克斯
+#文班亚马获得西决MVP #NBA总决赛马刺vS尼克斯 #马刺抢七淘汰雷霆晋级总决赛</div>
+  <button class="copy-btn" onclick="copyText('pack-p1-7666027265185401061', this)">📋 复制内容包</button>
+  <a class="beat-btn" href="https://www.douyin.com/video/7666027265185401061" target="_blank" rel="noopener">🎬 去原视频拍同款 →</a>
+</div>
+<div class="video-card">
+  <div class="video-head"><span class="video-no">视频11</span></div>
+  <div class="card-label">🖼 画面上的字</div>
+  <div class="copy-area" id="ocr-p1-7665602727195489381">便秘不在肠子
+在肺里</div>
+  <button class="copy-btn" onclick="copyText('ocr-p1-7665602727195489381', this)">📋 复制画面字</button>
+  <div class="card-label" style="margin-top:10px">📦 内容包（文案+标签）</div>
+  <div class="copy-area" id="pack-p1-7665602727195489381">文班亚马毫无悬念拿下西决MVP！马刺抢七淘汰雷霆，拿到西部冠军后一路高歌猛进，接下来要在决赛对上尼克斯啦～
+#文班亚马获得西决MVP #NBA总决赛马刺vs尼克斯 #马刺抢七淘汰雷霆晋级总决赛</div>
+  <button class="copy-btn" onclick="copyText('pack-p1-7665602727195489381', this)">📋 复制内容包</button>
+  <a class="beat-btn" href="https://www.douyin.com/video/7665602727195489381" target="_blank" rel="noopener">🎬 去原视频拍同款 →</a>
+</div>
+</div>
+<div class="product-section" data-product="p2">
+  <details class="acc-fold">
+    <summary>👤 爆过的账号（1个 · 点击展开）</summary>
+    <div class="acc-inner">
+      
+<div class="account-card">
+  <div class="acc-top">
+    <img class="acc-avatar" src="media/avatar_fb66e1e8e0.jpg" alt="头像" onerror="this.style.display=&apos;none&apos;">
+    <div class="acc-info">
+      <div class="acc-nick">倪养生</div>
+      <div class="acc-meta">抖音号 44530867338 · 粉丝 3.1万+</div>
+    </div>
+  </div>
+  <div class="card-label">🖼 头像（直接下载上传）</div>
+  <a class="dl-btn" href="media/avatar_fb66e1e8e0.jpg" download>⬇️ 下载此头像</a>
+  <div class="card-label" style="margin-top:10px">✨ 相似名字（点击即复制，风格一致）</div>
+  <div class="name-row"><button class="name-chip" onclick="copyTextByName(&apos;倪养生说&apos;, this)">倪养生说</button><button class="name-chip" onclick="copyTextByName(&apos;倪养生日常&apos;, this)">倪养生日常</button></div>
+  <div class="card-label" style="margin-top:10px">📝 简介（照抄，一键复制）</div>
+  <div class="copy-area" id="acc-sig-p2-1">每天为大家分享靠谱养生知识‼️
+视频提到好物都在橱窗‼️
+👇👇👇下面橱窗里购买 全部保证是正品‼️</div>
+  <button class="copy-btn" onclick="copyText('acc-sig-p2-1', this)">📋 复制简介</button>
+</div>
+    </div>
+  </details>
+  <div class="section-title">🎬 爆过的视频（1个）</div>
+  
+<div class="video-card">
+  <div class="video-head"><span class="video-no">视频1</span></div>
+  <div class="card-label">🖼 画面上的字</div>
+  <div class="copy-area" id="ocr-p2-7659234194602150565">人老不老
+不看年龄
+看膝盖</div>
+  <button class="copy-btn" onclick="copyText('ocr-p2-7659234194602150565', this)">📋 复制画面字</button>
+  <div class="card-label" style="margin-top:10px">📦 内容包（文案+标签）</div>
+  <div class="copy-area" id="pack-p2-7659234194602150565">马刺还是太年轻了，关键失误&amp;绝杀不中，马刺主场再负尼克斯
+#文班亚马错失绝杀 #尼克斯105比104险胜马刺 #尼克斯2比0马刺</div>
+  <button class="copy-btn" onclick="copyText('pack-p2-7659234194602150565', this)">📋 复制内容包</button>
+  <a class="beat-btn" href="https://www.douyin.com/video/7659234194602150565" target="_blank" rel="noopener">🎬 去原视频拍同款 →</a>
+</div>
+</div>
+<div class="product-section" data-product="p3">
+  <details class="acc-fold">
+    <summary>👤 爆过的账号（3个 · 点击展开）</summary>
+    <div class="acc-inner">
+      
+<div class="account-card">
+  <div class="acc-top">
+    <img class="acc-avatar" src="media/avatar_fb66e1e8e0.jpg" alt="头像" onerror="this.style.display=&apos;none&apos;">
+    <div class="acc-info">
+      <div class="acc-nick">倪养生</div>
+      <div class="acc-meta">抖音号 44530867338 · 粉丝 3.1万+</div>
+    </div>
+  </div>
+  <div class="card-label">🖼 头像（直接下载上传）</div>
+  <a class="dl-btn" href="media/avatar_fb66e1e8e0.jpg" download>⬇️ 下载此头像</a>
+  <div class="card-label" style="margin-top:10px">✨ 相似名字（点击即复制，风格一致）</div>
+  <div class="name-row"><button class="name-chip" onclick="copyTextByName(&apos;倪养生说&apos;, this)">倪养生说</button><button class="name-chip" onclick="copyTextByName(&apos;倪养生日常&apos;, this)">倪养生日常</button></div>
+  <div class="card-label" style="margin-top:10px">📝 简介（照抄，一键复制）</div>
+  <div class="copy-area" id="acc-sig-p3-1">每天为大家分享靠谱养生知识‼️
+视频提到好物都在橱窗‼️
+👇👇👇下面橱窗里购买 全部保证是正品‼️</div>
+  <button class="copy-btn" onclick="copyText('acc-sig-p3-1', this)">📋 复制简介</button>
+</div>
+<div class="account-card">
+  <div class="acc-top">
+    <img class="acc-avatar" src="media/avatar_89126d2041.jpg" alt="头像" onerror="this.style.display=&apos;none&apos;">
+    <div class="acc-info">
+      <div class="acc-nick">倪师传承</div>
+      <div class="acc-meta">抖音号 95423384881 · 粉丝 6000+</div>
+    </div>
+  </div>
+  <div class="card-label">🖼 头像（直接下载上传）</div>
+  <a class="dl-btn" href="media/avatar_89126d2041.jpg" download>⬇️ 下载此头像</a>
+  <div class="card-label" style="margin-top:10px">✨ 相似名字（点击即复制，风格一致）</div>
+  <div class="name-row"><button class="name-chip" onclick="copyTextByName(&apos;倪师传号&apos;, this)">倪师传号</button><button class="name-chip" onclick="copyTextByName(&apos;倪师传承日常&apos;, this)">倪师传承日常</button><button class="name-chip" onclick="copyTextByName(&apos;倪师传承说&apos;, this)">倪师传承说</button></div>
+  <div class="card-label" style="margin-top:10px">📝 简介（照抄，一键复制）</div>
+  <div class="copy-area" id="acc-sig-p3-2">视频同款都在👉@倪师传承 👈
+视频同款都在👉@倪师传承 👈
+视频同款都在👉@倪师传承👈... 更多</div>
+  <button class="copy-btn" onclick="copyText('acc-sig-p3-2', this)">📋 复制简介</button>
+</div>
+<div class="account-card">
+  <div class="acc-top">
+    <img class="acc-avatar" src="media/avatar_5cbf1db27c.jpg" alt="头像" onerror="this.style.display=&apos;none&apos;">
+    <div class="acc-info">
+      <div class="acc-nick">破土春声🌱</div>
+      <div class="acc-meta">抖音号 98896868770 · 粉丝 1万+</div>
+    </div>
+  </div>
+  <div class="card-label">🖼 头像（直接下载上传）</div>
+  <a class="dl-btn" href="media/avatar_5cbf1db27c.jpg" download>⬇️ 下载此头像</a>
+  <div class="card-label" style="margin-top:10px">✨ 相似名字（点击即复制，风格一致）</div>
+  <div class="name-row"><button class="name-chip" onclick="copyTextByName(&apos;破土春声号&apos;, this)">破土春声号</button><button class="name-chip" onclick="copyTextByName(&apos;破土春声🌱日常&apos;, this)">破土春声🌱日常</button><button class="name-chip" onclick="copyTextByName(&apos;破土春声🌱说&apos;, this)">破土春声🌱说</button></div>
+  <div class="card-label" style="margin-top:10px">📝 简介（照抄，一键复制）</div>
+  <div class="copy-area" id="acc-sig-p3-3">关爱健康，一起学习养生之道
+视频同款商品都在下方橱窗
+👇👇👇👇</div>
+  <button class="copy-btn" onclick="copyText('acc-sig-p3-3', this)">📋 复制简介</button>
+</div>
+    </div>
+  </details>
+  <div class="section-title">🎬 爆过的视频（3个）</div>
+  
+<div class="video-card">
+  <div class="video-head"><span class="video-no">视频1</span></div>
+  <div class="card-label">🖼 画面上的字</div>
+  <div class="copy-area" id="ocr-p3-7659234194602150565">人老不老
+不看年龄
+看膝盖</div>
+  <button class="copy-btn" onclick="copyText('ocr-p3-7659234194602150565', this)">📋 复制画面字</button>
+  <div class="card-label" style="margin-top:10px">📦 内容包（文案+标签）</div>
+  <div class="copy-area" id="pack-p3-7659234194602150565">马刺还是太年轻了，关键失误&amp;绝杀不中，马刺主场再负尼克斯
+#文班亚马错失绝杀 #尼克斯105比104险胜马刺 #尼克斯2比0马刺</div>
+  <button class="copy-btn" onclick="copyText('pack-p3-7659234194602150565', this)">📋 复制内容包</button>
+  <a class="beat-btn" href="https://www.douyin.com/video/7659234194602150565" target="_blank" rel="noopener">🎬 去原视频拍同款 →</a>
+</div>
+<div class="video-card">
+  <div class="video-head"><span class="video-no">视频2</span></div>
+  <div class="card-label">🖼 画面上的字</div>
+  <div class="copy-area" id="ocr-p3-7659282591317382591">（未识别到画面文字）</div>
+  <button class="copy-btn" onclick="copyText('ocr-p3-7659282591317382591', this)">📋 复制画面字</button>
+  <div class="card-label" style="margin-top:10px">📦 内容包（文案+标签）</div>
+  <div class="copy-area" id="pack-p3-7659282591317382591">#倪师 #倪海厦
+#倪师 #倪海厦</div>
+  <button class="copy-btn" onclick="copyText('pack-p3-7659282591317382591', this)">📋 复制内容包</button>
+  <a class="beat-btn" href="https://www.douyin.com/video/7659282591317382591" target="_blank" rel="noopener">🎬 去原视频拍同款 →</a>
+</div>
+<div class="video-card">
+  <div class="video-head"><span class="video-no">视频3</span></div>
+  <div class="card-label">🖼 画面上的字</div>
+  <div class="copy-area" id="ocr-p3-7664845714979775721">湿气重
+三伏天去湿</div>
+  <button class="copy-btn" onclick="copyText('ocr-p3-7664845714979775721', this)">📋 复制画面字</button>
+  <div class="card-label" style="margin-top:10px">📦 内容包（文案+标签）</div>
+  <div class="copy-area" id="pack-p3-7664845714979775721">马刺还是太年轻了，关键失误&amp;绝杀不中，马刺主场再负尼克斯
+#文班亚马错失绝杀 #尼克斯105比104险胜马刺 #尼克斯2比0马刺</div>
+  <button class="copy-btn" onclick="copyText('pack-p3-7664845714979775721', this)">📋 复制内容包</button>
+  <a class="beat-btn" href="https://www.douyin.com/video/7664845714979775721" target="_blank" rel="noopener">🎬 去原视频拍同款 →</a>
+</div>
+</div>
+<div class="product-section" data-product="p4">
+  <details class="acc-fold">
+    <summary>👤 爆过的账号（4个 · 点击展开）</summary>
+    <div class="acc-inner">
+      
+<div class="account-card">
+  <div class="acc-top">
+    <img class="acc-avatar" src="media/avatar_89126d2041.jpg" alt="头像" onerror="this.style.display=&apos;none&apos;">
+    <div class="acc-info">
+      <div class="acc-nick">倪师传承</div>
+      <div class="acc-meta">抖音号 95423384881 · 粉丝 6000+</div>
+    </div>
+  </div>
+  <div class="card-label">🖼 头像（直接下载上传）</div>
+  <a class="dl-btn" href="media/avatar_89126d2041.jpg" download>⬇️ 下载此头像</a>
+  <div class="card-label" style="margin-top:10px">✨ 相似名字（点击即复制，风格一致）</div>
+  <div class="name-row"><button class="name-chip" onclick="copyTextByName(&apos;倪师传号&apos;, this)">倪师传号</button><button class="name-chip" onclick="copyTextByName(&apos;倪师传承日常&apos;, this)">倪师传承日常</button><button class="name-chip" onclick="copyTextByName(&apos;倪师传承说&apos;, this)">倪师传承说</button></div>
+  <div class="card-label" style="margin-top:10px">📝 简介（照抄，一键复制）</div>
+  <div class="copy-area" id="acc-sig-p4-1">视频同款都在👉@倪师传承 👈
+视频同款都在👉@倪师传承 👈
+视频同款都在👉@倪师传承👈... 更多</div>
+  <button class="copy-btn" onclick="copyText('acc-sig-p4-1', this)">📋 复制简介</button>
+</div>
+<div class="account-card">
+  <div class="acc-top">
+    <img class="acc-avatar" src="media/avatar_c9c5f0e17f.jpg" alt="头像" onerror="this.style.display=&apos;none&apos;">
+    <div class="acc-info">
+      <div class="acc-nick">倪宗本草</div>
+      <div class="acc-meta">抖音号 79972179099 · 粉丝 1000+</div>
+    </div>
+  </div>
+  <div class="card-label">🖼 头像（直接下载上传）</div>
+  <a class="dl-btn" href="media/avatar_c9c5f0e17f.jpg" download>⬇️ 下载此头像</a>
+  <div class="card-label" style="margin-top:10px">✨ 相似名字（点击即复制，风格一致）</div>
+  <div class="name-row"><button class="name-chip" onclick="copyTextByName(&apos;倪宗本号&apos;, this)">倪宗本号</button><button class="name-chip" onclick="copyTextByName(&apos;倪宗本草日常&apos;, this)">倪宗本草日常</button><button class="name-chip" onclick="copyTextByName(&apos;倪宗本草说&apos;, this)">倪宗本草说</button></div>
+  <div class="card-label" style="margin-top:10px">📝 简介（照抄，一键复制）</div>
+  <div class="copy-area" id="acc-sig-p4-2">分享中医养生
+健康养生，好物
+↓  ↓  ↓   ↓</div>
+  <button class="copy-btn" onclick="copyText('acc-sig-p4-2', this)">📋 复制简介</button>
+</div>
+<div class="account-card">
+  <div class="acc-top">
+    <img class="acc-avatar" src="media/avatar_a7b2ac44f2.jpg" alt="头像" onerror="this.style.display=&apos;none&apos;">
+    <div class="acc-info">
+      <div class="acc-nick">倪師傳奇</div>
+      <div class="acc-meta">抖音号 41873038630 · 粉丝 2000+</div>
+    </div>
+  </div>
+  <div class="card-label">🖼 头像（直接下载上传）</div>
+  <a class="dl-btn" href="media/avatar_a7b2ac44f2.jpg" download>⬇️ 下载此头像</a>
+  <div class="card-label" style="margin-top:10px">✨ 相似名字（点击即复制，风格一致）</div>
+  <div class="name-row"><button class="name-chip" onclick="copyTextByName(&apos;倪師傳号&apos;, this)">倪師傳号</button><button class="name-chip" onclick="copyTextByName(&apos;倪師傳奇日常&apos;, this)">倪師傳奇日常</button><button class="name-chip" onclick="copyTextByName(&apos;倪師傳奇说&apos;, this)">倪師傳奇说</button></div>
+  <div class="card-label" style="margin-top:10px">📝 简介（照抄，一键复制）</div>
+  <div class="copy-area" id="acc-sig-p4-3">私信太多，回不过来。
+倪师推荐商品在橱窗里
+... 更多</div>
+  <button class="copy-btn" onclick="copyText('acc-sig-p4-3', this)">📋 复制简介</button>
+</div>
+<div class="account-card">
+  <div class="acc-top">
+    <img class="acc-avatar" src="media/avatar_ba70faa326.jpg" alt="头像" onerror="this.style.display=&apos;none&apos;">
+    <div class="acc-info">
+      <div class="acc-nick">倪师说</div>
+      <div class="acc-meta">抖音号 50261029302 · 粉丝 1.3万+</div>
+    </div>
+  </div>
+  <div class="card-label">🖼 头像（直接下载上传）</div>
+  <a class="dl-btn" href="media/avatar_ba70faa326.jpg" download>⬇️ 下载此头像</a>
+  <div class="card-label" style="margin-top:10px">✨ 相似名字（点击即复制，风格一致）</div>
+  <div class="name-row"><button class="name-chip" onclick="copyTextByName(&apos;倪师讲&apos;, this)">倪师讲</button><button class="name-chip" onclick="copyTextByName(&apos;倪师谈&apos;, this)">倪师谈</button><button class="name-chip" onclick="copyTextByName(&apos;倪师话&apos;, this)">倪师话</button><button class="name-chip" onclick="copyTextByName(&apos;倪师道&apos;, this)">倪师道</button><button class="name-chip" onclick="copyTextByName(&apos;倪师聊&apos;, this)">倪师聊</button></div>
+  <div class="card-label" style="margin-top:10px">📝 简介（照抄，一键复制）</div>
+  <div class="copy-area" id="acc-sig-p4-4">视频里说的好东西都在下面👇👇👇👇👇橱窗里。点击进入即可</div>
+  <button class="copy-btn" onclick="copyText('acc-sig-p4-4', this)">📋 复制简介</button>
+</div>
+    </div>
+  </details>
+  <div class="section-title">🎬 爆过的视频（4个）</div>
+  
+<div class="video-card">
+  <div class="video-head"><span class="video-no">视频1</span></div>
+  <div class="card-label">🖼 画面上的字</div>
+  <div class="copy-area" id="ocr-p4-7659282591317382591">（未识别到画面文字）</div>
+  <button class="copy-btn" onclick="copyText('ocr-p4-7659282591317382591', this)">📋 复制画面字</button>
+  <div class="card-label" style="margin-top:10px">📦 内容包（文案+标签）</div>
+  <div class="copy-area" id="pack-p4-7659282591317382591">#倪师 #倪海厦
+#倪师 #倪海厦</div>
+  <button class="copy-btn" onclick="copyText('pack-p4-7659282591317382591', this)">📋 复制内容包</button>
+  <a class="beat-btn" href="https://www.douyin.com/video/7659282591317382591" target="_blank" rel="noopener">🎬 去原视频拍同款 →</a>
+</div>
+<div class="video-card">
+  <div class="video-head"><span class="video-no">视频2</span></div>
+  <div class="card-label">🖼 画面上的字</div>
+  <div class="copy-area" id="ocr-p4-7636571018282300027">失眠</div>
+  <button class="copy-btn" onclick="copyText('ocr-p4-7636571018282300027', this)">📋 复制画面字</button>
+  <div class="card-label" style="margin-top:10px">📦 内容包（文案+标签）</div>
+  <div class="copy-area" id="pack-p4-7636571018282300027">#失眠
+#失眠</div>
+  <button class="copy-btn" onclick="copyText('pack-p4-7636571018282300027', this)">📋 复制内容包</button>
+  <a class="beat-btn" href="https://www.douyin.com/video/7636571018282300027" target="_blank" rel="noopener">🎬 去原视频拍同款 →</a>
+</div>
+<div class="video-card">
+  <div class="video-head"><span class="video-no">视频3</span></div>
+  <div class="card-label">🖼 画面上的字</div>
+  <div class="copy-area" id="ocr-p4-7622982150023187635">失眠睡不着</div>
+  <button class="copy-btn" onclick="copyText('ocr-p4-7622982150023187635', this)">📋 复制画面字</button>
+  <div class="card-label" style="margin-top:10px">📦 内容包（文案+标签）</div>
+  <div class="copy-area" id="pack-p4-7622982150023187635">#失眠的夜
+#失眠的夜</div>
+  <button class="copy-btn" onclick="copyText('pack-p4-7622982150023187635', this)">📋 复制内容包</button>
+  <a class="beat-btn" href="https://www.douyin.com/video/7622982150023187635" target="_blank" rel="noopener">🎬 去原视频拍同款 →</a>
+</div>
+<div class="video-card">
+  <div class="video-head"><span class="video-no">视频4</span></div>
+  <div class="card-label">🖼 画面上的字</div>
+  <div class="copy-area" id="ocr-p4-7636554868623002789">睡不着怎么办</div>
+  <button class="copy-btn" onclick="copyText('ocr-p4-7636554868623002789', this)">📋 复制画面字</button>
+  <div class="card-label" style="margin-top:10px">📦 内容包（文案+标签）</div>
+  <div class="copy-area" id="pack-p4-7636554868623002789">中超山东泰山4：1上海申花。克雷桑帽子戏法
+#中超 #山东泰山 #上海申花 #足球 #克雷桑</div>
+  <button class="copy-btn" onclick="copyText('pack-p4-7636554868623002789', this)">📋 复制内容包</button>
+  <a class="beat-btn" href="https://www.douyin.com/video/7636554868623002789" target="_blank" rel="noopener">🎬 去原视频拍同款 →</a>
+</div>
+</div>
+<div class="product-section" data-product="p5">
+  <details class="acc-fold">
+    <summary>👤 爆过的账号（6个 · 点击展开）</summary>
+    <div class="acc-inner">
+      
+<div class="account-card">
+  <div class="acc-top">
+    <img class="acc-avatar" src="media/avatar_8cfe945243.jpg" alt="头像" onerror="this.style.display=&apos;none&apos;">
+    <div class="acc-info">
+      <div class="acc-nick">颐养安和</div>
+      <div class="acc-meta">抖音号 35277573659 · 粉丝 4000+</div>
+    </div>
+  </div>
+  <div class="card-label">🖼 头像（直接下载上传）</div>
+  <a class="dl-btn" href="media/avatar_8cfe945243.jpg" download>⬇️ 下载此头像</a>
+  <div class="card-label" style="margin-top:10px">✨ 相似名字（点击即复制，风格一致）</div>
+  <div class="name-row"><button class="name-chip" onclick="copyTextByName(&apos;颐养安号&apos;, this)">颐养安号</button><button class="name-chip" onclick="copyTextByName(&apos;颐养安和日常&apos;, this)">颐养安和日常</button><button class="name-chip" onclick="copyTextByName(&apos;颐养安和说&apos;, this)">颐养安和说</button></div>
+  <div class="card-label" style="margin-top:10px">📝 简介（照抄，一键复制）</div>
+  <div class="copy-area" id="acc-sig-p5-1">视频中提到的肉桂粉和蜂蜜到@清养斋 橱窗购买
+  视频中提到的肉桂粉和蜂蜜到@清养斋 橱窗购买
+     视频中提到的肉桂粉和蜂蜜到@清养斋 橱窗购买</div>
+  <button class="copy-btn" onclick="copyText('acc-sig-p5-1', this)">📋 复制简介</button>
+</div>
+<div class="account-card">
+  <div class="acc-top">
+    <img class="acc-avatar" src="media/avatar_e5f125f511.jpg" alt="头像" onerror="this.style.display=&apos;none&apos;">
+    <div class="acc-info">
+      <div class="acc-nick">颐和清韵</div>
+      <div class="acc-meta">抖音号 53668482203 · 粉丝 9000+</div>
+    </div>
+  </div>
+  <div class="card-label">🖼 头像（直接下载上传）</div>
+  <a class="dl-btn" href="media/avatar_e5f125f511.jpg" download>⬇️ 下载此头像</a>
+  <div class="card-label" style="margin-top:10px">✨ 相似名字（点击即复制，风格一致）</div>
+  <div class="name-row"><button class="name-chip" onclick="copyTextByName(&apos;颐和清号&apos;, this)">颐和清号</button><button class="name-chip" onclick="copyTextByName(&apos;颐和清韵日常&apos;, this)">颐和清韵日常</button><button class="name-chip" onclick="copyTextByName(&apos;颐和清韵说&apos;, this)">颐和清韵说</button></div>
+  <div class="card-label" style="margin-top:10px">📝 简介（照抄，一键复制）</div>
+  <div class="copy-area" id="acc-sig-p5-2">视频同款商品在下面橱窗里购买，自行下单！
+视频同款商品在下面橱窗里购买，自行下单！... 更多</div>
+  <button class="copy-btn" onclick="copyText('acc-sig-p5-2', this)">📋 复制简介</button>
+</div>
+<div class="account-card">
+  <div class="acc-top">
+    <img class="acc-avatar" src="media/avatar_6a3efd3fb8.jpg" alt="头像" onerror="this.style.display=&apos;none&apos;">
+    <div class="acc-info">
+      <div class="acc-nick">元气食养堂🍵</div>
+      <div class="acc-meta">抖音号 94045587832 · 粉丝 5000+</div>
+    </div>
+  </div>
+  <div class="card-label">🖼 头像（直接下载上传）</div>
+  <a class="dl-btn" href="media/avatar_6a3efd3fb8.jpg" download>⬇️ 下载此头像</a>
+  <div class="card-label" style="margin-top:10px">✨ 相似名字（点击即复制，风格一致）</div>
+  <div class="name-row"><button class="name-chip" onclick="copyTextByName(&apos;元气食养堂号&apos;, this)">元气食养堂号</button><button class="name-chip" onclick="copyTextByName(&apos;元气食养堂🍵日常&apos;, this)">元气食养堂🍵日常</button><button class="name-chip" onclick="copyTextByName(&apos;元气食养堂🍵说&apos;, this)">元气食养堂🍵说</button></div>
+  <div class="card-label" style="margin-top:10px">📝 简介（照抄，一键复制）</div>
+  <div class="copy-area" id="acc-sig-p5-3">分享养生小秘诀！
+视频同款好物都在下面橱窗内，可自行下单！
+视频同款好物都在下面橱窗内，可自行下单！... 更多</div>
+  <button class="copy-btn" onclick="copyText('acc-sig-p5-3', this)">📋 复制简介</button>
+</div>
+<div class="account-card">
+  <div class="acc-top">
+    <img class="acc-avatar" src="media/avatar_44aed7a389.jpg" alt="头像" onerror="this.style.display=&apos;none&apos;">
+    <div class="acc-info">
+      <div class="acc-nick">颐养自清</div>
+      <div class="acc-meta">抖音号 13667286 · 粉丝 5000+</div>
+    </div>
+  </div>
+  <div class="card-label">🖼 头像（直接下载上传）</div>
+  <a class="dl-btn" href="media/avatar_44aed7a389.jpg" download>⬇️ 下载此头像</a>
+  <div class="card-label" style="margin-top:10px">✨ 相似名字（点击即复制，风格一致）</div>
+  <div class="name-row"><button class="name-chip" onclick="copyTextByName(&apos;颐养自号&apos;, this)">颐养自号</button><button class="name-chip" onclick="copyTextByName(&apos;颐养自清日常&apos;, this)">颐养自清日常</button><button class="name-chip" onclick="copyTextByName(&apos;颐养自清说&apos;, this)">颐养自清说</button></div>
+  <div class="card-label" style="margin-top:10px">📝 简介（照抄，一键复制）</div>
+  <div class="copy-area" id="acc-sig-p5-4">视频同款商品在下面橱窗里购买，自行下单！
+视频同款商品在下面橱窗里购买，自行下单！... 更多</div>
+  <button class="copy-btn" onclick="copyText('acc-sig-p5-4', this)">📋 复制简介</button>
+</div>
+<div class="account-card">
+  <div class="acc-top">
+    <img class="acc-avatar" src="media/avatar_fb71239460.jpg" alt="头像" onerror="this.style.display=&apos;none&apos;">
+    <div class="acc-info">
+      <div class="acc-nick">清养斋</div>
+      <div class="acc-meta">抖音号 53168816720 · 粉丝 8000+</div>
+    </div>
+  </div>
+  <div class="card-label">🖼 头像（直接下载上传）</div>
+  <a class="dl-btn" href="media/avatar_fb71239460.jpg" download>⬇️ 下载此头像</a>
+  <div class="card-label" style="margin-top:10px">✨ 相似名字（点击即复制，风格一致）</div>
+  <div class="name-row"><button class="name-chip" onclick="copyTextByName(&apos;清养斋说&apos;, this)">清养斋说</button><button class="name-chip" onclick="copyTextByName(&apos;清养斋日常&apos;, this)">清养斋日常</button></div>
+  <div class="card-label" style="margin-top:10px">📝 简介（照抄，一键复制）</div>
+  <div class="copy-area" id="acc-sig-p5-5">“是药三分毒，是食七分养”。每天分享养生知识
+视频同款商品在下面橱窗里购买，可自行下单！
+视频同款商品在下面橱窗里购买，可自行下单... 更多</div>
+  <button class="copy-btn" onclick="copyText('acc-sig-p5-5', this)">📋 复制简介</button>
+</div>
+<div class="account-card">
+  <div class="acc-top">
+    <img class="acc-avatar" src="media/avatar_2efcfd7f6b.jpg" alt="头像" onerror="this.style.display=&apos;none&apos;">
+    <div class="acc-info">
+      <div class="acc-nick">颐养致柔</div>
+      <div class="acc-meta">抖音号 63626365650 · 粉丝 3000+</div>
+    </div>
+  </div>
+  <div class="card-label">🖼 头像（直接下载上传）</div>
+  <a class="dl-btn" href="media/avatar_2efcfd7f6b.jpg" download>⬇️ 下载此头像</a>
+  <div class="card-label" style="margin-top:10px">✨ 相似名字（点击即复制，风格一致）</div>
+  <div class="name-row"><button class="name-chip" onclick="copyTextByName(&apos;颐养致号&apos;, this)">颐养致号</button><button class="name-chip" onclick="copyTextByName(&apos;颐养致柔日常&apos;, this)">颐养致柔日常</button><button class="name-chip" onclick="copyTextByName(&apos;颐养致柔说&apos;, this)">颐养致柔说</button></div>
+  <div class="card-label" style="margin-top:10px">📝 简介（照抄，一键复制）</div>
+  <div class="copy-area" id="acc-sig-p5-6">视频中提到的肉桂粉和蜂蜜在@颐和清韵橱窗里购买
+视频中提到的肉桂粉和蜂蜜在@颐和清韵 橱窗... 更多</div>
+  <button class="copy-btn" onclick="copyText('acc-sig-p5-6', this)">📋 复制简介</button>
+</div>
+    </div>
+  </details>
+  <div class="section-title">🎬 爆过的视频（6个）</div>
+  
+<div class="video-card">
+  <div class="video-head"><span class="video-no">视频1</span><div class="video-stats">👍17243 评0 藏0</div></div>
+  <div class="card-label">🖼 画面上的字</div>
+  <div class="copy-area" id="ocr-p5-7669046549053303784">体内炎症
+都消退</div>
+  <button class="copy-btn" onclick="copyText('ocr-p5-7669046549053303784', this)">📋 复制画面字</button>
+  <div class="card-label" style="margin-top:10px">📦 内容包（文案+标签）</div>
+  <div class="copy-area" id="pack-p5-7669046549053303784">票房已破18亿，相关部门统计估算有望突破30亿。
+#短视频变现 #功夫女足 #周星</div>
+  <button class="copy-btn" onclick="copyText('pack-p5-7669046549053303784', this)">📋 复制内容包</button>
+  <a class="beat-btn" href="https://www.douyin.com/video/7669046549053303784" target="_blank" rel="noopener">🎬 去原视频拍同款 →</a>
+</div>
+<div class="video-card">
+  <div class="video-head"><span class="video-no">视频2</span></div>
+  <div class="card-label">🖼 画面上的字</div>
+  <div class="copy-area" id="ocr-p5-7654887099573389161">体内炎症
+全部消退</div>
+  <button class="copy-btn" onclick="copyText('ocr-p5-7654887099573389161', this)">📋 复制画面字</button>
+  <div class="card-label" style="margin-top:10px">📦 内容包（文案+标签）</div>
+  <div class="copy-area" id="pack-p5-7654887099573389161">马刺还是太年轻了，关键失误&amp;绝杀不中，马刺主场再负尼克斯
+#文班亚马错失绝杀 #尼克斯105比104险胜马刺 #尼克斯2比0马刺</div>
+  <button class="copy-btn" onclick="copyText('pack-p5-7654887099573389161', this)">📋 复制内容包</button>
+  <a class="beat-btn" href="https://www.douyin.com/video/7654887099573389161" target="_blank" rel="noopener">🎬 去原视频拍同款 →</a>
+</div>
+<div class="video-card">
+  <div class="video-head"><span class="video-no">视频3</span><div class="video-stats">👍27106 评0 藏0</div></div>
+  <div class="card-label">🖼 画面上的字</div>
+  <div class="copy-area" id="ocr-p5-7652169287150763199">全部消退
+体内炎症</div>
+  <button class="copy-btn" onclick="copyText('ocr-p5-7652169287150763199', this)">📋 复制画面字</button>
+  <div class="card-label" style="margin-top:10px">📦 内容包（文案+标签）</div>
+  <div class="copy-area" id="pack-p5-7652169287150763199">登临最高峰，一览众山小！国乒男团3:0横扫日本队，夺得伦敦世乒赛团体冠军，12连冠，真正的NO.1！
+#国乒 #乒乓球 #王楚钦 #国乒男团 #伦敦世乒赛</div>
+  <button class="copy-btn" onclick="copyText('pack-p5-7652169287150763199', this)">📋 复制内容包</button>
+  <a class="beat-btn" href="https://www.douyin.com/video/7652169287150763199" target="_blank" rel="noopener">🎬 去原视频拍同款 →</a>
+</div>
+<div class="video-card">
+  <div class="video-head"><span class="video-no">视频4</span><div class="video-stats">👍23246 评0 藏0</div></div>
+  <div class="card-label">🖼 画面上的字</div>
+  <div class="copy-area" id="ocr-p5-7651877647223431606">体内炎症
+全部消退</div>
+  <button class="copy-btn" onclick="copyText('ocr-p5-7651877647223431606', this)">📋 复制画面字</button>
+  <div class="card-label" style="margin-top:10px">📦 内容包（文案+标签）</div>
+  <div class="copy-area" id="pack-p5-7651877647223431606">世锦赛燃爆！丁俊晖10:5轻取吉尔伯特拿到16强门票，下轮硬刚赵心童，中国德比谁能笑到最后？
+#丁俊晖为高考生们加油 #丁俊晖 #斯诺克 #高考 #新兴专业主理人 #抖音精选高考应援联盟</div>
+  <button class="copy-btn" onclick="copyText('pack-p5-7651877647223431606', this)">📋 复制内容包</button>
+  <a class="beat-btn" href="https://www.douyin.com/video/7651877647223431606" target="_blank" rel="noopener">🎬 去原视频拍同款 →</a>
+</div>
+<div class="video-card">
+  <div class="video-head"><span class="video-no">视频5</span></div>
+  <div class="card-label">🖼 画面上的字</div>
+  <div class="copy-area" id="ocr-p5-7659416900451076453">体内炎症
+都消退</div>
+  <button class="copy-btn" onclick="copyText('ocr-p5-7659416900451076453', this)">📋 复制画面字</button>
+  <div class="card-label" style="margin-top:10px">📦 内容包（文案+标签）</div>
+  <div class="copy-area" id="pack-p5-7659416900451076453">这局看得我心脏狂跳！孙颖莎连追10分完成极限大逆转😱最后赛</div>
+  <button class="copy-btn" onclick="copyText('pack-p5-7659416900451076453', this)">📋 复制内容包</button>
+  <a class="beat-btn" href="https://www.douyin.com/video/7659416900451076453" target="_blank" rel="noopener">🎬 去原视频拍同款 →</a>
+</div>
+<div class="video-card">
+  <div class="video-head"><span class="video-no">视频6</span><div class="video-stats">👍17866 评0 藏0</div></div>
+  <div class="card-label">🖼 画面上的字</div>
+  <div class="copy-area" id="ocr-p5-7659691342301345530">体内炎症
+都消退</div>
+  <button class="copy-btn" onclick="copyText('ocr-p5-7659691342301345530', this)">📋 复制画面字</button>
+  <div class="card-label" style="margin-top:10px">📦 内容包（文案+标签）</div>
+  <div class="copy-area" id="pack-p5-7659691342301345530">这局看得我心脏狂跳！孙颖莎连追10分完成极限大逆转😱最后赛点对手突然失误，直接锁定胜局！！
+#2026伦敦世乒赛 #乒乓咕起来 #国乒女团vs韩国女团 #孙颖莎3比2金娜英 #今天也在好好运动</div>
+  <button class="copy-btn" onclick="copyText('pack-p5-7659691342301345530', this)">📋 复制内容包</button>
+  <a class="beat-btn" href="https://www.douyin.com/video/7659691342301345530" target="_blank" rel="noopener">🎬 去原视频拍同款 →</a>
+</div>
+</div>
+<div class="product-section" data-product="p6">
+  <details class="acc-fold">
+    <summary>👤 爆过的账号（5个 · 点击展开）</summary>
+    <div class="acc-inner">
+      
+<div class="account-card">
+  <div class="acc-top">
+    <img class="acc-avatar" src="media/avatar_a961c9eb9f.jpg" alt="头像" onerror="this.style.display=&apos;none&apos;">
+    <div class="acc-info">
+      <div class="acc-nick">月光之下</div>
+      <div class="acc-meta">抖音号 dyvnm2mjpnep · 粉丝 8000+</div>
+    </div>
+  </div>
+  <div class="card-label">🖼 头像（直接下载上传）</div>
+  <a class="dl-btn" href="media/avatar_a961c9eb9f.jpg" download>⬇️ 下载此头像</a>
+  <div class="card-label" style="margin-top:10px">✨ 相似名字（点击即复制，风格一致）</div>
+  <div class="name-row"><button class="name-chip" onclick="copyTextByName(&apos;月光之号&apos;, this)">月光之号</button><button class="name-chip" onclick="copyTextByName(&apos;月光之下日常&apos;, this)">月光之下日常</button><button class="name-chip" onclick="copyTextByName(&apos;月光之下说&apos;, this)">月光之下说</button></div>
+  <div class="card-label" style="margin-top:10px">📝 简介（照抄，一键复制）</div>
+  <div class="copy-area" id="acc-sig-p6-1">广西南宁市</div>
+  <button class="copy-btn" onclick="copyText('acc-sig-p6-1', this)">📋 复制简介</button>
+</div>
+<div class="account-card">
+  <div class="acc-top">
+    <img class="acc-avatar" src="media/avatar_c8ab149a13.jpg" alt="头像" onerror="this.style.display=&apos;none&apos;">
+    <div class="acc-info">
+      <div class="acc-nick">倪老讲养</div>
+      <div class="acc-meta">抖音号 52774442044 · 粉丝 5000+</div>
+    </div>
+  </div>
+  <div class="card-label">🖼 头像（直接下载上传）</div>
+  <a class="dl-btn" href="media/avatar_c8ab149a13.jpg" download>⬇️ 下载此头像</a>
+  <div class="card-label" style="margin-top:10px">✨ 相似名字（点击即复制，风格一致）</div>
+  <div class="name-row"><button class="name-chip" onclick="copyTextByName(&apos;倪老说养&apos;, this)">倪老说养</button><button class="name-chip" onclick="copyTextByName(&apos;倪老谈养&apos;, this)">倪老谈养</button><button class="name-chip" onclick="copyTextByName(&apos;倪老话养&apos;, this)">倪老话养</button><button class="name-chip" onclick="copyTextByName(&apos;倪老道养&apos;, this)">倪老道养</button></div>
+  <div class="card-label" style="margin-top:10px">📝 简介（照抄，一键复制）</div>
+  <div class="copy-area" id="acc-sig-p6-2">希望大家都能有一个好身体
+需要购杏仁七白饮的请点击👉@南乡尽晚 
+需要购杏仁七白饮的请点击👉@南乡尽晚 ... 更多</div>
+  <button class="copy-btn" onclick="copyText('acc-sig-p6-2', this)">📋 复制简介</button>
+</div>
+<div class="account-card">
+  <div class="acc-top">
+    <img class="acc-avatar" src="media/avatar_2770464bd7.jpg" alt="头像" onerror="this.style.display=&apos;none&apos;">
+    <div class="acc-info">
+      <div class="acc-nick">王老师教养生</div>
+      <div class="acc-meta">抖音号 88713925986 · 粉丝 5000+</div>
+    </div>
+  </div>
+  <div class="card-label">🖼 头像（直接下载上传）</div>
+  <a class="dl-btn" href="media/avatar_2770464bd7.jpg" download>⬇️ 下载此头像</a>
+  <div class="card-label" style="margin-top:10px">✨ 相似名字（点击即复制，风格一致）</div>
+  <div class="name-row"><button class="name-chip" onclick="copyTextByName(&apos;王老师教养号&apos;, this)">王老师教养号</button><button class="name-chip" onclick="copyTextByName(&apos;王老师教养生日常&apos;, this)">王老师教养生日常</button><button class="name-chip" onclick="copyTextByName(&apos;王老师教养生说&apos;, this)">王老师教养生说</button></div>
+  <div class="card-label" style="margin-top:10px">📝 简介（照抄，一键复制）</div>
+  <div class="copy-area" id="acc-sig-p6-3">跟着老师学养生❤️</div>
+  <button class="copy-btn" onclick="copyText('acc-sig-p6-3', this)">📋 复制简介</button>
+</div>
+<div class="account-card">
+  <div class="acc-top">
+    <img class="acc-avatar" src="media/avatar_55fdbdf383.jpg" alt="头像" onerror="this.style.display=&apos;none&apos;">
+    <div class="acc-info">
+      <div class="acc-nick">倪老师养生健康</div>
+      <div class="acc-meta">抖音号 63126127997 · 粉丝 8000+</div>
+    </div>
+  </div>
+  <div class="card-label">🖼 头像（直接下载上传）</div>
+  <a class="dl-btn" href="media/avatar_55fdbdf383.jpg" download>⬇️ 下载此头像</a>
+  <div class="card-label" style="margin-top:10px">✨ 相似名字（点击即复制，风格一致）</div>
+  <div class="name-row"><button class="name-chip" onclick="copyTextByName(&apos;倪老师养生健号&apos;, this)">倪老师养生健号</button><button class="name-chip" onclick="copyTextByName(&apos;倪老师养生健康日常&apos;, this)">倪老师养生健康日常</button><button class="name-chip" onclick="copyTextByName(&apos;倪老师养生健康说&apos;, this)">倪老师养生健康说</button></div>
+  <div class="card-label" style="margin-top:10px">📝 简介（照抄，一键复制）</div>
+  <div class="copy-area" id="acc-sig-p6-4">需要购杏仁七白饮的点击👉@倪说养生 
+需要购杏仁七白饮的点击👉 @倪说养生 ... 更多</div>
+  <button class="copy-btn" onclick="copyText('acc-sig-p6-4', this)">📋 复制简介</button>
+</div>
+<div class="account-card">
+  <div class="acc-top">
+    <img class="acc-avatar" src="media/avatar_f1ea13ae8a.jpg" alt="头像" onerror="this.style.display=&apos;none&apos;">
+    <div class="acc-info">
+      <div class="acc-nick">逸哥谈健康🍵</div>
+      <div class="acc-meta">抖音号 47790937145 · 粉丝 2.2万+</div>
+    </div>
+  </div>
+  <div class="card-label">🖼 头像（直接下载上传）</div>
+  <a class="dl-btn" href="media/avatar_f1ea13ae8a.jpg" download>⬇️ 下载此头像</a>
+  <div class="card-label" style="margin-top:10px">✨ 相似名字（点击即复制，风格一致）</div>
+  <div class="name-row"><button class="name-chip" onclick="copyTextByName(&apos;逸哥说健康🍵&apos;, this)">逸哥说健康🍵</button><button class="name-chip" onclick="copyTextByName(&apos;逸哥讲健康🍵&apos;, this)">逸哥讲健康🍵</button><button class="name-chip" onclick="copyTextByName(&apos;逸哥话健康🍵&apos;, this)">逸哥话健康🍵</button><button class="name-chip" onclick="copyTextByName(&apos;逸哥聊健康🍵&apos;, this)">逸哥聊健康🍵</button></div>
+  <div class="card-label" style="margin-top:10px">📝 简介（照抄，一键复制）</div>
+  <div class="copy-area" id="acc-sig-p6-5">视频同款
+@董师傅养生分享 
+@董师傅养生分享 ... 更多</div>
+  <button class="copy-btn" onclick="copyText('acc-sig-p6-5', this)">📋 复制简介</button>
+</div>
+    </div>
+  </details>
+  <div class="section-title">🎬 爆过的视频（6个）</div>
+  
+<div class="video-card">
+  <div class="video-head"><span class="video-no">视频1</span><div class="video-stats">👍3306 评0 藏0</div></div>
+  <div class="card-label">🖼 画面上的字</div>
+  <div class="copy-area" id="ocr-p6-7667481731213871795">通血管之王</div>
+  <button class="copy-btn" onclick="copyText('ocr-p6-7667481731213871795', this)">📋 复制画面字</button>
+  <div class="card-label" style="margin-top:10px">📦 内容包（文案+标签）</div>
+  <div class="copy-area" id="pack-p6-7667481731213871795">#街景随拍 #夜晚城市温度
+#街景随拍 #夜晚城市温度</div>
+  <button class="copy-btn" onclick="copyText('pack-p6-7667481731213871795', this)">📋 复制内容包</button>
+  <a class="beat-btn" href="https://www.douyin.com/video/7667481731213871795" target="_blank" rel="noopener">🎬 去原视频拍同款 →</a>
+</div>
+<div class="video-card">
+  <div class="video-head"><span class="video-no">视频2</span><div class="video-stats">👍29638 评0 藏0</div></div>
+  <div class="card-label">🖼 画面上的字</div>
+  <div class="copy-area" id="ocr-p6-7669435939244318885">肺部最怕的
+三个习惯</div>
+  <button class="copy-btn" onclick="copyText('ocr-p6-7669435939244318885', this)">📋 复制画面字</button>
+  <div class="card-label" style="margin-top:10px">📦 内容包（文案+标签）</div>
+  <div class="copy-area" id="pack-p6-7669435939244318885">无敌是多么寂寞!
+2026伦敦世乒赛，国乒男女团双双夺冠!3:2逆转日本、3:0横扫日本,，这就是中国乒乓的统治力!今天全队凯旋，欢迎英雄回家!
+#国乒世乒赛夺冠 #国乒包揽冠军 #中国乒乓 #孙颖莎 #王楚钦</div>
+  <button class="copy-btn" onclick="copyText('pack-p6-7669435939244318885', this)">📋 复制内容包</button>
+  <a class="beat-btn" href="https://www.douyin.com/video/7669435939244318885" target="_blank" rel="noopener">🎬 去原视频拍同款 →</a>
+</div>
+<div class="video-card">
+  <div class="video-head"><span class="video-no">视频3</span><div class="video-stats">👍22184 评0 藏0</div></div>
+  <div class="card-label">🖼 画面上的字</div>
+  <div class="copy-area" id="ocr-p6-7644132915781341606">肺部</div>
+  <button class="copy-btn" onclick="copyText('ocr-p6-7644132915781341606', this)">📋 复制画面字</button>
+  <div class="card-label" style="margin-top:10px">📦 内容包（文案+标签）</div>
+  <div class="copy-area" id="pack-p6-7644132915781341606">2026澳门🇲🇴乒乓球🏓️世界杯🏆 女单1/4中国选手孙颖莎战七局以四比三胜埃及选手，成功晋级四强
+#澳门世界杯 #孙颖莎卫冕冠军 #乒乓球</div>
+  <button class="copy-btn" onclick="copyText('pack-p6-7644132915781341606', this)">📋 复制内容包</button>
+  <a class="beat-btn" href="https://www.douyin.com/video/7644132915781341606" target="_blank" rel="noopener">🎬 去原视频拍同款 →</a>
+</div>
+<div class="video-card">
+  <div class="video-head"><span class="video-no">视频4</span></div>
+  <div class="card-label">🖼 画面上的字</div>
+  <div class="copy-area" id="ocr-p6-7654239258290786043">肺部最怕的</div>
+  <button class="copy-btn" onclick="copyText('ocr-p6-7654239258290786043', this)">📋 复制画面字</button>
+  <div class="card-label" style="margin-top:10px">📦 内容包（文案+标签）</div>
+  <div class="copy-area" id="pack-p6-7654239258290786043">少年意气挥如剑 问鼎乒坛天下惊！国乒男团3:0横扫日本队夺得伦敦世乒赛团体冠军！12连冠！
+#乒乓球 #国乒 #伦敦世乒赛 #梁靖崀 #冠军</div>
+  <button class="copy-btn" onclick="copyText('pack-p6-7654239258290786043', this)">📋 复制内容包</button>
+  <a class="beat-btn" href="https://www.douyin.com/video/7654239258290786043" target="_blank" rel="noopener">🎬 去原视频拍同款 →</a>
+</div>
+<div class="video-card">
+  <div class="video-head"><span class="video-no">视频5</span><div class="video-stats">👍12254 评0 藏0</div></div>
+  <div class="card-label">🖼 画面上的字</div>
+  <div class="copy-area" id="ocr-p6-7643815990510636523">肺部最怕的是什麼</div>
+  <button class="copy-btn" onclick="copyText('ocr-p6-7643815990510636523', this)">📋 复制画面字</button>
+  <div class="card-label" style="margin-top:10px">📦 内容包（文案+标签）</div>
+  <div class="copy-area" id="pack-p6-7643815990510636523">大鹏一日同风起，扶摇直上九万里 国乒男团3:0横扫日本夺得伦敦世乒赛团体冠军 12连冠
+#乒乓球 #国乒 #伦敦世乒赛 #梁靖崑 #王楚钦</div>
+  <button class="copy-btn" onclick="copyText('pack-p6-7643815990510636523', this)">📋 复制内容包</button>
+  <a class="beat-btn" href="https://www.douyin.com/video/7643815990510636523" target="_blank" rel="noopener">🎬 去原视频拍同款 →</a>
+</div>
+<div class="video-card">
+  <div class="video-head"><span class="video-no">视频6</span></div>
+  <div class="card-label">🖼 画面上的字</div>
+  <div class="copy-area" id="ocr-p6-7659917351983206065">肺部最怕的</div>
+  <button class="copy-btn" onclick="copyText('ocr-p6-7659917351983206065', this)">📋 复制画面字</button>
+  <div class="card-label" style="margin-top:10px">📦 内容包（文案+标签）</div>
+  <div class="copy-area" id="pack-p6-7659917351983206065">少年意气挥如剑 问鼎乒坛天下惊！国乒男团3:0横扫日本队夺得伦敦世乒赛团体冠军！12连冠！
+#乒乓球 #国乒 #伦敦世乒赛 #梁靖崀 #冠军</div>
+  <button class="copy-btn" onclick="copyText('pack-p6-7659917351983206065', this)">📋 复制内容包</button>
+  <a class="beat-btn" href="https://www.douyin.com/video/7659917351983206065" target="_blank" rel="noopener">🎬 去原视频拍同款 →</a>
+</div>
+</div>
+<div class="product-section" data-product="p7">
+  <details class="acc-fold">
+    <summary>👤 爆过的账号（1个 · 点击展开）</summary>
+    <div class="acc-inner">
+      
+<div class="account-card">
+  <div class="acc-top">
+    <img class="acc-avatar" src="media/avatar_a961c9eb9f.jpg" alt="头像" onerror="this.style.display=&apos;none&apos;">
+    <div class="acc-info">
+      <div class="acc-nick">月光之下</div>
+      <div class="acc-meta">抖音号 dyvnm2mjpnep · 粉丝 8000+</div>
+    </div>
+  </div>
+  <div class="card-label">🖼 头像（直接下载上传）</div>
+  <a class="dl-btn" href="media/avatar_a961c9eb9f.jpg" download>⬇️ 下载此头像</a>
+  <div class="card-label" style="margin-top:10px">✨ 相似名字（点击即复制，风格一致）</div>
+  <div class="name-row"><button class="name-chip" onclick="copyTextByName(&apos;月光之号&apos;, this)">月光之号</button><button class="name-chip" onclick="copyTextByName(&apos;月光之下日常&apos;, this)">月光之下日常</button><button class="name-chip" onclick="copyTextByName(&apos;月光之下说&apos;, this)">月光之下说</button></div>
+  <div class="card-label" style="margin-top:10px">📝 简介（照抄，一键复制）</div>
+  <div class="copy-area" id="acc-sig-p7-1">广西南宁市</div>
+  <button class="copy-btn" onclick="copyText('acc-sig-p7-1', this)">📋 复制简介</button>
+</div>
+    </div>
+  </details>
+  <div class="section-title">🎬 爆过的视频（1个）</div>
+  
+<div class="video-card">
+  <div class="video-head"><span class="video-no">视频1</span><div class="video-stats">👍3306 评0 藏0</div></div>
+  <div class="card-label">🖼 画面上的字</div>
+  <div class="copy-area" id="ocr-p7-7667481731213871795">通血管之王</div>
+  <button class="copy-btn" onclick="copyText('ocr-p7-7667481731213871795', this)">📋 复制画面字</button>
+  <div class="card-label" style="margin-top:10px">📦 内容包（文案+标签）</div>
+  <div class="copy-area" id="pack-p7-7667481731213871795">#街景随拍 #夜晚城市温度
+#街景随拍 #夜晚城市温度</div>
+  <button class="copy-btn" onclick="copyText('pack-p7-7667481731213871795', this)">📋 复制内容包</button>
+  <a class="beat-btn" href="https://www.douyin.com/video/7667481731213871795" target="_blank" rel="noopener">🎬 去原视频拍同款 →</a>
+</div>
+</div>
+<div class="product-section" data-product="p8">
+  <details class="acc-fold">
+    <summary>👤 爆过的账号（3个 · 点击展开）</summary>
+    <div class="acc-inner">
+      
+<div class="account-card">
+  <div class="acc-top">
+    <img class="acc-avatar" src="media/avatar_999a8ef3e7.jpg" alt="头像" onerror="this.style.display=&apos;none&apos;">
+    <div class="acc-info">
+      <div class="acc-nick">倪师养方分享</div>
+      <div class="acc-meta">抖音号 wanshiruyi0028 · 粉丝 5000+</div>
+    </div>
+  </div>
+  <div class="card-label">🖼 头像（直接下载上传）</div>
+  <a class="dl-btn" href="media/avatar_999a8ef3e7.jpg" download>⬇️ 下载此头像</a>
+  <div class="card-label" style="margin-top:10px">✨ 相似名字（点击即复制，风格一致）</div>
+  <div class="name-row"><button class="name-chip" onclick="copyTextByName(&apos;倪师养方日记&apos;, this)">倪师养方日记</button><button class="name-chip" onclick="copyTextByName(&apos;倪师养方手记&apos;, this)">倪师养方手记</button><button class="name-chip" onclick="copyTextByName(&apos;倪师养方笔记&apos;, this)">倪师养方笔记</button></div>
+  <div class="card-label" style="margin-top:10px">📝 简介（照抄，一键复制）</div>
+  <div class="copy-area" id="acc-sig-p8-1">研习倪师汉唐中医医理
+分享传统草本养生知识与实用方
+视频同款都在橱窗购买... 更多</div>
+  <button class="copy-btn" onclick="copyText('acc-sig-p8-1', this)">📋 复制简介</button>
+</div>
+<div class="account-card">
+  <div class="acc-top">
+    <img class="acc-avatar" src="media/avatar_0e5c4d584c.jpg" alt="头像" onerror="this.style.display=&apos;none&apos;">
+    <div class="acc-info">
+      <div class="acc-nick">倪老科普养生</div>
+      <div class="acc-meta">抖音号 79825735300 · 粉丝 3000+</div>
+    </div>
+  </div>
+  <div class="card-label">🖼 头像（直接下载上传）</div>
+  <a class="dl-btn" href="media/avatar_0e5c4d584c.jpg" download>⬇️ 下载此头像</a>
+  <div class="card-label" style="margin-top:10px">✨ 相似名字（点击即复制，风格一致）</div>
+  <div class="name-row"><button class="name-chip" onclick="copyTextByName(&apos;倪老科普养号&apos;, this)">倪老科普养号</button><button class="name-chip" onclick="copyTextByName(&apos;倪老科普养生日常&apos;, this)">倪老科普养生日常</button><button class="name-chip" onclick="copyTextByName(&apos;倪老科普养生说&apos;, this)">倪老科普养生说</button></div>
+  <div class="card-label" style="margin-top:10px">📝 简介（照抄，一键复制）</div>
+  <div class="copy-area" id="acc-sig-p8-2">祝您健康！
+视频中所提的都在橱窗内，欢迎自行下单</div>
+  <button class="copy-btn" onclick="copyText('acc-sig-p8-2', this)">📋 复制简介</button>
+</div>
+<div class="account-card">
+  <div class="acc-top">
+    <img class="acc-avatar" src="media/avatar_788341d7d2.jpg" alt="头像" onerror="this.style.display=&apos;none&apos;">
+    <div class="acc-info">
+      <div class="acc-nick">倪师推荐杏仁粉（点这里）</div>
+      <div class="acc-meta">抖音号 CGHK2026 · 粉丝 1.1万+</div>
+    </div>
+  </div>
+  <div class="card-label">🖼 头像（直接下载上传）</div>
+  <a class="dl-btn" href="media/avatar_788341d7d2.jpg" download>⬇️ 下载此头像</a>
+  <div class="card-label" style="margin-top:10px">✨ 相似名字（点击即复制，风格一致）</div>
+  <div class="name-row"><button class="name-chip" onclick="copyTextByName(&apos;倪师推荐杏仁粉（点这里号&apos;, this)">倪师推荐杏仁粉（点这里号</button><button class="name-chip" onclick="copyTextByName(&apos;倪师推荐杏仁粉（点这里）日常&apos;, this)">倪师推荐杏仁粉（点这里）日常</button><button class="name-chip" onclick="copyTextByName(&apos;倪师推荐杏仁粉（点这里）说&apos;, this)">倪师推荐杏仁粉（点这里）说</button></div>
+  <div class="card-label" style="margin-top:10px">📝 简介（照抄，一键复制）</div>
+  <div class="copy-area" id="acc-sig-p8-3">祝您身体健康，万事如意
+倪师推荐的杏仁粉在👇👇👇橱窗，欢迎下单购买</div>
+  <button class="copy-btn" onclick="copyText('acc-sig-p8-3', this)">📋 复制简介</button>
+</div>
+    </div>
+  </details>
+  <div class="section-title">🎬 爆过的视频（5个）</div>
+  
+<div class="video-card">
+  <div class="video-head"><span class="video-no">视频1</span></div>
+  <div class="card-label">🖼 画面上的字</div>
+  <div class="copy-area" id="ocr-p8-7648606101927847503">（未识别到画面文字）</div>
+  <button class="copy-btn" onclick="copyText('ocr-p8-7648606101927847503', this)">📋 复制画面字</button>
+  <div class="card-label" style="margin-top:10px">📦 内容包（文案+标签）</div>
+  <div class="copy-area" id="pack-p8-7648606101927847503">看到希望!U17国足2-3日本全场集锦:万项破门赵松源点射，国少获亚军创近10届亚洲杯最好成绩
+#国足 #中国足球 #U17亚洲杯</div>
+  <button class="copy-btn" onclick="copyText('pack-p8-7648606101927847503', this)">📋 复制内容包</button>
+  <a class="beat-btn" href="https://www.douyin.com/video/7648606101927847503" target="_blank" rel="noopener">🎬 去原视频拍同款 →</a>
+</div>
+<div class="video-card">
+  <div class="video-head"><span class="video-no">视频2</span><div class="video-stats">👍4967 评0 藏0</div></div>
+  <div class="card-label">🖼 画面上的字</div>
+  <div class="copy-area" id="ocr-p8-7641738556885326821">（未识别到画面文字）</div>
+  <button class="copy-btn" onclick="copyText('ocr-p8-7641738556885326821', this)">📋 复制画面字</button>
+  <div class="card-label" style="margin-top:10px">📦 内容包（文案+标签）</div>
+  <div class="copy-area" id="pack-p8-7641738556885326821">2026斯诺克世锦赛决赛，吴宜泽18:17双赛点绝杀肖恩•墨菲，夺得冠军！
+#吴宜泽 #肖恩墨菲 #斯诺克 #斯诺克世锦赛d</div>
+  <button class="copy-btn" onclick="copyText('pack-p8-7641738556885326821', this)">📋 复制内容包</button>
+  <a class="beat-btn" href="https://www.douyin.com/video/7641738556885326821" target="_blank" rel="noopener">🎬 去原视频拍同款 →</a>
+</div>
+<div class="video-card">
+  <div class="video-head"><span class="video-no">视频3</span></div>
+  <div class="card-label">🖼 画面上的字</div>
+  <div class="copy-area" id="ocr-p8-7667783007487933434">（未识别到画面文字）</div>
+  <button class="copy-btn" onclick="copyText('ocr-p8-7667783007487933434', this)">📋 复制画面字</button>
+  <div class="card-label" style="margin-top:10px">📦 内容包（文案+标签）</div>
+  <div class="copy-area" id="pack-p8-7667783007487933434">在抖音记录美好生活20260806</div>
+  <button class="copy-btn" onclick="copyText('pack-p8-7667783007487933434', this)">📋 复制内容包</button>
+  <a class="beat-btn" href="https://www.douyin.com/video/7667783007487933434" target="_blank" rel="noopener">🎬 去原视频拍同款 →</a>
+</div>
+<div class="video-card">
+  <div class="video-head"><span class="video-no">视频4</span></div>
+  <div class="card-label">🖼 画面上的字</div>
+  <div class="copy-area" id="ocr-p8-7667429130753236927">（未识别到画面文字）</div>
+  <button class="copy-btn" onclick="copyText('ocr-p8-7667429130753236927', this)">📋 复制画面字</button>
+  <div class="card-label" style="margin-top:10px">📦 内容包（文案+标签）</div>
+  <div class="copy-area" id="pack-p8-7667429130753236927">在抖音记录美好生活20260806</div>
+  <button class="copy-btn" onclick="copyText('pack-p8-7667429130753236927', this)">📋 复制内容包</button>
+  <a class="beat-btn" href="https://www.douyin.com/video/7667429130753236927" target="_blank" rel="noopener">🎬 去原视频拍同款 →</a>
+</div>
+<div class="video-card">
+  <div class="video-head"><span class="video-no">视频5</span></div>
+  <div class="card-label">🖼 画面上的字</div>
+  <div class="copy-area" id="ocr-p8-7664834661684960121">（未识别到画面文字）</div>
+  <button class="copy-btn" onclick="copyText('ocr-p8-7664834661684960121', this)">📋 复制画面字</button>
+  <div class="card-label" style="margin-top:10px">📦 内容包（文案+标签）</div>
+  <div class="copy-area" id="pack-p8-7664834661684960121">文班亚马毫无悬念拿下西决MVP！马刺抢七淘汰雷霆，拿到西部冠军后一路高歌猛进，接下来要在总决赛对上尼克斯啦～
+#文班亚马获得西决MVP #NBA总决赛马刺vS尼克斯 #马刺抢七淘汰雷霆晋级总决赛</div>
+  <button class="copy-btn" onclick="copyText('pack-p8-7664834661684960121', this)">📋 复制内容包</button>
+  <a class="beat-btn" href="https://www.douyin.com/video/7664834661684960121" target="_blank" rel="noopener">🎬 去原视频拍同款 →</a>
+</div>
+</div>
+<div class="product-section" data-product="p9">
+  <details class="acc-fold">
+    <summary>👤 爆过的账号（2个 · 点击展开）</summary>
+    <div class="acc-inner">
+      
+<div class="account-card">
+  <div class="acc-top">
+    <img class="acc-avatar" src="media/avatar_7683b547c5.jpg" alt="头像" onerror="this.style.display=&apos;none&apos;">
+    <div class="acc-info">
+      <div class="acc-nick">年轻</div>
+      <div class="acc-meta">抖音号 207083185 · 粉丝 1000+</div>
+    </div>
+  </div>
+  <div class="card-label">🖼 头像（直接下载上传）</div>
+  <a class="dl-btn" href="media/avatar_7683b547c5.jpg" download>⬇️ 下载此头像</a>
+  <div class="card-label" style="margin-top:10px">✨ 相似名字（点击即复制，风格一致）</div>
+  <div class="name-row"><button class="name-chip" onclick="copyTextByName(&apos;年轻说&apos;, this)">年轻说</button><button class="name-chip" onclick="copyTextByName(&apos;年轻日常&apos;, this)">年轻日常</button></div>
+  <div class="card-label" style="margin-top:10px">📝 简介（照抄，一键复制）</div>
+  <div class="copy-area" id="acc-sig-p9-1">（无简介）</div>
+  <button class="copy-btn" onclick="copyText('acc-sig-p9-1', this)">📋 复制简介</button>
+</div>
+<div class="account-card">
+  <div class="acc-top">
+    <img class="acc-avatar" src="media/avatar_8efd4d46a1.jpg" alt="头像" onerror="this.style.display=&apos;none&apos;">
+    <div class="acc-info">
+      <div class="acc-nick">平安喜乐开心快乐</div>
+      <div class="acc-meta">抖音号 szfg666666888888 · 粉丝 4000+</div>
+    </div>
+  </div>
+  <div class="card-label">🖼 头像（直接下载上传）</div>
+  <a class="dl-btn" href="media/avatar_8efd4d46a1.jpg" download>⬇️ 下载此头像</a>
+  <div class="card-label" style="margin-top:10px">✨ 相似名字（点击即复制，风格一致）</div>
+  <div class="name-row"><button class="name-chip" onclick="copyTextByName(&apos;平安喜乐开心快号&apos;, this)">平安喜乐开心快号</button><button class="name-chip" onclick="copyTextByName(&apos;平安喜乐开心快乐日常&apos;, this)">平安喜乐开心快乐日常</button><button class="name-chip" onclick="copyTextByName(&apos;平安喜乐开心快乐说&apos;, this)">平安喜乐开心快乐说</button></div>
+  <div class="card-label" style="margin-top:10px">📝 简介（照抄，一键复制）</div>
+  <div class="copy-area" id="acc-sig-p9-2">（无简介）</div>
+  <button class="copy-btn" onclick="copyText('acc-sig-p9-2', this)">📋 复制简介</button>
+</div>
+    </div>
+  </details>
+  <div class="section-title">🎬 爆过的视频（2个）</div>
+  
+<div class="video-card">
+  <div class="video-head"><span class="video-no">视频1</span><div class="video-stats">👍2171 评0 藏0</div></div>
+  <div class="card-label">🖼 画面上的字</div>
+  <div class="copy-area" id="ocr-p9-7649192416659376057">思考中医
+刘力红 著
+对自然与生命的时间解读
+内证观察笔记
+真图本中医解剖学纲目
+无名氏 述
+【增订本】
+【增订本】</div>
+  <button class="copy-btn" onclick="copyText('ocr-p9-7649192416659376057', this)">📋 复制画面字</button>
+  <div class="card-label" style="margin-top:10px">📦 内容包（文案+标签）</div>
+  <div class="copy-area" id="pack-p9-7649192416659376057">痛苦是觉醒的必经之路。不寐三把火，心火，肝火，痰火 失眠不要再盲目吃安眠药了，问题没找到，伤害了自己！珍惜老祖宗留下来的智慧！
+#中医 #中医养生 #中医文化</div>
+  <button class="copy-btn" onclick="copyText('pack-p9-7649192416659376057', this)">📋 复制内容包</button>
+  <a class="beat-btn" href="https://www.douyin.com/video/7649192416659376057" target="_blank" rel="noopener">🎬 去原视频拍同款 →</a>
+</div>
+<div class="video-card">
+  <div class="video-head"><span class="video-no">视频2</span></div>
+  <div class="card-label">🖼 画面上的字</div>
+  <div class="copy-area" id="ocr-p9-7619455638150358641">失眠认真听完</div>
+  <button class="copy-btn" onclick="copyText('ocr-p9-7619455638150358641', this)">📋 复制画面字</button>
+  <div class="card-label" style="margin-top:10px">📦 内容包（文案+标签）</div>
+  <div class="copy-area" id="pack-p9-7619455638150358641">平安喜乐开心快乐在抖音记录美好生活20260321</div>
+  <button class="copy-btn" onclick="copyText('pack-p9-7619455638150358641', this)">📋 复制内容包</button>
+  <a class="beat-btn" href="https://www.douyin.com/video/7619455638150358641" target="_blank" rel="noopener">🎬 去原视频拍同款 →</a>
+</div>
+</div></div>
+
+<div class="footer">黑狐照抄工具 · 数据来自原视频 · 拍同款用原声</div>
+
+<script>
+function copyText(id, btn) {
+  var text = document.getElementById(id).innerText;
+  var fn = navigator.clipboard ? function(){navigator.clipboard.writeText(text).then(function(){s(btn)}).catch(function(){f(text,btn)})} : function(){f(text,btn)};
+  fn();
+}
+function copyTextByName(text, btn) {
+  var fn = navigator.clipboard ? function(){navigator.clipboard.writeText(text).then(function(){s(btn)}).catch(function(){f(text,btn)})} : function(){f(text,btn)};
+  fn();
+}
+function f(text,btn){var ta=document.createElement('textarea');ta.value=text;ta.style.position='fixed';ta.style.left='-9999px';document.body.appendChild(ta);ta.select();try{document.execCommand('copy');s(btn)}catch(e){}document.body.removeChild(ta)}
+function s(btn){var o=btn.innerText;btn.innerText='✅ 已复制！';btn.classList.add('copied');setTimeout(function(){btn.innerText=o;btn.classList.remove('copied')},1500)}
+function switchProduct(btn) {
+  var pid = btn.getAttribute('data-product');
+  var tabs = document.querySelectorAll('.product-tab');
+  for (var i=0;i<tabs.length;i++) tabs[i].classList.remove('active');
+  btn.classList.add('active');
+  var secs = document.querySelectorAll('.product-section');
+  for (var j=0;j<secs.length;j++) {
+    secs[j].style.display = secs[j].getAttribute('data-product')===pid ? '' : 'none';
+  }
+}
+window.onload = function() {
+  var first = document.querySelector('.product-tab.active');
+  if (first) switchProduct(first);
+};
+</script>
+</body>
+</html>
