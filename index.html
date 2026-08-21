@@ -6,52 +6,95 @@
 <title>全部商品 照抄包</title>
 <style>
 * { margin:0; padding:0; box-sizing:border-box; }
-body { font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif; background:#f5f5f5; padding:16px 12px 40px; }
-.header { text-align:center; padding:14px 0 6px; }
-.header h1 { font-size:20px; font-weight:800; }
-.header p { font-size:12px; color:#999; margin-top:4px; }
-.product-tabs { display:flex; gap:8px; padding:10px 0 6px; overflow-x:auto; -webkit-overflow-scrolling:touch; }
-.product-tab { flex:1; min-width:90px; padding:10px 12px; border:none; border-radius:10px; background:#fff; font-size:14px; font-weight:700; color:#666; cursor:pointer; box-shadow:0 1px 4px rgba(0,0,0,0.06); white-space:nowrap; -webkit-tap-highlight-color:transparent; }
-.product-tab.active { background:#ff6b35; color:#fff; }
-.tab-cnt { display:inline-block; margin-left:4px; font-size:11px; background:rgba(0,0,0,0.08); border-radius:10px; padding:1px 6px; }
+body { font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif; background:#f5f6f8; color:#2f3337; padding:12px 12px 36px; }
+.header { text-align:center; padding:12px 0 6px; }
+.header h1 { font-size:19px; line-height:1.35; font-weight:800; letter-spacing:0.2px; }
+.header p { font-size:12px; line-height:1.5; color:#8b929a; margin-top:4px; }
+.product-tabs { display:flex; gap:8px; margin:0 -12px; padding:10px 12px; overflow-x:auto; scrollbar-width:none; -webkit-overflow-scrolling:touch; overscroll-behavior-x:contain; scroll-snap-type:x proximity; position:sticky; top:0; background:rgba(245,246,248,0.96); backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px); border-bottom:1px solid rgba(34,40,49,0.06); z-index:10; }
+.product-tabs::-webkit-scrollbar { display:none; }
+.product-tab { flex:0 0 auto; min-width:88px; min-height:42px; padding:10px 14px; border:1px solid #e9ebef; border-radius:12px; background:#fff; font-size:13px; font-weight:700; color:#626971; cursor:pointer; box-shadow:0 2px 8px rgba(30,36,44,0.04); white-space:nowrap; scroll-snap-align:start; transition:background-color .18s ease,color .18s ease,border-color .18s ease,transform .12s ease,box-shadow .18s ease; -webkit-tap-highlight-color:transparent; }
+.product-tab.active { background:#f36b3e; color:#fff; border-color:#f36b3e; box-shadow:0 5px 14px rgba(243,107,62,0.22); }
+.product-tab:active { transform:scale(0.97); }
+.tab-cnt { display:inline-block; margin-left:3px; font-size:10px; background:rgba(0,0,0,0.08); border-radius:8px; padding:0 5px; }
 .product-tab.active .tab-cnt { background:rgba(255,255,255,0.25); }
-.section-title { font-size:15px; font-weight:800; color:#fff; background:#ff6b35; padding:10px 14px; border-radius:10px; margin:14px 0 10px; }
-.acc-fold { background:#fff; border-radius:12px; margin:12px 0; box-shadow:0 2px 10px rgba(0,0,0,0.06); overflow:hidden; }
-.acc-fold summary { padding:13px 14px; font-size:15px; font-weight:800; color:#333; cursor:pointer; list-style:none; display:flex; align-items:center; justify-content:space-between; -webkit-tap-highlight-color:transparent; }
+.section-title { font-size:14px; font-weight:800; color:#ba4d2a; background:#fff0e9; padding:10px 13px; border:1px solid #ffe0d3; border-radius:12px; margin:14px 0 10px; }
+.acc-fold { background:#fff; border:1px solid #eceef1; border-radius:14px; margin:12px 0; box-shadow:0 4px 14px rgba(30,36,44,0.05); overflow:hidden; }
+.acc-fold summary { min-height:46px; padding:12px 14px; font-size:13px; font-weight:800; color:#383d43; cursor:pointer; list-style:none; display:flex; align-items:center; justify-content:space-between; transition:background-color .18s ease; -webkit-tap-highlight-color:transparent; }
+.acc-fold summary:active { background:#f7f8fa; }
 .acc-fold summary::-webkit-details-marker { display:none; }
-.acc-fold summary::after { content:'▾'; font-size:13px; color:#999; transition:transform 0.2s; }
+.acc-fold summary::after { content:'▾'; font-size:12px; color:#9299a1; transition:transform 0.2s; }
 .acc-fold[open] summary::after { transform:rotate(180deg); }
-.acc-inner { padding:0 14px 14px; }
-.card, .account-card, .video-card { background:#fff; border-radius:14px; padding:14px; margin:12px 0; box-shadow:0 2px 10px rgba(0,0,0,0.06); }
-.card-label { font-size:13px; color:#666; font-weight:600; margin-bottom:8px; }
-.copy-area { background:#f8f9fa; border-radius:8px; padding:12px; font-size:14px; line-height:1.8; color:#333; word-break:break-all; border:1px solid #e8e8e8; white-space:pre-wrap; }
-.copy-btn { display:block; width:100%; padding:13px; background:#07c160; color:#fff; border:none; border-radius:10px; font-size:15px; font-weight:700; cursor:pointer; margin-top:10px; -webkit-tap-highlight-color:transparent; }
-.copy-btn:active { background:#06ad56; }
-.copy-btn.copied { background:#999; }
-.beat-btn { display:flex; align-items:center; justify-content:center; gap:8px; width:100%; padding:15px; background:linear-gradient(135deg,#ff2d55,#ff6b35); color:#fff; border:none; border-radius:12px; font-size:16px; font-weight:800; cursor:pointer; text-decoration:none; margin-top:12px; box-shadow:0 4px 14px rgba(255,45,85,0.3); -webkit-tap-highlight-color:transparent; }
-.beat-btn:active { opacity:0.9; }
-.hook-card { background:#fff; border-radius:14px; padding:14px; margin:12px 0; box-shadow:0 2px 10px rgba(0,0,0,0.06); }
-.hook-text { font-size:15px; font-weight:700; color:#333; line-height:1.8; white-space:pre-wrap; word-break:break-all; margin-bottom:4px; }
-.hook-note { font-size:11px; color:#bbb; margin-bottom:8px; }
-.hook-card .beat-btn { margin-top:10px; }
-.beat-btn.mini { padding:11px; font-size:14px; margin-top:8px; }
-.account-card { border-left:4px solid #ff6b35; }
-.acc-top { display:flex; align-items:center; gap:12px; margin-bottom:10px; }
-.acc-avatar { width:64px; height:64px; border-radius:50%; object-fit:cover; border:2px solid #eee; }
-.acc-avatar-placeholder { width:64px; height:64px; border-radius:50%; background:#f0f0f0; display:flex; align-items:center; justify-content:center; font-size:24px; }
-.acc-nick { font-size:17px; font-weight:800; }
-.acc-meta { font-size:12px; color:#999; margin-top:3px; }
+.acc-inner { padding:0 12px 12px; border-top:1px solid #f0f1f3; }
+.card, .account-card, .video-card { background:#fff; border:1px solid #eceef1; border-radius:14px; padding:14px; margin:12px 0; box-shadow:0 4px 14px rgba(30,36,44,0.045); }
+.card-label { font-size:12px; line-height:1.45; color:#727982; font-weight:600; margin-bottom:7px; }
+.copy-area { background:#f8f9fa; border-radius:10px; padding:12px; font-size:13px; line-height:1.6; color:#34393f; word-break:break-all; border:1px solid #e9ebee; white-space:pre-wrap; }
+.copy-btn { display:block; width:100%; min-height:44px; padding:11px 14px; background:#24ad68; color:#fff; border:none; border-radius:10px; font-size:13px; font-weight:700; cursor:pointer; margin-top:8px; box-shadow:0 3px 9px rgba(36,173,104,0.16); transition:background-color .18s ease,transform .12s ease,box-shadow .18s ease; -webkit-tap-highlight-color:transparent; }
+.copy-btn:active { background:#1d975a; transform:scale(0.985); box-shadow:none; }
+.copy-btn.copied { background:#8b929a; box-shadow:none; }
+.beat-btn { display:flex; align-items:center; justify-content:center; gap:6px; width:100%; min-height:46px; padding:12px 14px; background:linear-gradient(135deg,#ed6540,#f58055); color:#fff; border:none; border-radius:10px; font-size:14px; font-weight:800; cursor:pointer; text-decoration:none; margin-top:9px; box-shadow:0 4px 12px rgba(237,101,64,0.2); transition:opacity .18s ease,transform .12s ease,box-shadow .18s ease; -webkit-tap-highlight-color:transparent; }
+.beat-btn:active { opacity:0.9; transform:scale(0.985); box-shadow:none; }
+.hook-card { background:#fff; border:1px solid #eceef1; border-radius:14px; padding:14px; margin:12px 0; box-shadow:0 4px 14px rgba(30,36,44,0.045); }
+.hook-text { font-size:14px; font-weight:700; color:#333; line-height:1.5; white-space:pre-wrap; word-break:break-all; margin-bottom:5px; }
+.hook-note { font-size:10px; color:#a5abb2; margin-bottom:7px; }
+.hook-card .beat-btn { margin-top:9px; }
+.beat-btn.mini { min-height:42px; padding:10px; font-size:13px; margin-top:7px; }
+.account-card { border-left:3px solid #f07a52; }
+.acc-top { display:flex; align-items:center; gap:11px; margin-bottom:10px; }
+.acc-avatar { width:52px; height:52px; border-radius:50%; object-fit:cover; border:2px solid #eceef1; }
+.acc-avatar-placeholder { width:52px; height:52px; border-radius:50%; background:#f0f1f3; display:flex; align-items:center; justify-content:center; font-size:20px; }
+.acc-nick { font-size:15px; font-weight:800; color:#30353a; }
+.acc-meta { font-size:11px; color:#9299a1; margin-top:3px; }
 .video-head { display:flex; justify-content:space-between; align-items:center; margin-bottom:8px; }
-.video-no { font-size:13px; font-weight:700; color:#ff6b35; background:#fff3ee; padding:3px 10px; border-radius:20px; }
-.video-stats { font-size:12px; color:#999; }
-.name-row { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:4px; }
-.name-chip { padding:8px 14px; background:#fff7f0; border:1px solid #ffd8c2; border-radius:20px; font-size:13px; font-weight:600; color:#e85d1f; cursor:pointer; -webkit-tap-highlight-color:transparent; }
-.name-chip:active { background:#ffe8d8; }
-.name-chip.copied { background:#999; color:#fff; border-color:#999; }
-.name-chip-none { font-size:12px; color:#bbb; }
-.dl-btn { display:inline-block; padding:10px 16px; background:#f0f7ff; color:#1565c0; border:1px solid #b3d4f7; border-radius:8px; font-size:14px; font-weight:600; text-decoration:none; margin-bottom:4px; -webkit-tap-highlight-color:transparent; }
-.dl-btn:active { background:#dcebfa; }
-.footer { text-align:center; font-size:11px; color:#bbb; margin-top:16px; }
+.video-no { font-size:12px; font-weight:700; color:#d95f34; background:#fff1ea; padding:3px 9px; border-radius:16px; }
+.video-stats { font-size:11px; color:#9299a1; }
+.name-row { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:5px; }
+.name-chip { min-height:36px; padding:7px 13px; background:#fff7f2; border:1px solid #f7d7c8; border-radius:18px; font-size:12px; font-weight:600; color:#d95f34; cursor:pointer; transition:background-color .18s ease,transform .12s ease; -webkit-tap-highlight-color:transparent; }
+.name-chip:active { background:#ffe8dc; transform:scale(0.97); }
+.name-chip.copied { background:#8b929a; color:#fff; border-color:#8b929a; }
+.name-chip-none { font-size:11px; color:#a5abb2; }
+.dl-btn { display:inline-flex; align-items:center; min-height:40px; padding:9px 14px; background:#f1f6fc; color:#27649f; border:1px solid #cbdff3; border-radius:10px; font-size:13px; font-weight:600; text-decoration:none; margin-bottom:4px; transition:background-color .18s ease,transform .12s ease; -webkit-tap-highlight-color:transparent; }
+.dl-btn:active { background:#e2eef9; transform:scale(0.98); }
+.footer { text-align:center; font-size:10px; color:#a5abb2; margin-top:16px; }
+.audio-group { background:#fff; border:1px solid #e8eaed; border-radius:14px; padding:14px; margin:12px 0; box-shadow:0 5px 16px rgba(30,36,44,0.055); }
+.hook-tabs { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:10px; }
+.hook-tab { display:flex; align-items:center; justify-content:center; min-width:80px; min-height:40px; padding:8px 12px; background:#fff7f2; border:1px solid #f7d7c8; border-radius:10px; font-size:13px; font-weight:700; color:#d95f34; cursor:pointer; line-height:1.35; white-space:pre-line; text-align:center; transition:background-color .18s ease,color .18s ease,border-color .18s ease,transform .12s ease; -webkit-tap-highlight-color:transparent; box-sizing:border-box; position:relative; }
+.hook-tab.active { background:#f36b3e; color:#fff; border-color:#f36b3e; }
+.hook-tab:active { transform:scale(0.97); }
+.hook-display .copy-area { margin-bottom:0; }
+.hook-star { position:absolute; top:-6px; right:-4px; color:#ef476f; font-size:14px; line-height:1; text-shadow:0 0 3px #fff; }
+.hook-text .hook-star, .copy-area .hook-star { position:static; margin-right:3px; font-size:12px; }
+
+@media (hover:hover) {
+  .product-tab:hover, .hook-tab:hover, .name-chip:hover { border-color:#efb9a4; }
+  .copy-btn:hover { background:#209f61; }
+  .beat-btn:hover { opacity:0.94; }
+  .dl-btn:hover { background:#e7f1fa; }
+}
+
+@media (max-width:360px) {
+  body { padding-left:10px; padding-right:10px; }
+  .product-tabs { margin-left:-10px; margin-right:-10px; padding-left:10px; padding-right:10px; }
+  .audio-group, .card, .account-card, .video-card { padding:12px; }
+}
+
+/* === 已发标记功能 === */
+.used-bar { display:flex; align-items:center; gap:8px; padding:9px 10px; background:#fff; border:1px solid #eceef1; border-radius:10px; margin:8px 0 4px; box-shadow:0 1px 4px rgba(0,0,0,0.06); }
+.used-bar .ub-title { min-width:0; font-size:13px; font-weight:800; color:#333; flex:1 1 auto; }
+.used-btn { flex:0 0 auto; min-height:36px; padding:7px 12px; border:none; border-radius:8px; font-size:13px; font-weight:700; cursor:pointer; white-space:nowrap; -webkit-tap-highlight-color:transparent; }
+.used-btn.filter { background:#ff6b35; color:#fff; }
+.used-btn.filter.off { background:#e0e0e0; color:#666; }
+.used-btn.reset { background:#fff; color:#999; border:1px solid #ddd; }
+.used-btn.reset:active { background:#f5f5f5; }
+.mark-used-btn { display:block; width:100%; padding:9px; margin-top:8px; background:#fff; color:#999; border:1.5px dashed #ccc; border-radius:8px; font-size:12px; font-weight:700; cursor:pointer; -webkit-tap-highlight-color:transparent; }
+.mark-used-btn:active { background:#f7f7f7; }
+.audio-group.used, .video-card.used, .account-card.used, .hook-card.used { opacity:0.45; }
+.audio-group.used .hook-tab, .video-card.used .copy-btn, .video-card.used .beat-btn, .audio-group.used .copy-btn, .audio-group.used .beat-btn { pointer-events:none; }
+.used-badge { display:inline-block; background:#999; color:#fff; font-size:10px; padding:1px 6px; border-radius:8px; margin-left:6px; }
+@media (max-width:390px) {
+  .used-bar { flex-wrap:wrap; }
+  .used-bar .ub-title { flex-basis:100%; }
+  .used-btn { flex:1 1 0; }
+}
 </style>
 </head>
 <body>
@@ -60,49 +103,40 @@ body { font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif; bac
   <p>点商品标签 → 看该商品的账号素材 + 内容包 + 拍同款</p>
 </div>
 
-<div class="product-tabs"><button class="product-tab active" data-product="p0" onclick="switchProduct(this)">石斛牛蒡茶<span class="tab-cnt">8</span></button><button class="product-tab" data-product="p1" onclick="switchProduct(this)">杏仁粉<span class="tab-cnt">15</span></button><button class="product-tab" data-product="p2" onclick="switchProduct(this)">姜枣茶<span class="tab-cnt">1</span></button><button class="product-tab" data-product="p3" onclick="switchProduct(this)">五指毛桃茯苓糕<span class="tab-cnt">2</span></button><button class="product-tab" data-product="p4" onclick="switchProduct(this)">肉桂粉<span class="tab-cnt">6</span></button><button class="product-tab" data-product="p5" onclick="switchProduct(this)">四宝粉<span class="tab-cnt">1</span></button><button class="product-tab" data-product="p6" onclick="switchProduct(this)">当归黑豆<span class="tab-cnt">1</span></button><button class="product-tab" data-product="p7" onclick="switchProduct(this)">酸枣仁粉<span class="tab-cnt">5</span></button></div>
+<div class="product-tabs"><button class="product-tab" data-product="p12" onclick="switchProduct(this)">🆕 新号<span class="tab-cnt" id="naCnt">--</span></button><!-- P13_REPLY_TAB_START --><button class="product-tab" data-product="p13" onclick="switchProduct(this)">🤖 回复助手<span class="tab-cnt">AI</span></button><!-- P13_REPLY_TAB_END --><button class="product-tab active" data-product="p0" onclick="switchProduct(this)">石斛牛蒡茶<span class="tab-cnt">18</span></button><button class="product-tab" data-product="p1" onclick="switchProduct(this)">杏仁粉<span class="tab-cnt">5</span></button><button class="product-tab" data-product="p14" onclick="switchProduct(this)">杏仁七白饮<span class="tab-cnt">1</span></button><button class="product-tab" data-product="p2" onclick="switchProduct(this)">姜枣茶<span class="tab-cnt">18</span></button><button class="product-tab" data-product="p3" onclick="switchProduct(this)">五指毛桃茯苓糕<span class="tab-cnt">28</span></button><button class="product-tab" data-product="p4" onclick="switchProduct(this)">肉桂粉<span class="tab-cnt">14</span></button><button class="product-tab" data-product="p5" onclick="switchProduct(this)">四宝粉<span class="tab-cnt">3</span></button><button class="product-tab" data-product="p6" onclick="switchProduct(this)">酸枣仁粉<span class="tab-cnt">12</span></button><button class="product-tab" data-product="p7" onclick="switchProduct(this)">当归黑豆<span class="tab-cnt">4</span></button><button class="product-tab" data-product="p8" onclick="switchProduct(this)">鸡内金<span class="tab-cnt">1</span></button><button class="product-tab" data-product="p9" onclick="switchProduct(this)">乌梅蒲公英根茶<span class="tab-cnt">4</span></button><button class="product-tab" data-product="p10" onclick="switchProduct(this)">开运堂·引流<span class="tab-cnt">18</span></button><button class="product-tab" data-product="p11" onclick="switchProduct(this)">黄精苁蓉膏<span class="tab-cnt">2</span></button><button class="product-tab" data-product="p15" onclick="switchProduct(this)">桑叶双瓜茶<span class="tab-cnt">1</span></button></div>
 <div id="product-sections">
 <div class="product-section" data-product="p0">
-  <div class="section-title">🎵 爆款画面字 · 拍同款（8个）</div>
-  
-<div class="hook-card">
-  <div class="hook-text" data-aweme="7663091978016192177">养肝就是补肾
-肝肾同补</div>
-  <a class="beat-btn" data-aweme="7663091978016192177" href="https://www.douyin.com/music/7625925684396870454" target="_blank" rel="noopener">🎬 拍同款（原声） →</a>
+  <div class="section-title">🎵 爆款画面字 · 同音频钩子（18个）</div>
+<div class="audio-group" data-music="7625925684396870454">
+  <div class="hook-tabs"><button class="hook-tab active" onclick="switchHook(this,'p0a0')">养肝就是补肾 肝肾同补</button><button class="hook-tab" onclick="switchHook(this,'p0a0')">开水加它泡着喝 养肝就是养命</button><button class="hook-tab" onclick="switchHook(this,'p0a0')">养肝就是补肾 肝肾同源</button></div>
+  <div class="hook-display"><div class="copy-area" id="hd-p0a0-0" data-hook="0">养肝就是补肾 肝肾同补</div><button class="copy-btn" data-hook="0" style="margin-top:6px" onclick="copyText('hd-p0a0-0', this)">📋 复制此钩子</button><div class="copy-area" id="hd-p0a0-1" data-hook="1" style="display:none">开水加它泡着喝 养肝就是养命</div><button class="copy-btn" data-hook="1" style="display:none;margin-top:6px" onclick="copyText('hd-p0a0-1', this)">📋 复制此钩子</button><div class="copy-area" id="hd-p0a0-2" data-hook="2" style="display:none">养肝就是补肾 肝肾同源</div><button class="copy-btn" data-hook="2" style="display:none;margin-top:6px" onclick="copyText('hd-p0a0-2', this)">📋 复制此钩子</button></div>
+  <a class="beat-btn" href="https://www.douyin.com/music/7625925684396870454" target="_blank" rel="noopener">🎬 拍同款（原声）→</a>
+</div><div class="audio-group" data-music="7587419527796919082">
+  <div class="hook-tabs"><button class="hook-tab active" onclick="switchHook(this,'p0a919082')">菊花加一宝，肚子瘦了眼睛亮了</button><button class="hook-tab" onclick="switchHook(this,'p0a919082')">菊花加一宝，肝和眼睛一起轻松</button><button class="hook-tab" onclick="switchHook(this,'p0a919082')">肝为什么被称为将军之官</button></div>
+  <div class="hook-display"><div class="copy-area" id="hd-p0a919082-0" data-hook="0">菊花加一宝，肚子瘦了眼睛亮了</div><button class="copy-btn" data-hook="0" style="margin-top:6px" onclick="copyText('hd-p0a919082-0', this)">📋 复制此钩子</button><div class="copy-area" id="hd-p0a919082-1" data-hook="1" style="display:none">菊花加一宝，肝和眼睛一起轻松</div><button class="copy-btn" data-hook="1" style="display:none;margin-top:6px" onclick="copyText('hd-p0a919082-1', this)">📋 复制此钩子</button><div class="copy-area" id="hd-p0a919082-2" data-hook="2" style="display:none">肝为什么被称为将军之官</div><button class="copy-btn" data-hook="2" style="display:none;margin-top:6px" onclick="copyText('hd-p0a919082-2', this)">📋 复制此钩子</button></div>
+  <a class="beat-btn" href="https://www.douyin.com/music/7587419527796919082" target="_blank" rel="noopener">🎬 拍同款（开运堂·632赞）→</a>
 </div>
-<div class="hook-card">
-  <div class="hook-text" data-aweme="7648917541129733093">开水加它泡着喝
-养肝就是养命</div>
-  <a class="beat-btn" data-aweme="7648917541129733093" href="https://www.douyin.com/music/7625925684396870454" target="_blank" rel="noopener">🎬 拍同款（原声） →</a>
+<div class="audio-group" data-music="7591173181877029678">
+  <div class="hook-tabs"><button class="hook-tab active" onclick="switchHook(this,'p0a029678')">肝脏洗澡，只认晚上11点</button><button class="hook-tab" onclick="switchHook(this,'p0a029678')">熬夜，就是在往肝脏里倒垃圾</button><button class="hook-tab" onclick="switchHook(this,'p0a029678')">剧毒第一个受害者就是肝脏</button></div>
+  <div class="hook-display"><div class="copy-area" id="hd-p0a029678-0" data-hook="0">肝脏洗澡，只认晚上11点</div><button class="copy-btn" data-hook="0" style="margin-top:6px" onclick="copyText('hd-p0a029678-0', this)">📋 复制此钩子</button><div class="copy-area" id="hd-p0a029678-1" data-hook="1" style="display:none">熬夜，就是在往肝脏里倒垃圾</div><button class="copy-btn" data-hook="1" style="display:none;margin-top:6px" onclick="copyText('hd-p0a029678-1', this)">📋 复制此钩子</button><div class="copy-area" id="hd-p0a029678-2" data-hook="2" style="display:none">剧毒第一个受害者就是肝脏</div><button class="copy-btn" data-hook="2" style="display:none;margin-top:6px" onclick="copyText('hd-p0a029678-2', this)">📋 复制此钩子</button></div>
+  <a class="beat-btn" href="https://www.douyin.com/music/7591173181877029678" target="_blank" rel="noopener">🎬 拍同款（开运堂·330赞）→</a>
 </div>
-<div class="hook-card">
-  <div class="hook-text" data-aweme="7669369820463356081">养肝就是补肾
-肝肾同源</div>
-  <a class="beat-btn" data-aweme="7669369820463356081" href="https://www.douyin.com/music/7625925684396870454" target="_blank" rel="noopener">🎬 拍同款（原声） →</a>
+<div class="audio-group" data-music="7589595669664549666">
+  <div class="hook-tabs"><button class="hook-tab active" onclick="switchHook(this,'p0a549666')">肝不会喊痛，一痛就是晚期</button><button class="hook-tab" onclick="switchHook(this,'p0a549666')">肝出问题，脸上最先露馅</button><button class="hook-tab" onclick="switchHook(this,'p0a549666')">肝在腹中，为什么脸先报警</button></div>
+  <div class="hook-display"><div class="copy-area" id="hd-p0a549666-0" data-hook="0">肝不会喊痛，一痛就是晚期</div><button class="copy-btn" data-hook="0" style="margin-top:6px" onclick="copyText('hd-p0a549666-0', this)">📋 复制此钩子</button><div class="copy-area" id="hd-p0a549666-1" data-hook="1" style="display:none">肝出问题，脸上最先露馅</div><button class="copy-btn" data-hook="1" style="display:none;margin-top:6px" onclick="copyText('hd-p0a549666-1', this)">📋 复制此钩子</button><div class="copy-area" id="hd-p0a549666-2" data-hook="2" style="display:none">肝在腹中，为什么脸先报警</div><button class="copy-btn" data-hook="2" style="display:none;margin-top:6px" onclick="copyText('hd-p0a549666-2', this)">📋 复制此钩子</button></div>
+  <a class="beat-btn" href="https://www.douyin.com/music/7589595669664549666" target="_blank" rel="noopener">🎬 拍同款（开运堂·281赞）→</a>
 </div>
-<div class="hook-card">
-  <div class="hook-text" data-aweme="7648606101927847503">养肝</div>
-  <a class="beat-btn" data-aweme="7648606101927847503" href="https://www.douyin.com/music/7625925684396870454" target="_blank" rel="noopener">🎬 拍同款（原声） →</a>
+<div class="audio-group" data-music="7595091391936498459">
+  <div class="hook-tabs"><button class="hook-tab active" onclick="switchHook(this,'p0a498459')">眼睛干涩不是小事，肝在求救</button><button class="hook-tab" onclick="switchHook(this,'p0a498459')">眼睛黑白分明，秘密藏在肝里</button><button class="hook-tab" onclick="switchHook(this,'p0a498459')">肝一出问题，眼睛第一个报警</button></div>
+  <div class="hook-display"><div class="copy-area" id="hd-p0a498459-0" data-hook="0">眼睛干涩不是小事，肝在求救</div><button class="copy-btn" data-hook="0" style="margin-top:6px" onclick="copyText('hd-p0a498459-0', this)">📋 复制此钩子</button><div class="copy-area" id="hd-p0a498459-1" data-hook="1" style="display:none">眼睛黑白分明，秘密藏在肝里</div><button class="copy-btn" data-hook="1" style="display:none;margin-top:6px" onclick="copyText('hd-p0a498459-1', this)">📋 复制此钩子</button><div class="copy-area" id="hd-p0a498459-2" data-hook="2" style="display:none">肝一出问题，眼睛第一个报警</div><button class="copy-btn" data-hook="2" style="display:none;margin-top:6px" onclick="copyText('hd-p0a498459-2', this)">📋 复制此钩子</button></div>
+  <a class="beat-btn" href="https://www.douyin.com/music/7595091391936498459" target="_blank" rel="noopener">🎬 拍同款（开运堂·163赞）→</a>
 </div>
-<div class="hook-card">
-  <div class="hook-text" data-aweme="7641738556885326821">养肝就是补肾
-肝肾同源</div>
-  <a class="beat-btn" data-aweme="7641738556885326821" href="https://www.douyin.com/music/7625925684396870454" target="_blank" rel="noopener">🎬 拍同款（原声） →</a>
+<div class="audio-group" data-music="7587340023603776298">
+  <div class="hook-tabs"><button class="hook-tab active" onclick="switchHook(this,'p0a776298')">警惕厨房里的食用油</button><button class="hook-tab" onclick="switchHook(this,'p0a776298')">厨房这桶油，可能正在伤全家</button><button class="hook-tab" onclick="switchHook(this,'p0a776298')">食用油背后的真相，没人敢说</button></div>
+  <div class="hook-display"><div class="copy-area" id="hd-p0a776298-0" data-hook="0">警惕厨房里的食用油</div><button class="copy-btn" data-hook="0" style="margin-top:6px" onclick="copyText('hd-p0a776298-0', this)">📋 复制此钩子</button><div class="copy-area" id="hd-p0a776298-1" data-hook="1" style="display:none">厨房这桶油，可能正在伤全家</div><button class="copy-btn" data-hook="1" style="display:none;margin-top:6px" onclick="copyText('hd-p0a776298-1', this)">📋 复制此钩子</button><div class="copy-area" id="hd-p0a776298-2" data-hook="2" style="display:none">食用油背后的真相，没人敢说</div><button class="copy-btn" data-hook="2" style="display:none;margin-top:6px" onclick="copyText('hd-p0a776298-2', this)">📋 复制此钩子</button></div>
+  <a class="beat-btn" href="https://www.douyin.com/music/7587340023603776298" target="_blank" rel="noopener">🎬 拍同款（开运堂·45赞）→</a>
 </div>
-<div class="hook-card">
-  <div class="hook-text" data-aweme="7645611457916734803">滋肝养肾</div>
-  <a class="beat-btn" data-aweme="7645611457916734803" href="https://www.douyin.com/music/7625925684396870454" target="_blank" rel="noopener">🎬 拍同款（原声） →</a>
-</div>
-<div class="hook-card">
-  <div class="hook-text" data-aweme="7642887617982331994">养肝就是养命</div>
-  <a class="beat-btn" data-aweme="7642887617982331994" href="https://www.douyin.com/music/7625925684396870454" target="_blank" rel="noopener">🎬 拍同款（原声） →</a>
-</div>
-<div class="hook-card">
-  <div class="hook-text" data-aweme="7662014313331594202">养肝就是补肾
-肝肾同源</div>
-  <a class="beat-btn" data-aweme="7662014313331594202" href="https://www.douyin.com/music/7625925684396870454" target="_blank" rel="noopener">🎬 拍同款（原声） →</a>
-</div>
-  <details class="acc-fold">
+<details class="acc-fold">
     <summary>🎬 爆过的视频（8个 · 点击展开）</summary>
     <div class="acc-inner">
       
@@ -200,7 +234,7 @@ body { font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif; bac
 </div>
     </div>
   </details>
-  <details class="acc-fold">
+<details class="acc-fold">
     <summary>👤 爆过的账号（8个 · 点击展开）</summary>
     <div class="acc-inner">
       
@@ -348,81 +382,26 @@ body { font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif; bac
     </div>
   </details>
 </div>
-<div class="product-section" data-product="p1">
-  <div class="section-title">🎵 爆款画面字 · 拍同款（15个）</div>
-  
-<div class="hook-card">
-  <div class="hook-text" data-aweme="7669630768456562929">肺部最怕的</div>
-  <a class="beat-btn" data-aweme="7669630768456562929" href="https://www.douyin.com/music/7635838809241914118" target="_blank" rel="noopener">🎬 拍同款（原声） →</a>
+<div class="product-section" data-product="p1" style="display:none">
+  <div class="section-title">🎵 爆款画面字 · 同音频钩子（5个）</div>
+<div class="audio-group" data-music="7644112350877944616">
+  <div class="hook-tabs"><button class="hook-tab active" onclick="switchHook(this,'_db1')">便秘拖久了，真的会要命</button></div>
+  <div class="hook-display"><div class="copy-area" id="hd-_db1-0" data-hook="0">便秘拖久了，真的会要命</div><button class="copy-btn" data-hook="0" style="margin-top:6px" onclick="copyText('hd-_db1-0', this)">📋 复制此钩子</button></div>
+  <a class="beat-btn" href="https://www.douyin.com/music/7644112350877944616" target="_blank" rel="noopener">🎬 拍同款（185赞·倪师原声）→</a>
 </div>
-<div class="hook-card">
-  <div class="hook-text" data-aweme="7669041823234668712">肺好人美
-不显老
-肺津液不足</div>
-  <a class="beat-btn" data-aweme="7669041823234668712" href="https://www.douyin.com/music/7635838809241914118" target="_blank" rel="noopener">🎬 拍同款（原声） →</a>
+<div class="audio-group" data-music="7622692036939942697">
+  <div class="hook-tabs"><button class="hook-tab active" onclick="switchHook(this,'p1a2')">便秘不在肠子 在肺里</button></div>
+  <div class="hook-display"><div class="copy-area" id="hd-p1a2-0" data-hook="0">便秘不在肠子
+在肺里</div><button class="copy-btn" data-hook="0" style="margin-top:6px" onclick="copyText('hd-p1a2-0', this)">📋 复制此钩子</button></div>
+  <a class="beat-btn" href="https://www.douyin.com/music/7622692036939942697" target="_blank" rel="noopener">🎬 拍同款（原声）→</a>
 </div>
-<div class="hook-card">
-  <div class="hook-text" data-aweme="7669435939244318885">肺部最怕的
-三个习惯</div>
-  <a class="beat-btn" data-aweme="7669435939244318885" href="https://www.douyin.com/music/7635838809241914118" target="_blank" rel="noopener">🎬 拍同款（原声） →</a>
+<div class="audio-group" data-music="7589281452003052315">
+  <div class="hook-tabs"><button class="hook-tab active" onclick="switchHook(this,'p1a052315')">咳了一个月，问题根本不在肺</button><button class="hook-tab" onclick="switchHook(this,'p1a052315')">花椒炖梨，专治久咳不好</button><button class="hook-tab" onclick="switchHook(this,'p1a052315')">久咳不愈，病根可能不在肺</button></div>
+  <div class="hook-display"><div class="copy-area" id="hd-p1a052315-0" data-hook="0">咳了一个月，问题根本不在肺</div><button class="copy-btn" data-hook="0" style="margin-top:6px" onclick="copyText('hd-p1a052315-0', this)">📋 复制此钩子</button><div class="copy-area" id="hd-p1a052315-1" data-hook="1" style="display:none">花椒炖梨，专治久咳不好</div><button class="copy-btn" data-hook="1" style="display:none;margin-top:6px" onclick="copyText('hd-p1a052315-1', this)">📋 复制此钩子</button><div class="copy-area" id="hd-p1a052315-2" data-hook="2" style="display:none">久咳不愈，病根可能不在肺</div><button class="copy-btn" data-hook="2" style="display:none;margin-top:6px" onclick="copyText('hd-p1a052315-2', this)">📋 复制此钩子</button></div>
+  <a class="beat-btn" href="https://www.douyin.com/music/7589281452003052315" target="_blank" rel="noopener">🎬 拍同款（开运堂·65赞）→</a>
 </div>
-<div class="hook-card">
-  <div class="hook-text" data-aweme="7644132915781341606">肺部</div>
-  <a class="beat-btn" data-aweme="7644132915781341606" href="https://www.douyin.com/music/7635838809241914118" target="_blank" rel="noopener">🎬 拍同款（原声） →</a>
-</div>
-<div class="hook-card">
-  <div class="hook-text" data-aweme="7654239258290786043">肺部最怕的</div>
-  <a class="beat-btn" data-aweme="7654239258290786043" href="https://www.douyin.com/music/7635838809241914118" target="_blank" rel="noopener">🎬 拍同款（原声） →</a>
-</div>
-<div class="hook-card">
-  <div class="hook-text" data-aweme="7659917351983206065">肺部最怕的</div>
-  <a class="beat-btn" data-aweme="7659917351983206065" href="https://www.douyin.com/music/7635838809241914118" target="_blank" rel="noopener">🎬 拍同款（原声） →</a>
-</div>
-<div class="hook-card">
-  <div class="hook-text" data-aweme="7663093427618187941">（未识别到画面文字）</div>
-  <a class="beat-btn" data-aweme="7663093427618187941" href="https://www.douyin.com/music/7635838809241914118" target="_blank" rel="noopener">🎬 拍同款（原声） →</a>
-</div>
-<div class="hook-card">
-  <div class="hook-text" data-aweme="7664530388455573672">便秘不在肠子
-在肺里</div>
-  <a class="beat-btn" data-aweme="7664530388455573672" href="https://www.douyin.com/music/7635838809241914118" target="_blank" rel="noopener">🎬 拍同款（原声） →</a>
-</div>
-<div class="hook-card">
-  <div class="hook-text" data-aweme="7667983694674340480">便秘不在肠子
-在肺里</div>
-  <a class="beat-btn" data-aweme="7667983694674340480" href="https://www.douyin.com/music/7635838809241914118" target="_blank" rel="noopener">🎬 拍同款（原声） →</a>
-</div>
-<div class="hook-card">
-  <div class="hook-text" data-aweme="7664834661684960121">便秘不是在肠子
-而是在肺里</div>
-  <a class="beat-btn" data-aweme="7664834661684960121" href="https://www.douyin.com/music/7635838809241914118" target="_blank" rel="noopener">🎬 拍同款（原声） →</a>
-</div>
-<div class="hook-card">
-  <div class="hook-text" data-aweme="7664656847026394298">（未识别到画面文字）</div>
-  <a class="beat-btn" data-aweme="7664656847026394298" href="https://www.douyin.com/music/7635838809241914118" target="_blank" rel="noopener">🎬 拍同款（原声） →</a>
-</div>
-<div class="hook-card">
-  <div class="hook-text" data-aweme="7648536249091654245">便秘不在肠里
-肺和大肠相表里</div>
-  <a class="beat-btn" data-aweme="7648536249091654245" href="https://www.douyin.com/music/7635838809241914118" target="_blank" rel="noopener">🎬 拍同款（原声） →</a>
-</div>
-<div class="hook-card">
-  <div class="hook-text" data-aweme="7669852230786571001">便秘不在肠子
-在肺里</div>
-  <a class="beat-btn" data-aweme="7669852230786571001" href="https://www.douyin.com/music/7635838809241914118" target="_blank" rel="noopener">🎬 拍同款（原声） →</a>
-</div>
-<div class="hook-card">
-  <div class="hook-text" data-aweme="7666027265185401061">便秘不在肠子
-在肺里</div>
-  <a class="beat-btn" data-aweme="7666027265185401061" href="https://www.douyin.com/music/7635838809241914118" target="_blank" rel="noopener">🎬 拍同款（原声） →</a>
-</div>
-<div class="hook-card">
-  <div class="hook-text" data-aweme="7665602727195489381">便秘不在肠子
-在肺里</div>
-  <a class="beat-btn" data-aweme="7665602727195489381" href="https://www.douyin.com/music/7635838809241914118" target="_blank" rel="noopener">🎬 拍同款（原声） →</a>
-</div>
-  <details class="acc-fold">
-    <summary>🎬 爆过的视频（15个 · 点击展开）</summary>
+<details class="acc-fold">
+    <summary>🎬 爆过的视频（13个 · 点击展开）</summary>
     <div class="acc-inner">
       
 <div class="video-card">
@@ -496,18 +475,7 @@ body { font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif; bac
   <a class="beat-btn" href="https://www.douyin.com/video/7659917351983206065" target="_blank" rel="noopener">🎬 去原视频拍同款 →</a>
 </div>
 <div class="video-card">
-  <div class="video-head"><span class="video-no">视频7</span><div class="video-stats">👍15753 评0 藏0</div></div>
-  <div class="card-label">🖼 画面上的字</div>
-  <div class="copy-area" id="ocr-p1-7663093427618187941" data-ocr="7663093427618187941">（未识别到画面文字）</div>
-  <button class="copy-btn" onclick="copyText('ocr-p1-7663093427618187941', this)">📋 复制画面字</button>
-  <div class="card-label" style="margin-top:10px">📦 内容包（文案+标签）</div>
-  <div class="copy-area" id="pack-p1-7663093427618187941">文班亚马毫无悬念当选西决MVP，马刺抢七淘汰雷霆荣获西部冠军，高歌猛进闯入总决赛面对尼克斯#
-#文班亚马获得西决MVP #NBA总决赛马刺vS尼克斯 #马刺抢七淘汰雷霆晋级总决赛</div>
-  <button class="copy-btn" onclick="copyText('pack-p1-7663093427618187941', this)">📋 复制内容包</button>
-  <a class="beat-btn" href="https://www.douyin.com/video/7663093427618187941" target="_blank" rel="noopener">🎬 去原视频拍同款 →</a>
-</div>
-<div class="video-card">
-  <div class="video-head"><span class="video-no">视频8</span></div>
+  <div class="video-head"><span class="video-no">视频7</span></div>
   <div class="card-label">🖼 画面上的字</div>
   <div class="copy-area" id="ocr-p1-7664530388455573672" data-ocr="7664530388455573672">便秘不在肠子
 在肺里</div>
@@ -518,7 +486,7 @@ body { font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif; bac
   <a class="beat-btn" href="https://www.douyin.com/video/7664530388455573672" target="_blank" rel="noopener">🎬 去原视频拍同款 →</a>
 </div>
 <div class="video-card">
-  <div class="video-head"><span class="video-no">视频9</span><div class="video-stats">👍4293 评0 藏0</div></div>
+  <div class="video-head"><span class="video-no">视频8</span><div class="video-stats">👍4293 评0 藏0</div></div>
   <div class="card-label">🖼 画面上的字</div>
   <div class="copy-area" id="ocr-p1-7667983694674340480" data-ocr="7667983694674340480">便秘不在肠子
 在肺里</div>
@@ -530,7 +498,7 @@ body { font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif; bac
   <a class="beat-btn" href="https://www.douyin.com/video/7667983694674340480" target="_blank" rel="noopener">🎬 去原视频拍同款 →</a>
 </div>
 <div class="video-card">
-  <div class="video-head"><span class="video-no">视频10</span></div>
+  <div class="video-head"><span class="video-no">视频9</span></div>
   <div class="card-label">🖼 画面上的字</div>
   <div class="copy-area" id="ocr-p1-7664834661684960121" data-ocr="7664834661684960121">便秘不是在肠子
 而是在肺里</div>
@@ -542,18 +510,7 @@ body { font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif; bac
   <a class="beat-btn" href="https://www.douyin.com/video/7664834661684960121" target="_blank" rel="noopener">🎬 去原视频拍同款 →</a>
 </div>
 <div class="video-card">
-  <div class="video-head"><span class="video-no">视频11</span><div class="video-stats">👍3779 评0 藏0</div></div>
-  <div class="card-label">🖼 画面上的字</div>
-  <div class="copy-area" id="ocr-p1-7664656847026394298" data-ocr="7664656847026394298">（未识别到画面文字）</div>
-  <button class="copy-btn" onclick="copyText('ocr-p1-7664656847026394298', this)">📋 复制画面字</button>
-  <div class="card-label" style="margin-top:10px">📦 内容包（文案+标签）</div>
-  <div class="copy-area" id="pack-p1-7664656847026394298">文班亚马毫无悬念当选西决MVP，马刺抢七淘汰雷霆荣获西部冠军，高歌猛进闯入总决赛面对尼克斯
-#文班亚马获得西决MVP #NBA总决赛马刺vS尼克斯 #马刺抢七淘汰雷霆晋级总决赛</div>
-  <button class="copy-btn" onclick="copyText('pack-p1-7664656847026394298', this)">📋 复制内容包</button>
-  <a class="beat-btn" href="https://www.douyin.com/video/7664656847026394298" target="_blank" rel="noopener">🎬 去原视频拍同款 →</a>
-</div>
-<div class="video-card">
-  <div class="video-head"><span class="video-no">视频12</span></div>
+  <div class="video-head"><span class="video-no">视频10</span></div>
   <div class="card-label">🖼 画面上的字</div>
   <div class="copy-area" id="ocr-p1-7648536249091654245" data-ocr="7648536249091654245">便秘不在肠里
 肺和大肠相表里</div>
@@ -565,7 +522,7 @@ body { font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif; bac
   <a class="beat-btn" href="https://www.douyin.com/video/7648536249091654245" target="_blank" rel="noopener">🎬 去原视频拍同款 →</a>
 </div>
 <div class="video-card">
-  <div class="video-head"><span class="video-no">视频13</span><div class="video-stats">👍3006 评0 藏0</div></div>
+  <div class="video-head"><span class="video-no">视频11</span><div class="video-stats">👍3006 评0 藏0</div></div>
   <div class="card-label">🖼 画面上的字</div>
   <div class="copy-area" id="ocr-p1-7669852230786571001" data-ocr="7669852230786571001">便秘不在肠子
 在肺里</div>
@@ -577,7 +534,7 @@ body { font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif; bac
   <a class="beat-btn" href="https://www.douyin.com/video/7669852230786571001" target="_blank" rel="noopener">🎬 去原视频拍同款 →</a>
 </div>
 <div class="video-card">
-  <div class="video-head"><span class="video-no">视频14</span><div class="video-stats">👍2373 评0 藏0</div></div>
+  <div class="video-head"><span class="video-no">视频12</span><div class="video-stats">👍2373 评0 藏0</div></div>
   <div class="card-label">🖼 画面上的字</div>
   <div class="copy-area" id="ocr-p1-7666027265185401061" data-ocr="7666027265185401061">便秘不在肠子
 在肺里</div>
@@ -589,7 +546,7 @@ body { font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif; bac
   <a class="beat-btn" href="https://www.douyin.com/video/7666027265185401061" target="_blank" rel="noopener">🎬 去原视频拍同款 →</a>
 </div>
 <div class="video-card">
-  <div class="video-head"><span class="video-no">视频15</span></div>
+  <div class="video-head"><span class="video-no">视频13</span></div>
   <div class="card-label">🖼 画面上的字</div>
   <div class="copy-area" id="ocr-p1-7665602727195489381" data-ocr="7665602727195489381">便秘不在肠子
 在肺里</div>
@@ -602,7 +559,7 @@ body { font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif; bac
 </div>
     </div>
   </details>
-  <details class="acc-fold">
+<details class="acc-fold">
     <summary>👤 爆过的账号（12个 · 点击展开）</summary>
     <div class="acc-inner">
       
@@ -694,24 +651,6 @@ body { font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif; bac
 </div>
 <div class="account-card">
   <div class="acc-top">
-    <img class="acc-avatar" src="media/avatar_6f72a142e2.jpg" alt="头像" onerror="this.style.display=&apos;none&apos;">
-    <div class="acc-info">
-      <div class="acc-nick">倪师讲健康</div>
-      <div class="acc-meta">抖音号 75997863560 · 粉丝 7000+</div>
-    </div>
-  </div>
-  <div class="card-label">🖼 头像（直接下载上传）</div>
-  <a class="dl-btn" href="media/avatar_6f72a142e2.jpg" download>⬇️ 下载此头像</a>
-  <div class="card-label" style="margin-top:10px">✨ 相似名字（点击即复制，风格一致）</div>
-  <div class="name-row"><button class="name-chip" onclick="copyTextByName(&apos;倪师说健康&apos;, this)">倪师说健康</button><button class="name-chip" onclick="copyTextByName(&apos;倪师谈健康&apos;, this)">倪师谈健康</button><button class="name-chip" onclick="copyTextByName(&apos;倪师话健康&apos;, this)">倪师话健康</button><button class="name-chip" onclick="copyTextByName(&apos;倪师道健康&apos;, this)">倪师道健康</button></div>
-  <div class="card-label" style="margin-top:10px">📝 简介（照抄，一键复制）</div>
-  <div class="copy-area" id="acc-sig-p1-6">祝大家身体健康！
-视频同款商品在下面橱窗购买，可自行下单
-⬇️⬇️⬇️⬇️</div>
-  <button class="copy-btn" onclick="copyText('acc-sig-p1-6', this)">📋 复制简介</button>
-</div>
-<div class="account-card">
-  <div class="acc-top">
     <img class="acc-avatar" src="media/avatar_65fe20a34c.jpg" alt="头像" onerror="this.style.display=&apos;none&apos;">
     <div class="acc-info">
       <div class="acc-nick">倪师精华录</div>
@@ -723,8 +662,8 @@ body { font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif; bac
   <div class="card-label" style="margin-top:10px">✨ 相似名字（点击即复制，风格一致）</div>
   <div class="name-row"><button class="name-chip" onclick="copyTextByName(&apos;倪师精华号&apos;, this)">倪师精华号</button><button class="name-chip" onclick="copyTextByName(&apos;倪师精华录日常&apos;, this)">倪师精华录日常</button><button class="name-chip" onclick="copyTextByName(&apos;倪师精华录说&apos;, this)">倪师精华录说</button></div>
   <div class="card-label" style="margin-top:10px">📝 简介（照抄，一键复制）</div>
-  <div class="copy-area" id="acc-sig-p1-7">视频同款在橱窗，私信太多，有需要请自主下单</div>
-  <button class="copy-btn" onclick="copyText('acc-sig-p1-7', this)">📋 复制简介</button>
+  <div class="copy-area" id="acc-sig-p1-6">视频同款在橱窗，私信太多，有需要请自主下单</div>
+  <button class="copy-btn" onclick="copyText('acc-sig-p1-6', this)">📋 复制简介</button>
 </div>
 <div class="account-card">
   <div class="acc-top">
@@ -739,8 +678,8 @@ body { font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif; bac
   <div class="card-label" style="margin-top:10px">✨ 相似名字（点击即复制，风格一致）</div>
   <div class="name-row"><button class="name-chip" onclick="copyTextByName(&apos;倪师传号&apos;, this)">倪师传号</button><button class="name-chip" onclick="copyTextByName(&apos;倪师传承日常&apos;, this)">倪师传承日常</button><button class="name-chip" onclick="copyTextByName(&apos;倪师传承说&apos;, this)">倪师传承说</button></div>
   <div class="card-label" style="margin-top:10px">📝 简介（照抄，一键复制）</div>
-  <div class="copy-area" id="acc-sig-p1-8">（无简介）</div>
-  <button class="copy-btn" onclick="copyText('acc-sig-p1-8', this)">📋 复制简介</button>
+  <div class="copy-area" id="acc-sig-p1-7">（无简介）</div>
+  <button class="copy-btn" onclick="copyText('acc-sig-p1-7', this)">📋 复制简介</button>
 </div>
 <div class="account-card">
   <div class="acc-top">
@@ -755,9 +694,9 @@ body { font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif; bac
   <div class="card-label" style="margin-top:10px">✨ 相似名字（点击即复制，风格一致）</div>
   <div class="name-row"><button class="name-chip" onclick="copyTextByName(&apos;倪师推荐杏仁粉（点这里号&apos;, this)">倪师推荐杏仁粉（点这里号</button><button class="name-chip" onclick="copyTextByName(&apos;倪师推荐杏仁粉（点这里）日常&apos;, this)">倪师推荐杏仁粉（点这里）日常</button><button class="name-chip" onclick="copyTextByName(&apos;倪师推荐杏仁粉（点这里）说&apos;, this)">倪师推荐杏仁粉（点这里）说</button></div>
   <div class="card-label" style="margin-top:10px">📝 简介（照抄，一键复制）</div>
-  <div class="copy-area" id="acc-sig-p1-9">祝您身体健康，万事如意
+  <div class="copy-area" id="acc-sig-p1-8">祝您身体健康，万事如意
 倪师推荐的杏仁粉在👇👇👇橱窗，欢迎下单购买</div>
-  <button class="copy-btn" onclick="copyText('acc-sig-p1-9', this)">📋 复制简介</button>
+  <button class="copy-btn" onclick="copyText('acc-sig-p1-8', this)">📋 复制简介</button>
 </div>
 <div class="account-card">
   <div class="acc-top">
@@ -772,8 +711,8 @@ body { font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif; bac
   <div class="card-label" style="margin-top:10px">✨ 相似名字（点击即复制，风格一致）</div>
   <div class="name-row"><button class="name-chip" onclick="copyTextByName(&apos;大说至简，中医传承&apos;, this)">大说至简，中医传承</button><button class="name-chip" onclick="copyTextByName(&apos;大讲至简，中医传承&apos;, this)">大讲至简，中医传承</button><button class="name-chip" onclick="copyTextByName(&apos;大谈至简，中医传承&apos;, this)">大谈至简，中医传承</button><button class="name-chip" onclick="copyTextByName(&apos;大话至简，中医传承&apos;, this)">大话至简，中医传承</button></div>
   <div class="card-label" style="margin-top:10px">📝 简介（照抄，一键复制）</div>
-  <div class="copy-area" id="acc-sig-p1-10">中医养生</div>
-  <button class="copy-btn" onclick="copyText('acc-sig-p1-10', this)">📋 复制简介</button>
+  <div class="copy-area" id="acc-sig-p1-9">中医养生</div>
+  <button class="copy-btn" onclick="copyText('acc-sig-p1-9', this)">📋 复制简介</button>
 </div>
 <div class="account-card">
   <div class="acc-top">
@@ -788,7 +727,25 @@ body { font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif; bac
   <div class="card-label" style="margin-top:10px">✨ 相似名字（点击即复制，风格一致）</div>
   <div class="name-row"><button class="name-chip" onclick="copyTextByName(&apos;倪师健康频说🚩&apos;, this)">倪师健康频说🚩</button><button class="name-chip" onclick="copyTextByName(&apos;倪师健康频讲🚩&apos;, this)">倪师健康频讲🚩</button><button class="name-chip" onclick="copyTextByName(&apos;倪师健康频谈🚩&apos;, this)">倪师健康频谈🚩</button><button class="name-chip" onclick="copyTextByName(&apos;倪师健康频话🚩&apos;, this)">倪师健康频话🚩</button></div>
   <div class="card-label" style="margin-top:10px">📝 简介（照抄，一键复制）</div>
-  <div class="copy-area" id="acc-sig-p1-11">视频同款杏仁粉找👉@倪师推荐杏仁粉（同款点这里） 视频同款杏仁粉找他👉@倪师推荐杏仁粉（同款点这里） @倪师推荐杏仁粉（同款点这里）</div>
+  <div class="copy-area" id="acc-sig-p1-10">视频同款杏仁粉找👉@倪师推荐杏仁粉（同款点这里） 视频同款杏仁粉找他👉@倪师推荐杏仁粉（同款点这里） @倪师推荐杏仁粉（同款点这里）</div>
+  <button class="copy-btn" onclick="copyText('acc-sig-p1-10', this)">📋 复制简介</button>
+</div>
+<div class="account-card">
+  <div class="acc-top">
+    <img class="acc-avatar" src="media/avatar_6f72a142e2.jpg" alt="头像" onerror="this.style.display=&apos;none&apos;">
+    <div class="acc-info">
+      <div class="acc-nick">倪师讲健康</div>
+      <div class="acc-meta">抖音号 75997863560 · 粉丝 7000+</div>
+    </div>
+  </div>
+  <div class="card-label">🖼 头像（直接下载上传）</div>
+  <a class="dl-btn" href="media/avatar_6f72a142e2.jpg" download>⬇️ 下载此头像</a>
+  <div class="card-label" style="margin-top:10px">✨ 相似名字（点击即复制，风格一致）</div>
+  <div class="name-row"><button class="name-chip" onclick="copyTextByName(&apos;倪师说健康&apos;, this)">倪师说健康</button><button class="name-chip" onclick="copyTextByName(&apos;倪师谈健康&apos;, this)">倪师谈健康</button><button class="name-chip" onclick="copyTextByName(&apos;倪师话健康&apos;, this)">倪师话健康</button><button class="name-chip" onclick="copyTextByName(&apos;倪师道健康&apos;, this)">倪师道健康</button></div>
+  <div class="card-label" style="margin-top:10px">📝 简介（照抄，一键复制）</div>
+  <div class="copy-area" id="acc-sig-p1-11">祝大家身体健康！
+视频同款商品在下面橱窗购买，可自行下单
+⬇️⬇️⬇️⬇️</div>
   <button class="copy-btn" onclick="copyText('acc-sig-p1-11', this)">📋 复制简介</button>
 </div>
 <div class="account-card">
@@ -811,17 +768,42 @@ body { font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif; bac
 </div>
     </div>
   </details>
-</div>
-<div class="product-section" data-product="p2">
-  <div class="section-title">🎵 爆款画面字 · 拍同款（1个）</div>
+
   
-<div class="hook-card">
-  <div class="hook-text" data-aweme="7659234194602150565">人老不老
-不看年龄
-看膝盖</div>
-  <a class="beat-btn" data-aweme="7659234194602150565" href="https://www.douyin.com/music/7630730224661203721" target="_blank" rel="noopener">🎬 拍同款（原声） →</a>
 </div>
-  <details class="acc-fold">
+<div class="product-section" data-product="p2" style="display:none">
+  <div class="section-title">🎵 爆款画面字 · 同音频钩子（18个）</div>
+<div class="audio-group" data-music="7601751422752934675">
+  <div class="hook-tabs"><button class="hook-tab active" onclick="switchHook(this,'p2a934675')">几十块的热水袋，胜过万元补品</button><button class="hook-tab" onclick="switchHook(this,'p2a934675')">身体是座冰窖，补再多也烧不起来</button><button class="hook-tab" onclick="switchHook(this,'p2a934675')">热水袋敷肚脐，阳气才升得起</button></div>
+  <div class="hook-display"><div class="copy-area" id="hd-p2a934675-0" data-hook="0">几十块的热水袋，胜过万元补品</div><button class="copy-btn" data-hook="0" style="margin-top:6px" onclick="copyText('hd-p2a934675-0', this)">📋 复制此钩子</button><div class="copy-area" id="hd-p2a934675-1" data-hook="1" style="display:none">身体是座冰窖，补再多也烧不起来</div><button class="copy-btn" data-hook="1" style="display:none;margin-top:6px" onclick="copyText('hd-p2a934675-1', this)">📋 复制此钩子</button><div class="copy-area" id="hd-p2a934675-2" data-hook="2" style="display:none">热水袋敷肚脐，阳气才升得起</div><button class="copy-btn" data-hook="2" style="display:none;margin-top:6px" onclick="copyText('hd-p2a934675-2', this)">📋 复制此钩子</button></div>
+  <a class="beat-btn" href="https://www.douyin.com/music/7601751422752934675" target="_blank" rel="noopener">🎬 拍同款（开运堂·5595赞）→</a>
+</div>
+<div class="audio-group" data-music="7584415466949446438">
+  <div class="hook-tabs"><button class="hook-tab active" onclick="switchHook(this,'p2a446438')">比钱更重要的三样东西</button><button class="hook-tab" onclick="switchHook(this,'p2a446438')">千万富翁也买不到这三样东西</button><button class="hook-tab" onclick="switchHook(this,'p2a446438')">第一样保命符，很多人弄丢了</button></div>
+  <div class="hook-display"><div class="copy-area" id="hd-p2a446438-0" data-hook="0">比钱更重要的三样东西</div><button class="copy-btn" data-hook="0" style="margin-top:6px" onclick="copyText('hd-p2a446438-0', this)">📋 复制此钩子</button><div class="copy-area" id="hd-p2a446438-1" data-hook="1" style="display:none">千万富翁也买不到这三样东西</div><button class="copy-btn" data-hook="1" style="display:none;margin-top:6px" onclick="copyText('hd-p2a446438-1', this)">📋 复制此钩子</button><div class="copy-area" id="hd-p2a446438-2" data-hook="2" style="display:none">第一样保命符，很多人弄丢了</div><button class="copy-btn" data-hook="2" style="display:none;margin-top:6px" onclick="copyText('hd-p2a446438-2', this)">📋 复制此钩子</button></div>
+  <a class="beat-btn" href="https://www.douyin.com/music/7584415466949446438" target="_blank" rel="noopener">🎬 拍同款（开运堂·3549赞）→</a>
+</div>
+<div class="audio-group" data-music="7595164586754083647">
+  <div class="hook-tabs"><button class="hook-tab active" onclick="switchHook(this,'p2a083647')">阳气越足，越不容易生病</button><button class="hook-tab" onclick="switchHook(this,'p2a083647')">生病先别补，看看阳气还剩多少</button><button class="hook-tab" onclick="switchHook(this,'p2a083647')">阳气就是身体里的太阳</button></div>
+  <div class="hook-display"><div class="copy-area" id="hd-p2a083647-0" data-hook="0">阳气越足，越不容易生病</div><button class="copy-btn" data-hook="0" style="margin-top:6px" onclick="copyText('hd-p2a083647-0', this)">📋 复制此钩子</button><div class="copy-area" id="hd-p2a083647-1" data-hook="1" style="display:none">生病先别补，看看阳气还剩多少</div><button class="copy-btn" data-hook="1" style="display:none;margin-top:6px" onclick="copyText('hd-p2a083647-1', this)">📋 复制此钩子</button><div class="copy-area" id="hd-p2a083647-2" data-hook="2" style="display:none">阳气就是身体里的太阳</div><button class="copy-btn" data-hook="2" style="display:none;margin-top:6px" onclick="copyText('hd-p2a083647-2', this)">📋 复制此钩子</button></div>
+  <a class="beat-btn" href="https://www.douyin.com/music/7595164586754083647" target="_blank" rel="noopener">🎬 拍同款（开运堂·1270赞）→</a>
+</div>
+<div class="audio-group" data-music="7586169880152394502">
+  <div class="hook-tabs"><button class="hook-tab active" onclick="switchHook(this,'p2a394502')">生姜的力量，不在嘴里在肚脐</button><button class="hook-tab" onclick="switchHook(this,'p2a394502')">几毛钱生姜敷肚脐，半个月身体大变</button><button class="hook-tab" onclick="switchHook(this,'p2a394502')">神阙穴，才是生姜起效的开关</button></div>
+  <div class="hook-display"><div class="copy-area" id="hd-p2a394502-0" data-hook="0">生姜的力量，不在嘴里在肚脐</div><button class="copy-btn" data-hook="0" style="margin-top:6px" onclick="copyText('hd-p2a394502-0', this)">📋 复制此钩子</button><div class="copy-area" id="hd-p2a394502-1" data-hook="1" style="display:none">几毛钱生姜敷肚脐，半个月身体大变</div><button class="copy-btn" data-hook="1" style="display:none;margin-top:6px" onclick="copyText('hd-p2a394502-1', this)">📋 复制此钩子</button><div class="copy-area" id="hd-p2a394502-2" data-hook="2" style="display:none">神阙穴，才是生姜起效的开关</div><button class="copy-btn" data-hook="2" style="display:none;margin-top:6px" onclick="copyText('hd-p2a394502-2', this)">📋 复制此钩子</button></div>
+  <a class="beat-btn" href="https://www.douyin.com/music/7586169880152394502" target="_blank" rel="noopener">🎬 拍同款（开运堂·350赞）→</a>
+</div>
+<div class="audio-group" data-music="7586178298702695231">
+  <div class="hook-tabs"><button class="hook-tab active" onclick="switchHook(this,'p2a695231')">冬至乱补，等于送命</button><button class="hook-tab" onclick="switchHook(this,'p2a695231')">给老人冬至进补，补错了就是催命</button><button class="hook-tab" onclick="switchHook(this,'p2a695231')">冬至这口生冷，最伤老人孩子</button></div>
+  <div class="hook-display"><div class="copy-area" id="hd-p2a695231-0" data-hook="0">冬至乱补，等于送命</div><button class="copy-btn" data-hook="0" style="margin-top:6px" onclick="copyText('hd-p2a695231-0', this)">📋 复制此钩子</button><div class="copy-area" id="hd-p2a695231-1" data-hook="1" style="display:none">给老人冬至进补，补错了就是催命</div><button class="copy-btn" data-hook="1" style="display:none;margin-top:6px" onclick="copyText('hd-p2a695231-1', this)">📋 复制此钩子</button><div class="copy-area" id="hd-p2a695231-2" data-hook="2" style="display:none">冬至这口生冷，最伤老人孩子</div><button class="copy-btn" data-hook="2" style="display:none;margin-top:6px" onclick="copyText('hd-p2a695231-2', this)">📋 复制此钩子</button></div>
+  <a class="beat-btn" href="https://www.douyin.com/music/7586178298702695231" target="_blank" rel="noopener">🎬 拍同款（开运堂·91赞）→</a>
+</div>
+<div class="audio-group" data-music="7584444420248455999">
+  <div class="hook-tabs"><button class="hook-tab active" onclick="switchHook(this,'p2a455999')">厨房有药，不用往医院跑</button><button class="hook-tab" onclick="switchHook(this,'p2a455999')">食物也分寒热，吃反了就伤身</button><button class="hook-tab" onclick="switchHook(this,'p2a455999')">晚上睡不好，生姜反而不能喝</button></div>
+  <div class="hook-display"><div class="copy-area" id="hd-p2a455999-0" data-hook="0">厨房有药，不用往医院跑</div><button class="copy-btn" data-hook="0" style="margin-top:6px" onclick="copyText('hd-p2a455999-0', this)">📋 复制此钩子</button><div class="copy-area" id="hd-p2a455999-1" data-hook="1" style="display:none">食物也分寒热，吃反了就伤身</div><button class="copy-btn" data-hook="1" style="display:none;margin-top:6px" onclick="copyText('hd-p2a455999-1', this)">📋 复制此钩子</button><div class="copy-area" id="hd-p2a455999-2" data-hook="2" style="display:none">晚上睡不好，生姜反而不能喝</div><button class="copy-btn" data-hook="2" style="display:none;margin-top:6px" onclick="copyText('hd-p2a455999-2', this)">📋 复制此钩子</button></div>
+  <a class="beat-btn" href="https://www.douyin.com/music/7584444420248455999" target="_blank" rel="noopener">🎬 拍同款（开运堂·88赞）→</a>
+</div>
+<details class="acc-fold">
     <summary>🎬 爆过的视频（1个 · 点击展开）</summary>
     <div class="acc-inner">
       
@@ -840,7 +822,22 @@ body { font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif; bac
 </div>
     </div>
   </details>
-  <details class="acc-fold">
+<details class="acc-fold">
+    <summary>🎬 开运堂带货视频（1个 · 点击展开）</summary>
+    <div class="acc-inner">
+<div class="video-card">
+  <div class="video-head"><span class="video-no">视频1</span><div class="video-stats">开运堂同款</div></div>
+  <div class="card-label">🖼 画面上的字</div>
+  <div class="copy-area" id="ocr-k-7584411284406406438" data-ocr="7584411284406406438">养出黄金胃</div>
+  <button class="copy-btn" onclick="copyText('ocr-k-7584411284406406438', this)">📋 复制画面字</button>
+  <div class="card-label" style="margin-top:10px">📦 内容包（文案+标签）</div>
+  <div class="copy-area" id="pack-k-7584411284406406438">养出黄金胃</div>
+  <button class="copy-btn" onclick="copyText('pack-k-7584411284406406438', this)">📋 复制内容包</button>
+  <a class="beat-btn" href="https://www.douyin.com/video/7584411284406406438" target="_blank" rel="noopener">🎬 去原视频拍同款 →</a>
+</div>
+    </div>
+  </details>
+<details class="acc-fold">
     <summary>👤 爆过的账号（1个 · 点击展开）</summary>
     <div class="acc-inner">
       
@@ -864,36 +861,67 @@ body { font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif; bac
 </div>
     </div>
   </details>
-</div>
-<div class="product-section" data-product="p3">
-  <div class="section-title">🎵 爆款画面字 · 拍同款（2个）</div>
+
   
-<div class="hook-card">
-  <div class="hook-text" data-aweme="7659282591317382591">（未识别到画面文字）</div>
-  <a class="beat-btn" data-aweme="7659282591317382591" href="https://www.douyin.com/music/7652698355453315891" target="_blank" rel="noopener">🎬 拍同款（原声） →</a>
 </div>
-<div class="hook-card">
-  <div class="hook-text" data-aweme="7664845714979775721">湿气重
-三伏天去湿</div>
-  <a class="beat-btn" data-aweme="7664845714979775721" href="https://www.douyin.com/music/7652698355453315891" target="_blank" rel="noopener">🎬 拍同款（原声） →</a>
+<div class="product-section" data-product="p3" style="display:none">
+  <div class="section-title">🎵 爆款画面字 · 同音频钩子（28个）</div>
+<div class="audio-group" data-music="7618540971566910246">
+  <div class="hook-tabs"><button class="hook-tab active" onclick="switchHook(this,'p3a1')">脾越补越虚，问题出在阳气</button></div>
+  <div class="hook-display"><div class="copy-area" id="hd-p3a1-0" data-hook="0">脾越补越虚，问题出在阳气</div><button class="copy-btn" data-hook="0" style="margin-top:6px" onclick="copyText('hd-p3a1-0', this)">📋 复制此钩子</button></div>
+  <a class="beat-btn" href="https://www.douyin.com/music/7618540971566910246" target="_blank" rel="noopener">🎬 拍同款（原声）→</a>
 </div>
-  <details class="acc-fold">
-    <summary>🎬 爆过的视频（2个 · 点击展开）</summary>
+<div class="audio-group" data-music="7586334110336240393">
+  <div class="hook-tabs"><button class="hook-tab active" onclick="switchHook(this,'p3a240393')">千寒易祛，一湿难除</button><button class="hook-tab" onclick="switchHook(this,'p3a240393')">拔罐后轻松几天，湿气根本没走</button><button class="hook-tab" onclick="switchHook(this,'p3a240393')">祛湿茶喝错时间，越喝越伤脾</button></div>
+  <div class="hook-display"><div class="copy-area" id="hd-p3a240393-0" data-hook="0">千寒易祛，一湿难除</div><button class="copy-btn" data-hook="0" style="margin-top:6px" onclick="copyText('hd-p3a240393-0', this)">📋 复制此钩子</button><div class="copy-area" id="hd-p3a240393-1" data-hook="1" style="display:none">拔罐后轻松几天，湿气根本没走</div><button class="copy-btn" data-hook="1" style="display:none;margin-top:6px" onclick="copyText('hd-p3a240393-1', this)">📋 复制此钩子</button><div class="copy-area" id="hd-p3a240393-2" data-hook="2" style="display:none">祛湿茶喝错时间，越喝越伤脾</div><button class="copy-btn" data-hook="2" style="display:none;margin-top:6px" onclick="copyText('hd-p3a240393-2', this)">📋 复制此钩子</button></div>
+  <a class="beat-btn" href="https://www.douyin.com/music/7586334110336240393" target="_blank" rel="noopener">🎬 拍同款（开运堂·346赞）→</a>
+</div>
+<div class="audio-group" data-music="7601158050472397606">
+  <div class="hook-tabs"><button class="hook-tab active" onclick="switchHook(this,'p3a397606')">皮肤无故发痒，可能不是皮肤病</button><button class="hook-tab" onclick="switchHook(this,'p3a397606')">皮肤发痒，是身体堵住了排毒口</button><button class="hook-tab" onclick="switchHook(this,'p3a397606')">止痒药越用，皮肤为什么越痒</button></div>
+  <div class="hook-display"><div class="copy-area" id="hd-p3a397606-0" data-hook="0">皮肤无故发痒，可能不是皮肤病</div><button class="copy-btn" data-hook="0" style="margin-top:6px" onclick="copyText('hd-p3a397606-0', this)">📋 复制此钩子</button><div class="copy-area" id="hd-p3a397606-1" data-hook="1" style="display:none">皮肤发痒，是身体堵住了排毒口</div><button class="copy-btn" data-hook="1" style="display:none;margin-top:6px" onclick="copyText('hd-p3a397606-1', this)">📋 复制此钩子</button><div class="copy-area" id="hd-p3a397606-2" data-hook="2" style="display:none">止痒药越用，皮肤为什么越痒</div><button class="copy-btn" data-hook="2" style="display:none;margin-top:6px" onclick="copyText('hd-p3a397606-2', this)">📋 复制此钩子</button></div>
+  <a class="beat-btn" href="https://www.douyin.com/music/7601158050472397606" target="_blank" rel="noopener">🎬 拍同款（开运堂·313赞）→</a>
+</div>
+<div class="audio-group" data-music="7583575071491820339">
+  <div class="hook-tabs"><button class="hook-tab active" onclick="switchHook(this,'p3a820339')">腿脚无力并非自然老化</button><button class="hook-tab" onclick="switchHook(this,'p3a820339')">身体像穿着湿棉袄，阳气被压住了</button><button class="hook-tab" onclick="switchHook(this,'p3a820339')">走两步就喘，不是老了是心阳不足</button></div>
+  <div class="hook-display"><div class="copy-area" id="hd-p3a820339-0" data-hook="0">腿脚无力并非自然老化</div><button class="copy-btn" data-hook="0" style="margin-top:6px" onclick="copyText('hd-p3a820339-0', this)">📋 复制此钩子</button><div class="copy-area" id="hd-p3a820339-1" data-hook="1" style="display:none">身体像穿着湿棉袄，阳气被压住了</div><button class="copy-btn" data-hook="1" style="display:none;margin-top:6px" onclick="copyText('hd-p3a820339-1', this)">📋 复制此钩子</button><div class="copy-area" id="hd-p3a820339-2" data-hook="2" style="display:none">走两步就喘，不是老了是心阳不足</div><button class="copy-btn" data-hook="2" style="display:none;margin-top:6px" onclick="copyText('hd-p3a820339-2', this)">📋 复制此钩子</button></div>
+  <a class="beat-btn" href="https://www.douyin.com/music/7583575071491820339" target="_blank" rel="noopener">🎬 拍同款（开运堂·146赞）→</a>
+</div>
+<div class="audio-group" data-music="7589516633392073515">
+  <div class="hook-tabs"><button class="hook-tab active" onclick="switchHook(this,'p3a073515')">肚子越大，寒湿越重</button><button class="hook-tab" onclick="switchHook(this,'p3a073515')">大肚子不是福气，是寒湿堆出来的</button><button class="hook-tab" onclick="switchHook(this,'p3a073515')">压力越大，肚子为什么越鼓</button></div>
+  <div class="hook-display"><div class="copy-area" id="hd-p3a073515-0" data-hook="0">肚子越大，寒湿越重</div><button class="copy-btn" data-hook="0" style="margin-top:6px" onclick="copyText('hd-p3a073515-0', this)">📋 复制此钩子</button><div class="copy-area" id="hd-p3a073515-1" data-hook="1" style="display:none">大肚子不是福气，是寒湿堆出来的</div><button class="copy-btn" data-hook="1" style="display:none;margin-top:6px" onclick="copyText('hd-p3a073515-1', this)">📋 复制此钩子</button><div class="copy-area" id="hd-p3a073515-2" data-hook="2" style="display:none">压力越大，肚子为什么越鼓</div><button class="copy-btn" data-hook="2" style="display:none;margin-top:6px" onclick="copyText('hd-p3a073515-2', this)">📋 复制此钩子</button></div>
+  <a class="beat-btn" href="https://www.douyin.com/music/7589516633392073515" target="_blank" rel="noopener">🎬 拍同款（开运堂·133赞）→</a>
+</div>
+<div class="audio-group" data-music="7589475715100281638">
+  <div class="hook-tabs"><button class="hook-tab active" onclick="switchHook(this,'p3a281638')">突然衰老，是湿困住了脾</button><button class="hook-tab" onclick="switchHook(this,'p3a281638')">断崖式衰老，不是更年期是湿困住了脾</button><button class="hook-tab" onclick="switchHook(this,'p3a281638')">53岁突然老了10岁，元凶不是岁月</button></div>
+  <div class="hook-display"><div class="copy-area" id="hd-p3a281638-0" data-hook="0">突然衰老，是湿困住了脾</div><button class="copy-btn" data-hook="0" style="margin-top:6px" onclick="copyText('hd-p3a281638-0', this)">📋 复制此钩子</button><div class="copy-area" id="hd-p3a281638-1" data-hook="1" style="display:none">断崖式衰老，不是更年期是湿困住了脾</div><button class="copy-btn" data-hook="1" style="display:none;margin-top:6px" onclick="copyText('hd-p3a281638-1', this)">📋 复制此钩子</button><div class="copy-area" id="hd-p3a281638-2" data-hook="2" style="display:none">53岁突然老了10岁，元凶不是岁月</div><button class="copy-btn" data-hook="2" style="display:none;margin-top:6px" onclick="copyText('hd-p3a281638-2', this)">📋 复制此钩子</button></div>
+  <a class="beat-btn" href="https://www.douyin.com/music/7589475715100281638" target="_blank" rel="noopener">🎬 拍同款（开运堂·132赞）→</a>
+</div>
+<div class="audio-group" data-music="7586294132125354786">
+  <div class="hook-tabs"><button class="hook-tab active" onclick="switchHook(this,'p3a354786')">这碗粥，胜过人参</button><button class="hook-tab" onclick="switchHook(this,'p3a354786')">早上第一口白粥，可能正在伤你</button><button class="hook-tab" onclick="switchHook(this,'p3a354786')">白粥养人这句古训，很多人读反了</button></div>
+  <div class="hook-display"><div class="copy-area" id="hd-p3a354786-0" data-hook="0">这碗粥，胜过人参</div><button class="copy-btn" data-hook="0" style="margin-top:6px" onclick="copyText('hd-p3a354786-0', this)">📋 复制此钩子</button><div class="copy-area" id="hd-p3a354786-1" data-hook="1" style="display:none">早上第一口白粥，可能正在伤你</div><button class="copy-btn" data-hook="1" style="display:none;margin-top:6px" onclick="copyText('hd-p3a354786-1', this)">📋 复制此钩子</button><div class="copy-area" id="hd-p3a354786-2" data-hook="2" style="display:none">白粥养人这句古训，很多人读反了</div><button class="copy-btn" data-hook="2" style="display:none;margin-top:6px" onclick="copyText('hd-p3a354786-2', this)">📋 复制此钩子</button></div>
+  <a class="beat-btn" href="https://www.douyin.com/music/7586294132125354786" target="_blank" rel="noopener">🎬 拍同款（开运堂·126赞）→</a>
+</div>
+<div class="audio-group" data-music="7584665509719853887">
+  <div class="hook-tabs"><button class="hook-tab active" onclick="switchHook(this,'p3a853887')">82岁下地干活，30岁瘫在椅子上</button><button class="hook-tab" onclick="switchHook(this,'p3a853887')">你的湿气，全是自己一口一口养出来的</button><button class="hook-tab" onclick="switchHook(this,'p3a853887')">越吃低卡低GI，身体反而越垮</button></div>
+  <div class="hook-display"><div class="copy-area" id="hd-p3a853887-0" data-hook="0">82岁下地干活，30岁瘫在椅子上</div><button class="copy-btn" data-hook="0" style="margin-top:6px" onclick="copyText('hd-p3a853887-0', this)">📋 复制此钩子</button><div class="copy-area" id="hd-p3a853887-1" data-hook="1" style="display:none">你的湿气，全是自己一口一口养出来的</div><button class="copy-btn" data-hook="1" style="display:none;margin-top:6px" onclick="copyText('hd-p3a853887-1', this)">📋 复制此钩子</button><div class="copy-area" id="hd-p3a853887-2" data-hook="2" style="display:none">越吃低卡低GI，身体反而越垮</div><button class="copy-btn" data-hook="2" style="display:none;margin-top:6px" onclick="copyText('hd-p3a853887-2', this)">📋 复制此钩子</button></div>
+  <a class="beat-btn" href="https://www.douyin.com/music/7584665509719853887" target="_blank" rel="noopener">🎬 拍同款（开运堂·87赞）→</a>
+</div>
+<div class="audio-group" data-music="7584409343370578707">
+  <div class="hook-tabs"><button class="hook-tab active" onclick="switchHook(this,'p3a578707')">脸肿得像馒头，不是老是湿堵了</button><button class="hook-tab" onclick="switchHook(this,'p3a578707')">53岁一夜老10岁，湿气才是真凶</button><button class="hook-tab" onclick="switchHook(this,'p3a578707')">红豆薏米越喝，湿气为什么越重</button></div>
+  <div class="hook-display"><div class="copy-area" id="hd-p3a578707-0" data-hook="0">脸肿得像馒头，不是老是湿堵了</div><button class="copy-btn" data-hook="0" style="margin-top:6px" onclick="copyText('hd-p3a578707-0', this)">📋 复制此钩子</button><div class="copy-area" id="hd-p3a578707-1" data-hook="1" style="display:none">53岁一夜老10岁，湿气才是真凶</div><button class="copy-btn" data-hook="1" style="display:none;margin-top:6px" onclick="copyText('hd-p3a578707-1', this)">📋 复制此钩子</button><div class="copy-area" id="hd-p3a578707-2" data-hook="2" style="display:none">红豆薏米越喝，湿气为什么越重</div><button class="copy-btn" data-hook="2" style="display:none;margin-top:6px" onclick="copyText('hd-p3a578707-2', this)">📋 复制此钩子</button></div>
+  <a class="beat-btn" href="https://www.douyin.com/music/7584409343370578707" target="_blank" rel="noopener">🎬 拍同款（开运堂·81赞）→</a>
+</div>
+<div class="audio-group" data-music="7584665853380037402">
+  <div class="hook-tabs"><button class="hook-tab active" onclick="switchHook(this,'p3a037402')">三年不吃米饭，月经直接没了</button><button class="hook-tab" onclick="switchHook(this,'p3a037402')">不吃主食，就是把自己往病里送</button><button class="hook-tab" onclick="switchHook(this,'p3a037402')">电饭煲煮的饭，为什么不养人</button></div>
+  <div class="hook-display"><div class="copy-area" id="hd-p3a037402-0" data-hook="0">三年不吃米饭，月经直接没了</div><button class="copy-btn" data-hook="0" style="margin-top:6px" onclick="copyText('hd-p3a037402-0', this)">📋 复制此钩子</button><div class="copy-area" id="hd-p3a037402-1" data-hook="1" style="display:none">不吃主食，就是把自己往病里送</div><button class="copy-btn" data-hook="1" style="display:none;margin-top:6px" onclick="copyText('hd-p3a037402-1', this)">📋 复制此钩子</button><div class="copy-area" id="hd-p3a037402-2" data-hook="2" style="display:none">电饭煲煮的饭，为什么不养人</div><button class="copy-btn" data-hook="2" style="display:none;margin-top:6px" onclick="copyText('hd-p3a037402-2', this)">📋 复制此钩子</button></div>
+  <a class="beat-btn" href="https://www.douyin.com/music/7584665853380037402" target="_blank" rel="noopener">🎬 拍同款（开运堂·77赞）→</a>
+</div>
+<details class="acc-fold">
+    <summary>🎬 爆过的视频（1个 · 点击展开）</summary>
     <div class="acc-inner">
       
 <div class="video-card">
   <div class="video-head"><span class="video-no">视频1</span></div>
-  <div class="card-label">🖼 画面上的字</div>
-  <div class="copy-area" id="ocr-p3-7659282591317382591" data-ocr="7659282591317382591">（未识别到画面文字）</div>
-  <button class="copy-btn" onclick="copyText('ocr-p3-7659282591317382591', this)">📋 复制画面字</button>
-  <div class="card-label" style="margin-top:10px">📦 内容包（文案+标签）</div>
-  <div class="copy-area" id="pack-p3-7659282591317382591">#倪师 #倪海厦
-#倪师 #倪海厦</div>
-  <button class="copy-btn" onclick="copyText('pack-p3-7659282591317382591', this)">📋 复制内容包</button>
-  <a class="beat-btn" href="https://www.douyin.com/video/7659282591317382591" target="_blank" rel="noopener">🎬 去原视频拍同款 →</a>
-</div>
-<div class="video-card">
-  <div class="video-head"><span class="video-no">视频2</span></div>
   <div class="card-label">🖼 画面上的字</div>
   <div class="copy-area" id="ocr-p3-7664845714979775721" data-ocr="7664845714979775721">湿气重
 三伏天去湿</div>
@@ -906,28 +934,10 @@ body { font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif; bac
 </div>
     </div>
   </details>
-  <details class="acc-fold">
-    <summary>👤 爆过的账号（2个 · 点击展开）</summary>
+<details class="acc-fold">
+    <summary>👤 爆过的账号（1个 · 点击展开）</summary>
     <div class="acc-inner">
       
-<div class="account-card">
-  <div class="acc-top">
-    <img class="acc-avatar" src="media/avatar_89126d2041.jpg" alt="头像" onerror="this.style.display=&apos;none&apos;">
-    <div class="acc-info">
-      <div class="acc-nick">倪师传承</div>
-      <div class="acc-meta">抖音号 95423384881 · 粉丝 6000+</div>
-    </div>
-  </div>
-  <div class="card-label">🖼 头像（直接下载上传）</div>
-  <a class="dl-btn" href="media/avatar_89126d2041.jpg" download>⬇️ 下载此头像</a>
-  <div class="card-label" style="margin-top:10px">✨ 相似名字（点击即复制，风格一致）</div>
-  <div class="name-row"><button class="name-chip" onclick="copyTextByName(&apos;倪师传号&apos;, this)">倪师传号</button><button class="name-chip" onclick="copyTextByName(&apos;倪师传承日常&apos;, this)">倪师传承日常</button><button class="name-chip" onclick="copyTextByName(&apos;倪师传承说&apos;, this)">倪师传承说</button></div>
-  <div class="card-label" style="margin-top:10px">📝 简介（照抄，一键复制）</div>
-  <div class="copy-area" id="acc-sig-p3-1">视频同款都在👉@倪师传承 👈
-视频同款都在👉@倪师传承 👈
-视频同款都在👉@倪师传承👈... 更多</div>
-  <button class="copy-btn" onclick="copyText('acc-sig-p3-1', this)">📋 复制简介</button>
-</div>
 <div class="account-card">
   <div class="acc-top">
     <img class="acc-avatar" src="media/avatar_5cbf1db27c.jpg" alt="头像" onerror="this.style.display=&apos;none&apos;">
@@ -941,54 +951,51 @@ body { font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif; bac
   <div class="card-label" style="margin-top:10px">✨ 相似名字（点击即复制，风格一致）</div>
   <div class="name-row"><button class="name-chip" onclick="copyTextByName(&apos;破土春声号&apos;, this)">破土春声号</button><button class="name-chip" onclick="copyTextByName(&apos;破土春声🌱日常&apos;, this)">破土春声🌱日常</button><button class="name-chip" onclick="copyTextByName(&apos;破土春声🌱说&apos;, this)">破土春声🌱说</button></div>
   <div class="card-label" style="margin-top:10px">📝 简介（照抄，一键复制）</div>
-  <div class="copy-area" id="acc-sig-p3-2">关爱健康，一起学习养生之道
+  <div class="copy-area" id="acc-sig-p3-1">关爱健康，一起学习养生之道
 视频同款商品都在下方橱窗
 👇👇👇👇</div>
-  <button class="copy-btn" onclick="copyText('acc-sig-p3-2', this)">📋 复制简介</button>
+  <button class="copy-btn" onclick="copyText('acc-sig-p3-1', this)">📋 复制简介</button>
 </div>
     </div>
   </details>
-</div>
-<div class="product-section" data-product="p4">
-  <div class="section-title">🎵 爆款画面字 · 拍同款（6个）</div>
+
   
-<div class="hook-card">
-  <div class="hook-text" data-aweme="7669046549053303784">体内炎症
-都消退</div>
-  <a class="beat-btn" data-aweme="7669046549053303784" href="https://www.douyin.com/music/7644449594570574619" target="_blank" rel="noopener">🎬 拍同款（原声） →</a>
 </div>
-<div class="hook-card">
-  <div class="hook-text" data-aweme="7654887099573389161">体内炎症
-全部消退</div>
-  <a class="beat-btn" data-aweme="7654887099573389161" href="https://www.douyin.com/music/7644449594570574619" target="_blank" rel="noopener">🎬 拍同款（原声） →</a>
+<div class="product-section" data-product="p4" style="display:none">
+  <div class="section-title">🎵 爆款画面字 · 同音频钩子（14个）</div>
+<div class="audio-group" data-music="7638588370470996742">
+  <div class="hook-tabs"><button class="hook-tab active" onclick="switchHook(this,'p4a0')">炎症反复，根源可能不是炎症</button><button class="hook-tab" onclick="switchHook(this,'p4a0')">身体不再发炎，关键不是消炎</button><button class="hook-tab" onclick="switchHook(this,'p4a0')">炎症全退后，身体发生了什么</button></div>
+  <div class="hook-display"><div class="copy-area" id="hd-p4a0-0" data-hook="0">炎症反复，根源可能不是炎症</div><button class="copy-btn" data-hook="0" style="margin-top:6px" onclick="copyText('hd-p4a0-0', this)">📋 复制此钩子</button><div class="copy-area" id="hd-p4a0-1" data-hook="1" style="display:none">身体不再发炎，关键不是消炎</div><button class="copy-btn" data-hook="1" style="margin-top:6px;display:none" onclick="copyText('hd-p4a0-1', this)">📋 复制此钩子</button><div class="copy-area" id="hd-p4a0-2" data-hook="2" style="display:none">炎症全退后，身体发生了什么</div><button class="copy-btn" data-hook="2" style="margin-top:6px;display:none" onclick="copyText('hd-p4a0-2', this)">📋 复制此钩子</button></div>
+  <a class="beat-btn" href="https://www.douyin.com/music/7638588370470996742" target="_blank" rel="noopener">🎬 拍同款（原声）→</a>
 </div>
-<div class="hook-card">
-  <div class="hook-text" data-aweme="7652169287150763199">全部消退
-体内炎症</div>
-  <a class="beat-btn" data-aweme="7652169287150763199" href="https://www.douyin.com/music/7644449594570574619" target="_blank" rel="noopener">🎬 拍同款（原声） →</a>
+<div class="audio-group" data-music="7667495311144783000">
+  <div class="hook-tabs"><button class="hook-tab active" onclick="switchHook(this,'p4a783000')">蜂蜜加一物升阳好搭档</button><button class="hook-tab" onclick="switchHook(this,'p4a783000')">蜂蜜配肉桂，阴阳竟能一起补</button></div>
+  <div class="hook-display"><div class="copy-area" id="hd-p4a783000-0" data-hook="0">蜂蜜加一物升阳好搭档</div><button class="copy-btn" data-hook="0" style="margin-top:6px" onclick="copyText('hd-p4a783000-0', this)">📋 复制此钩子</button><div class="copy-area" id="hd-p4a783000-1" data-hook="1" style="display:none">蜂蜜配肉桂，阴阳竟能一起补</div><button class="copy-btn" data-hook="1" style="display:none;margin-top:6px" onclick="copyText('hd-p4a783000-1', this)">📋 复制此钩子</button></div>
+  <a class="beat-btn" href="https://www.douyin.com/music/7667495311144783000" target="_blank" rel="noopener">🎬 拍同款（开运堂·757赞）→</a>
 </div>
-<div class="hook-card">
-  <div class="hook-text" data-aweme="7651877647223431606">（未识别到画面文字）</div>
-  <a class="beat-btn" data-aweme="7651877647223431606" href="https://www.douyin.com/music/7644449594570574619" target="_blank" rel="noopener">🎬 拍同款（原声） →</a>
+<div class="audio-group" data-music="7589491933359803162">
+  <div class="hook-tabs"><button class="hook-tab active" onclick="switchHook(this,'p4a803162')">脚冷不是体质，是阎王爷的邀请函</button><button class="hook-tab" onclick="switchHook(this,'p4a803162')">脚冷不是体质，是身体在求救</button><button class="hook-tab" onclick="switchHook(this,'p4a803162')">这句保命提醒，请你刻进脑子里</button></div>
+  <div class="hook-display"><div class="copy-area" id="hd-p4a803162-0" data-hook="0">脚冷不是体质，是阎王爷的邀请函</div><button class="copy-btn" data-hook="0" style="margin-top:6px" onclick="copyText('hd-p4a803162-0', this)">📋 复制此钩子</button><div class="copy-area" id="hd-p4a803162-1" data-hook="1" style="display:none">脚冷不是体质，是身体在求救</div><button class="copy-btn" data-hook="1" style="display:none;margin-top:6px" onclick="copyText('hd-p4a803162-1', this)">📋 复制此钩子</button><div class="copy-area" id="hd-p4a803162-2" data-hook="2" style="display:none">这句保命提醒，请你刻进脑子里</div><button class="copy-btn" data-hook="2" style="display:none;margin-top:6px" onclick="copyText('hd-p4a803162-2', this)">📋 复制此钩子</button></div>
+  <a class="beat-btn" href="https://www.douyin.com/music/7589491933359803162" target="_blank" rel="noopener">🎬 拍同款（开运堂·739赞）→</a>
 </div>
-<div class="hook-card">
-  <div class="hook-text" data-aweme="7659416900451076453">体内炎症
-都消退</div>
-  <a class="beat-btn" data-aweme="7659416900451076453" href="https://www.douyin.com/music/7644449594570574619" target="_blank" rel="noopener">🎬 拍同款（原声） →</a>
+<div class="audio-group" data-music="7591321889264503593">
+  <div class="hook-tabs"><button class="hook-tab active" onclick="switchHook(this,'p4a503593')">手脚冰到骨头里，是寒入了骨髓</button><button class="hook-tab" onclick="switchHook(this,'p4a503593')">肉桂，是能钻进骨髓的一把火</button><button class="hook-tab" onclick="switchHook(this,'p4a503593')">肉桂这把火，为什么能入骨髓</button></div>
+  <div class="hook-display"><div class="copy-area" id="hd-p4a503593-0" data-hook="0">手脚冰到骨头里，是寒入了骨髓</div><button class="copy-btn" data-hook="0" style="margin-top:6px" onclick="copyText('hd-p4a503593-0', this)">📋 复制此钩子</button><div class="copy-area" id="hd-p4a503593-1" data-hook="1" style="display:none">肉桂，是能钻进骨髓的一把火</div><button class="copy-btn" data-hook="1" style="display:none;margin-top:6px" onclick="copyText('hd-p4a503593-1', this)">📋 复制此钩子</button><div class="copy-area" id="hd-p4a503593-2" data-hook="2" style="display:none">肉桂这把火，为什么能入骨髓</div><button class="copy-btn" data-hook="2" style="display:none;margin-top:6px" onclick="copyText('hd-p4a503593-2', this)">📋 复制此钩子</button></div>
+  <a class="beat-btn" href="https://www.douyin.com/music/7591321889264503593" target="_blank" rel="noopener">🎬 拍同款（开运堂·348赞）→</a>
 </div>
-<div class="hook-card">
-  <div class="hook-text" data-aweme="7659691342301345530">体内炎症
-都消退</div>
-  <a class="beat-btn" data-aweme="7659691342301345530" href="https://www.douyin.com/music/7644449594570574619" target="_blank" rel="noopener">🎬 拍同款（原声） →</a>
+<div class="audio-group" data-music="7592456566574549766">
+  <div class="hook-tabs"><button class="hook-tab active" onclick="switchHook(this,'p4a549766')">30岁就英年早白，是命门火灭了</button><button class="hook-tab" onclick="switchHook(this,'p4a549766')">白发染不黑，是命门火快灭了</button><button class="hook-tab" onclick="switchHook(this,'p4a549766')">英年早白的真相，西医很难解释</button></div>
+  <div class="hook-display"><div class="copy-area" id="hd-p4a549766-0" data-hook="0">30岁就英年早白，是命门火灭了</div><button class="copy-btn" data-hook="0" style="margin-top:6px" onclick="copyText('hd-p4a549766-0', this)">📋 复制此钩子</button><div class="copy-area" id="hd-p4a549766-1" data-hook="1" style="display:none">白发染不黑，是命门火快灭了</div><button class="copy-btn" data-hook="1" style="display:none;margin-top:6px" onclick="copyText('hd-p4a549766-1', this)">📋 复制此钩子</button><div class="copy-area" id="hd-p4a549766-2" data-hook="2" style="display:none">英年早白的真相，西医很难解释</div><button class="copy-btn" data-hook="2" style="display:none;margin-top:6px" onclick="copyText('hd-p4a549766-2', this)">📋 复制此钩子</button></div>
+  <a class="beat-btn" href="https://www.douyin.com/music/7592456566574549766" target="_blank" rel="noopener">🎬 拍同款（开运堂·266赞）→</a>
 </div>
-  <details class="acc-fold">
-    <summary>🎬 爆过的视频（6个 · 点击展开）</summary>
+<details class="acc-fold">
+    <summary>🎬 爆过的视频（5个 · 点击展开）</summary>
     <div class="acc-inner">
       
 <div class="video-card">
   <div class="video-head"><span class="video-no">视频1</span><div class="video-stats">👍17243 评0 藏0</div></div>
   <div class="card-label">🖼 画面上的字</div>
-  <div class="copy-area" id="ocr-p4-7669046549053303784" data-ocr="7669046549053303784">体内炎症
+  <div class="copy-area" id="ocr-p4-7669046549053303784" data-ocr="7669046549053303784">炎症消失
 都消退</div>
   <button class="copy-btn" onclick="copyText('ocr-p4-7669046549053303784', this)">📋 复制画面字</button>
   <div class="card-label" style="margin-top:10px">📦 内容包（文案+标签）</div>
@@ -1000,7 +1007,7 @@ body { font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif; bac
 <div class="video-card">
   <div class="video-head"><span class="video-no">视频2</span></div>
   <div class="card-label">🖼 画面上的字</div>
-  <div class="copy-area" id="ocr-p4-7654887099573389161" data-ocr="7654887099573389161">体内炎症
+  <div class="copy-area" id="ocr-p4-7654887099573389161" data-ocr="7654887099573389161">炎症消失
 全部消退</div>
   <button class="copy-btn" onclick="copyText('ocr-p4-7654887099573389161', this)">📋 复制画面字</button>
   <div class="card-label" style="margin-top:10px">📦 内容包（文案+标签）</div>
@@ -1013,7 +1020,7 @@ body { font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif; bac
   <div class="video-head"><span class="video-no">视频3</span><div class="video-stats">👍27106 评0 藏0</div></div>
   <div class="card-label">🖼 画面上的字</div>
   <div class="copy-area" id="ocr-p4-7652169287150763199" data-ocr="7652169287150763199">全部消退
-体内炎症</div>
+炎症消失</div>
   <button class="copy-btn" onclick="copyText('ocr-p4-7652169287150763199', this)">📋 复制画面字</button>
   <div class="card-label" style="margin-top:10px">📦 内容包（文案+标签）</div>
   <div class="copy-area" id="pack-p4-7652169287150763199">登临最高峰，一览众山小！国乒男团3:0横扫日本队，夺得伦敦世乒赛团体冠军，12连冠，真正的NO.1！
@@ -1022,20 +1029,9 @@ body { font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif; bac
   <a class="beat-btn" href="https://www.douyin.com/video/7652169287150763199" target="_blank" rel="noopener">🎬 去原视频拍同款 →</a>
 </div>
 <div class="video-card">
-  <div class="video-head"><span class="video-no">视频4</span><div class="video-stats">👍23246 评0 藏0</div></div>
+  <div class="video-head"><span class="video-no">视频4</span></div>
   <div class="card-label">🖼 画面上的字</div>
-  <div class="copy-area" id="ocr-p4-7651877647223431606" data-ocr="7651877647223431606">（未识别到画面文字）</div>
-  <button class="copy-btn" onclick="copyText('ocr-p4-7651877647223431606', this)">📋 复制画面字</button>
-  <div class="card-label" style="margin-top:10px">📦 内容包（文案+标签）</div>
-  <div class="copy-area" id="pack-p4-7651877647223431606">世锦赛燃爆！丁俊晖10:5轻取吉尔伯特拿到16强门票，下轮硬刚赵心童，中国德比谁能笑到最后？
-#丁俊晖为高考生们加油 #丁俊晖 #斯诺克 #高考 #新兴专业主理人 #抖音精选高考应援联盟</div>
-  <button class="copy-btn" onclick="copyText('pack-p4-7651877647223431606', this)">📋 复制内容包</button>
-  <a class="beat-btn" href="https://www.douyin.com/video/7651877647223431606" target="_blank" rel="noopener">🎬 去原视频拍同款 →</a>
-</div>
-<div class="video-card">
-  <div class="video-head"><span class="video-no">视频5</span></div>
-  <div class="card-label">🖼 画面上的字</div>
-  <div class="copy-area" id="ocr-p4-7659416900451076453" data-ocr="7659416900451076453">体内炎症
+  <div class="copy-area" id="ocr-p4-7659416900451076453" data-ocr="7659416900451076453">炎症消失
 都消退</div>
   <button class="copy-btn" onclick="copyText('ocr-p4-7659416900451076453', this)">📋 复制画面字</button>
   <div class="card-label" style="margin-top:10px">📦 内容包（文案+标签）</div>
@@ -1044,9 +1040,9 @@ body { font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif; bac
   <a class="beat-btn" href="https://www.douyin.com/video/7659416900451076453" target="_blank" rel="noopener">🎬 去原视频拍同款 →</a>
 </div>
 <div class="video-card">
-  <div class="video-head"><span class="video-no">视频6</span><div class="video-stats">👍17866 评0 藏0</div></div>
+  <div class="video-head"><span class="video-no">视频5</span><div class="video-stats">👍17866 评0 藏0</div></div>
   <div class="card-label">🖼 画面上的字</div>
-  <div class="copy-area" id="ocr-p4-7659691342301345530" data-ocr="7659691342301345530">体内炎症
+  <div class="copy-area" id="ocr-p4-7659691342301345530" data-ocr="7659691342301345530">炎症消失
 都消退</div>
   <button class="copy-btn" onclick="copyText('ocr-p4-7659691342301345530', this)">📋 复制画面字</button>
   <div class="card-label" style="margin-top:10px">📦 内容包（文案+标签）</div>
@@ -1057,8 +1053,8 @@ body { font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif; bac
 </div>
     </div>
   </details>
-  <details class="acc-fold">
-    <summary>👤 爆过的账号（6个 · 点击展开）</summary>
+<details class="acc-fold">
+    <summary>👤 爆过的账号（5个 · 点击展开）</summary>
     <div class="acc-inner">
       
 <div class="account-card">
@@ -1116,23 +1112,6 @@ body { font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif; bac
 </div>
 <div class="account-card">
   <div class="acc-top">
-    <img class="acc-avatar" src="media/avatar_44aed7a389.jpg" alt="头像" onerror="this.style.display=&apos;none&apos;">
-    <div class="acc-info">
-      <div class="acc-nick">颐养自清</div>
-      <div class="acc-meta">抖音号 13667286 · 粉丝 5000+</div>
-    </div>
-  </div>
-  <div class="card-label">🖼 头像（直接下载上传）</div>
-  <a class="dl-btn" href="media/avatar_44aed7a389.jpg" download>⬇️ 下载此头像</a>
-  <div class="card-label" style="margin-top:10px">✨ 相似名字（点击即复制，风格一致）</div>
-  <div class="name-row"><button class="name-chip" onclick="copyTextByName(&apos;颐养自号&apos;, this)">颐养自号</button><button class="name-chip" onclick="copyTextByName(&apos;颐养自清日常&apos;, this)">颐养自清日常</button><button class="name-chip" onclick="copyTextByName(&apos;颐养自清说&apos;, this)">颐养自清说</button></div>
-  <div class="card-label" style="margin-top:10px">📝 简介（照抄，一键复制）</div>
-  <div class="copy-area" id="acc-sig-p4-4">视频同款商品在下面橱窗里购买，自行下单！
-视频同款商品在下面橱窗里购买，自行下单！... 更多</div>
-  <button class="copy-btn" onclick="copyText('acc-sig-p4-4', this)">📋 复制简介</button>
-</div>
-<div class="account-card">
-  <div class="acc-top">
     <img class="acc-avatar" src="media/avatar_fb71239460.jpg" alt="头像" onerror="this.style.display=&apos;none&apos;">
     <div class="acc-info">
       <div class="acc-nick">清养斋</div>
@@ -1144,10 +1123,10 @@ body { font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif; bac
   <div class="card-label" style="margin-top:10px">✨ 相似名字（点击即复制，风格一致）</div>
   <div class="name-row"><button class="name-chip" onclick="copyTextByName(&apos;清养斋说&apos;, this)">清养斋说</button><button class="name-chip" onclick="copyTextByName(&apos;清养斋日常&apos;, this)">清养斋日常</button></div>
   <div class="card-label" style="margin-top:10px">📝 简介（照抄，一键复制）</div>
-  <div class="copy-area" id="acc-sig-p4-5">“是药三分毒，是食七分养”。每天分享养生知识
+  <div class="copy-area" id="acc-sig-p4-4">“是药三分毒，是食七分养”。每天分享养生知识
 视频同款商品在下面橱窗里购买，可自行下单！
 视频同款商品在下面橱窗里购买，可自行下单... 更多</div>
-  <button class="copy-btn" onclick="copyText('acc-sig-p4-5', this)">📋 复制简介</button>
+  <button class="copy-btn" onclick="copyText('acc-sig-p4-4', this)">📋 复制简介</button>
 </div>
 <div class="account-card">
   <div class="acc-top">
@@ -1162,26 +1141,45 @@ body { font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif; bac
   <div class="card-label" style="margin-top:10px">✨ 相似名字（点击即复制，风格一致）</div>
   <div class="name-row"><button class="name-chip" onclick="copyTextByName(&apos;颐养致号&apos;, this)">颐养致号</button><button class="name-chip" onclick="copyTextByName(&apos;颐养致柔日常&apos;, this)">颐养致柔日常</button><button class="name-chip" onclick="copyTextByName(&apos;颐养致柔说&apos;, this)">颐养致柔说</button></div>
   <div class="card-label" style="margin-top:10px">📝 简介（照抄，一键复制）</div>
-  <div class="copy-area" id="acc-sig-p4-6">视频中提到的肉桂粉和蜂蜜在@颐和清韵橱窗里购买
+  <div class="copy-area" id="acc-sig-p4-5">视频中提到的肉桂粉和蜂蜜在@颐和清韵橱窗里购买
 视频中提到的肉桂粉和蜂蜜在@颐和清韵 橱窗... 更多</div>
-  <button class="copy-btn" onclick="copyText('acc-sig-p4-6', this)">📋 复制简介</button>
+  <button class="copy-btn" onclick="copyText('acc-sig-p4-5', this)">📋 复制简介</button>
 </div>
     </div>
   </details>
 </div>
-<div class="product-section" data-product="p5">
-  <div class="section-title">🎵 爆款画面字 · 拍同款（1个）</div>
-  
-<div class="hook-card">
-  <div class="hook-text" data-aweme="7667481731213871795">通血管之王</div>
-  <a class="beat-btn" data-aweme="7667481731213871795" href="https://www.douyin.com/music/7664513972632111926" target="_blank" rel="noopener">🎬 拍同款（原声） →</a>
+<div class="product-section" data-product="p5" style="display:none">
+  <div class="section-title">🎵 爆款画面字 · 同音频钩子（原始爆款音频 3个）</div>
+<div class="audio-group" data-music="7664513972632111926">
+  <div class="hook-tabs"><button class="hook-tab active" onclick="switchHook(this,'p5a0')">四味药磨成粉，守住中年人的底</button><button class="hook-tab " onclick="switchHook(this,'p5a0')">换季总没精神，老祖宗留下四宝</button><button class="hook-tab " onclick="switchHook(this,'p5a0')">人过中年，最怕底子突然塌</button></div>
+  <div class="hook-display"><div class="copy-area" id="hd-p5a0-0" data-hook="0">四味药磨成粉，守住中年人的底</div><button class="copy-btn" data-hook="0" style="margin-top:6px" onclick="copyText('hd-p5a0-0', this)">📋 复制此钩子</button><div class="copy-area" id="hd-p5a0-1" data-hook="1" style="display:none">换季总没精神，老祖宗留下四宝</div><button class="copy-btn" data-hook="1" style="display:none;margin-top:6px" onclick="copyText('hd-p5a0-1', this)">📋 复制此钩子</button><div class="copy-area" id="hd-p5a0-2" data-hook="2" style="display:none">人过中年，最怕底子突然塌</div><button class="copy-btn" data-hook="2" style="display:none;margin-top:6px" onclick="copyText('hd-p5a0-2', this)">📋 复制此钩子</button></div>
+  <a class="beat-btn" href="https://www.douyin.com/music/7664513972632111926" target="_blank" rel="noopener">🎬 拍同款（原声·910赞爆款）→</a>
+</div><div class="audio-group" data-music="7592250527887461126">
+  <div class="hook-tabs"><button class="hook-tab active" onclick="switchHook(this,'p5a461126')">血管里的通渠神器</button><button class="hook-tab" onclick="switchHook(this,'p5a461126')">阿司匹林让血变稀，却没清掉血栓</button><button class="hook-tab" onclick="switchHook(this,'p5a461126')">血管堵塞的真相，可能超出你认知</button></div>
+  <div class="hook-display"><div class="copy-area" id="hd-p5a461126-0" data-hook="0">血管里的通渠神器</div><button class="copy-btn" data-hook="0" style="margin-top:6px" onclick="copyText('hd-p5a461126-0', this)">📋 复制此钩子</button><div class="copy-area" id="hd-p5a461126-1" data-hook="1" style="display:none">阿司匹林让血变稀，却没清掉血栓</div><button class="copy-btn" data-hook="1" style="display:none;margin-top:6px" onclick="copyText('hd-p5a461126-1', this)">📋 复制此钩子</button><div class="copy-area" id="hd-p5a461126-2" data-hook="2" style="display:none">血管堵塞的真相，可能超出你认知</div><button class="copy-btn" data-hook="2" style="display:none;margin-top:6px" onclick="copyText('hd-p5a461126-2', this)">📋 复制此钩子</button></div>
+  <a class="beat-btn" href="https://www.douyin.com/music/7592250527887461126" target="_blank" rel="noopener">🎬 拍同款（开运堂·232赞）→</a>
 </div>
-  <details class="acc-fold">
-    <summary>🎬 爆过的视频（1个 · 点击展开）</summary>
+<div class="audio-group" data-music="7590036166540495670">
+  <div class="hook-tabs"><button class="hook-tab active" onclick="switchHook(this,'p5a0495670')">怕中风怕心梗，血管问题拖不得</button><button class="hook-tab" onclick="switchHook(this,'p5a0495670')">血管里的垃圾，是谁一口口堆出来的</button><button class="hook-tab" onclick="switchHook(this,'p5a0495670')">血管好不好，身体早就告诉你了</button></div>
+  <div class="hook-display"><div class="copy-area" id="hd-p5a0495670-0" data-hook="0">怕中风怕心梗，血管问题拖不得</div><button class="copy-btn" data-hook="0" style="margin-top:6px" onclick="copyText('hd-p5a0495670-0', this)">📋 复制此钩子</button><div class="copy-area" id="hd-p5a0495670-1" data-hook="1" style="display:none">血管里的垃圾，是谁一口口堆出来的</div><button class="copy-btn" data-hook="1" style="display:none;margin-top:6px" onclick="copyText('hd-p5a0495670-1', this)">📋 复制此钩子</button><div class="copy-area" id="hd-p5a0495670-2" data-hook="2" style="display:none">血管好不好，身体早就告诉你了</div><button class="copy-btn" data-hook="2" style="display:none;margin-top:6px" onclick="copyText('hd-p5a0495670-2', this)">📋 复制此钩子</button></div>
+  <a class="beat-btn" href="https://www.douyin.com/music/7590036166540495670" target="_blank" rel="noopener">🎬 拍同款（开运堂·161赞）→</a>
+</div>
+<details class="acc-fold">
+    <summary>🎬 爆过的视频（3个 · 点击展开）</summary>
     <div class="acc-inner">
       
 <div class="video-card">
-  <div class="video-head"><span class="video-no">视频1</span><div class="video-stats">👍3306 评0 藏0</div></div>
+  <div class="video-head"><span class="video-no">视频1</span><div class="video-stats">👍910 评117 藏532</div></div>
+  <div class="card-label">🖼 画面上的字</div>
+  <div class="copy-area" id="ocr-p5-7664513998427450697" data-ocr="7664513998427450697">七八九月 紧急通知</div>
+  <button class="copy-btn" onclick="copyText('ocr-p5-7664513998427450697', this)">📋 复制画面字</button>
+  <div class="card-label" style="margin-top:10px">📦 内容包（文案+标签）</div>
+  <div class="copy-area" id="pack-p5-7664513998427450697">#四宝粉 #三七丹参天麻西洋参 #倪海厦 #中医养生 #老祖宗的智慧 #健康养生 #中老年</div>
+  <button class="copy-btn" onclick="copyText('pack-p5-7664513998427450697', this)">📋 复制内容包</button>
+  <a class="beat-btn" href="https://www.douyin.com/video/7664513998427450697" target="_blank" rel="noopener">🎬 去原视频拍同款 →</a>
+</div>
+<div class="video-card">
+  <div class="video-head"><span class="video-no">视频2</span><div class="video-stats">👍3306 评0 藏0</div></div>
   <div class="card-label">🖼 画面上的字</div>
   <div class="copy-area" id="ocr-p5-7667481731213871795" data-ocr="7667481731213871795">通血管之王</div>
   <button class="copy-btn" onclick="copyText('ocr-p5-7667481731213871795', this)">📋 复制画面字</button>
@@ -1191,258 +1189,250 @@ body { font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif; bac
   <button class="copy-btn" onclick="copyText('pack-p5-7667481731213871795', this)">📋 复制内容包</button>
   <a class="beat-btn" href="https://www.douyin.com/video/7667481731213871795" target="_blank" rel="noopener">🎬 去原视频拍同款 →</a>
 </div>
+<div class="video-card">
+  <div class="video-head"><span class="video-no">视频3</span><div class="video-stats">👍310 评0 藏0</div></div>
+  <div class="card-label">🖼 画面上的字</div>
+  <div class="copy-area" id="ocr-p5-7667430692410478321" data-ocr="7667430692410478321">四宝方·同音频</div>
+  <button class="copy-btn" onclick="copyText('ocr-p5-7667430692410478321', this)">📋 复制画面字</button>
+  <div class="card-label" style="margin-top:10px">📦 内容包（文案+标签）</div>
+  <div class="copy-area" id="pack-p5-7667430692410478321">#四宝粉 #三七粉 #丹参粉 #天麻粉 #西洋参粉 #养生 #健康知识科普</div>
+  <button class="copy-btn" onclick="copyText('pack-p5-7667430692410478321', this)">📋 复制内容包</button>
+  <a class="beat-btn" href="https://www.douyin.com/video/7667430692410478321" target="_blank" rel="noopener">🎬 去原视频拍同款 →</a>
+</div>
     </div>
   </details>
-  <details class="acc-fold">
-    <summary>👤 爆过的账号（1个 · 点击展开）</summary>
+<details class="acc-fold">
+    <summary>🎬 开运堂带货视频（3个 · 点击展开）</summary>
     <div class="acc-inner">
-      
-<div class="account-card">
-  <div class="acc-top">
-    <img class="acc-avatar" src="media/avatar_a961c9eb9f.jpg" alt="头像" onerror="this.style.display=&apos;none&apos;">
-    <div class="acc-info">
-      <div class="acc-nick">月光之下</div>
-      <div class="acc-meta">抖音号 dyvnm2mjpnep · 粉丝 8000+</div>
-    </div>
-  </div>
-  <div class="card-label">🖼 头像（直接下载上传）</div>
-  <a class="dl-btn" href="media/avatar_a961c9eb9f.jpg" download>⬇️ 下载此头像</a>
-  <div class="card-label" style="margin-top:10px">✨ 相似名字（点击即复制，风格一致）</div>
-  <div class="name-row"><button class="name-chip" onclick="copyTextByName(&apos;月光之号&apos;, this)">月光之号</button><button class="name-chip" onclick="copyTextByName(&apos;月光之下日常&apos;, this)">月光之下日常</button><button class="name-chip" onclick="copyTextByName(&apos;月光之下说&apos;, this)">月光之下说</button></div>
-  <div class="card-label" style="margin-top:10px">📝 简介（照抄，一键复制）</div>
-  <div class="copy-area" id="acc-sig-p5-1">广西南宁市</div>
-  <button class="copy-btn" onclick="copyText('acc-sig-p5-1', this)">📋 复制简介</button>
+<div class="video-card">
+  <div class="video-head"><span class="video-no">视频2</span><div class="video-stats">开运堂同款</div></div>
+  <div class="card-label">🖼 画面上的字</div>
+  <div class="copy-area" id="ocr-k-7592249971366251827" data-ocr="7592249971366251827">血管里的通渠神器</div>
+  <button class="copy-btn" onclick="copyText('ocr-k-7592249971366251827', this)">📋 复制画面字</button>
+  <div class="card-label" style="margin-top:10px">📦 内容包（文案+标签）</div>
+  <div class="copy-area" id="pack-k-7592249971366251827">血管里的通渠神器</div>
+  <button class="copy-btn" onclick="copyText('pack-k-7592249971366251827', this)">📋 复制内容包</button>
+  <a class="beat-btn" href="https://www.douyin.com/video/7592249971366251827" target="_blank" rel="noopener">🎬 去原视频拍同款 →</a>
+</div><div class="video-card">
+  <div class="video-head"><span class="video-no">视频3</span><div class="video-stats">开运堂同款</div></div>
+  <div class="card-label">🖼 画面上的字</div>
+  <div class="copy-area" id="ocr-k-7587374181696703798" data-ocr="7587374181696703798">小米加四宝，养胃效果翻倍</div>
+  <button class="copy-btn" onclick="copyText('ocr-k-7587374181696703798', this)">📋 复制画面字</button>
+  <div class="card-label" style="margin-top:10px">📦 内容包（文案+标签）</div>
+  <div class="copy-area" id="pack-k-7587374181696703798">小米加四宝，养胃效果翻倍</div>
+  <button class="copy-btn" onclick="copyText('pack-k-7587374181696703798', this)">📋 复制内容包</button>
+  <a class="beat-btn" href="https://www.douyin.com/video/7587374181696703798" target="_blank" rel="noopener">🎬 去原视频拍同款 →</a>
 </div>
     </div>
   </details>
-</div>
-<div class="product-section" data-product="p6">
-  <div class="section-title">🎵 爆款画面字 · 拍同款（1个）</div>
+
   
-<div class="hook-card">
-  <div class="hook-text" data-aweme="7643815990510636523">（未识别到画面文字）</div>
-  <a class="beat-btn" data-aweme="7643815990510636523" href="https://www.douyin.com/music/7618430443448847142" target="_blank" rel="noopener">🎬 拍同款（原声） →</a>
+</div><div class="product-section" data-product="p6" style="display:none">
+  <div class="section-title">🎵 爆款画面字 · 同音频钩子（12个）</div>
+<div class="audio-group" data-music="7590592368231877412">
+  <div class="hook-tabs"><button class="hook-tab active" onclick="switchHook(this,'p6a0')">失眠的人，身体最怕你硬睡</button><button class="hook-tab" onclick="switchHook(this,'p6a0')">睡不着，问题可能根本不在脑</button><button class="hook-tab" onclick="switchHook(this,'p6a0')">越想睡着，大脑为什么越清醒</button></div>
+  <div class="hook-display"><div class="copy-area" id="hd-p6a0-0" data-hook="0">失眠的人，身体最怕你硬睡</div><button class="copy-btn" data-hook="0" style="margin-top:6px" onclick="copyText('hd-p6a0-0', this)">📋 复制此钩子</button><div class="copy-area" id="hd-p6a0-1" data-hook="1" style="display:none">睡不着，问题可能根本不在脑</div><button class="copy-btn" data-hook="1" style="display:none;margin-top:6px" onclick="copyText('hd-p6a0-1', this)">📋 复制此钩子</button><div class="copy-area" id="hd-p6a0-2" data-hook="2" style="display:none">越想睡着，大脑为什么越清醒</div><button class="copy-btn" data-hook="2" style="display:none;margin-top:6px" onclick="copyText('hd-p6a0-2', this)">📋 复制此钩子</button></div>
+  <a class="beat-btn" href="https://www.douyin.com/music/7590592368231877412" target="_blank" rel="noopener">🎬 拍同款（原声）→</a>
+</div><div class="audio-group" data-music="7586336597143030537">
+  <div class="hook-tabs"><button class="hook-tab active" onclick="switchHook(this,'p6a030537')">失眠别再吃褪黑素了</button><button class="hook-tab" onclick="switchHook(this,'p6a030537')">褪黑素越吃越睡不着的真相</button><button class="hook-tab" onclick="switchHook(this,'p6a030537')">睡不着就吃药，可能第一步就错了</button></div>
+  <div class="hook-display"><div class="copy-area" id="hd-p6a030537-0" data-hook="0">失眠别再吃褪黑素了</div><button class="copy-btn" data-hook="0" style="margin-top:6px" onclick="copyText('hd-p6a030537-0', this)">📋 复制此钩子</button><div class="copy-area" id="hd-p6a030537-1" data-hook="1" style="display:none">褪黑素越吃越睡不着的真相</div><button class="copy-btn" data-hook="1" style="display:none;margin-top:6px" onclick="copyText('hd-p6a030537-1', this)">📋 复制此钩子</button><div class="copy-area" id="hd-p6a030537-2" data-hook="2" style="display:none">睡不着就吃药，可能第一步就错了</div><button class="copy-btn" data-hook="2" style="display:none;margin-top:6px" onclick="copyText('hd-p6a030537-2', this)">📋 复制此钩子</button></div>
+  <a class="beat-btn" href="https://www.douyin.com/music/7586336597143030537" target="_blank" rel="noopener">🎬 拍同款（开运堂·341赞）→</a>
 </div>
-  <details class="acc-fold">
-    <summary>🎬 爆过的视频（1个 · 点击展开）</summary>
+<div class="audio-group" data-music="7583391316283312905">
+  <div class="hook-tabs"><button class="hook-tab active" onclick="switchHook(this,'p6a312905')">睡觉出现这信号，身体在拉警报</button><button class="hook-tab" onclick="switchHook(this,'p6a312905')">半夜醒来别硬扛，这是身体最后的警报</button><button class="hook-tab" onclick="switchHook(this,'p6a312905')">不要等到这颗定时炸弹爆了再来哭</button></div>
+  <div class="hook-display"><div class="copy-area" id="hd-p6a312905-0" data-hook="0">睡觉出现这信号，身体在拉警报</div><button class="copy-btn" data-hook="0" style="margin-top:6px" onclick="copyText('hd-p6a312905-0', this)">📋 复制此钩子</button><div class="copy-area" id="hd-p6a312905-1" data-hook="1" style="display:none">半夜醒来别硬扛，这是身体最后的警报</div><button class="copy-btn" data-hook="1" style="display:none;margin-top:6px" onclick="copyText('hd-p6a312905-1', this)">📋 复制此钩子</button><div class="copy-area" id="hd-p6a312905-2" data-hook="2" style="display:none">不要等到这颗定时炸弹爆了再来哭</div><button class="copy-btn" data-hook="2" style="display:none;margin-top:6px" onclick="copyText('hd-p6a312905-2', this)">📋 复制此钩子</button></div>
+  <a class="beat-btn" href="https://www.douyin.com/music/7583391316283312905" target="_blank" rel="noopener">🎬 拍同款（开运堂·319赞）→</a>
+</div>
+<div class="audio-group" data-music="7587378661066541843">
+  <div class="hook-tabs"><button class="hook-tab active" onclick="switchHook(this,'p6a541843')">张仲景一张方，专治凌晨早醒</button><button class="hook-tab" onclick="switchHook(this,'p6a541843')">凌晨1到3点醒，张仲景1800年前就懂了</button><button class="hook-tab" onclick="switchHook(this,'p6a541843')">每天凌晨1点准时醒，是肝在求救</button></div>
+  <div class="hook-display"><div class="copy-area" id="hd-p6a541843-0" data-hook="0">张仲景一张方，专治凌晨早醒</div><button class="copy-btn" data-hook="0" style="margin-top:6px" onclick="copyText('hd-p6a541843-0', this)">📋 复制此钩子</button><div class="copy-area" id="hd-p6a541843-1" data-hook="1" style="display:none">凌晨1到3点醒，张仲景1800年前就懂了</div><button class="copy-btn" data-hook="1" style="display:none;margin-top:6px" onclick="copyText('hd-p6a541843-1', this)">📋 复制此钩子</button><div class="copy-area" id="hd-p6a541843-2" data-hook="2" style="display:none">每天凌晨1点准时醒，是肝在求救</div><button class="copy-btn" data-hook="2" style="display:none;margin-top:6px" onclick="copyText('hd-p6a541843-2', this)">📋 复制此钩子</button></div>
+  <a class="beat-btn" href="https://www.douyin.com/music/7587378661066541843" target="_blank" rel="noopener">🎬 拍同款（开运堂·234赞）→</a>
+</div>
+<details class="acc-fold">
+    <summary>🎬 爆过的视频（4个 · 点击展开）</summary>
     <div class="acc-inner">
       
 <div class="video-card">
-  <div class="video-head"><span class="video-no">视频1</span><div class="video-stats">👍12254 评0 藏0</div></div>
+  <div class="video-head"><span class="video-no">视频1</span></div>
   <div class="card-label">🖼 画面上的字</div>
-  <div class="copy-area" id="ocr-p6-7643815990510636523" data-ocr="7643815990510636523">（未识别到画面文字）</div>
-  <button class="copy-btn" onclick="copyText('ocr-p6-7643815990510636523', this)">📋 复制画面字</button>
+  <div class="copy-area" id="ocr-p6-7619455638150358641" data-ocr="7619455638150358641">失眠认真听完</div>
+  <button class="copy-btn" onclick="copyText('ocr-p6-7619455638150358641', this)">📋 复制画面字</button>
   <div class="card-label" style="margin-top:10px">📦 内容包（文案+标签）</div>
-  <div class="copy-area" id="pack-p6-7643815990510636523">大鹏一日同风起，扶摇直上九万里 国乒男团3:0横扫日本夺得伦敦世乒赛团体冠军 12连冠
-#乒乓球 #国乒 #伦敦世乒赛 #梁靖崑 #王楚钦</div>
-  <button class="copy-btn" onclick="copyText('pack-p6-7643815990510636523', this)">📋 复制内容包</button>
-  <a class="beat-btn" href="https://www.douyin.com/video/7643815990510636523" target="_blank" rel="noopener">🎬 去原视频拍同款 →</a>
-</div>
-    </div>
-  </details>
-  <details class="acc-fold">
-    <summary>👤 爆过的账号（1个 · 点击展开）</summary>
-    <div class="acc-inner">
-      
-<div class="account-card">
-  <div class="acc-top">
-    <img class="acc-avatar" src="media/avatar_f1ea13ae8a.jpg" alt="头像" onerror="this.style.display=&apos;none&apos;">
-    <div class="acc-info">
-      <div class="acc-nick">逸哥谈健康🍵</div>
-      <div class="acc-meta">抖音号 47790937145 · 粉丝 2.2万+</div>
-    </div>
-  </div>
-  <div class="card-label">🖼 头像（直接下载上传）</div>
-  <a class="dl-btn" href="media/avatar_f1ea13ae8a.jpg" download>⬇️ 下载此头像</a>
-  <div class="card-label" style="margin-top:10px">✨ 相似名字（点击即复制，风格一致）</div>
-  <div class="name-row"><button class="name-chip" onclick="copyTextByName(&apos;逸哥说健康🍵&apos;, this)">逸哥说健康🍵</button><button class="name-chip" onclick="copyTextByName(&apos;逸哥讲健康🍵&apos;, this)">逸哥讲健康🍵</button><button class="name-chip" onclick="copyTextByName(&apos;逸哥话健康🍵&apos;, this)">逸哥话健康🍵</button><button class="name-chip" onclick="copyTextByName(&apos;逸哥聊健康🍵&apos;, this)">逸哥聊健康🍵</button></div>
-  <div class="card-label" style="margin-top:10px">📝 简介（照抄，一键复制）</div>
-  <div class="copy-area" id="acc-sig-p6-1">视频同款
-@董师傅养生分享 
-@董师傅养生分享 ... 更多</div>
-  <button class="copy-btn" onclick="copyText('acc-sig-p6-1', this)">📋 复制简介</button>
-</div>
-    </div>
-  </details>
-</div>
-<div class="product-section" data-product="p7">
-  <div class="section-title">🎵 爆款画面字 · 拍同款（5个）</div>
-  
-<div class="hook-card">
-  <div class="hook-text" data-aweme="7649192416659376057">（未识别到画面文字）</div>
-  <a class="beat-btn" data-aweme="7649192416659376057" href="https://www.douyin.com/music/7590592368231877412" target="_blank" rel="noopener">🎬 拍同款（原声） →</a>
-</div>
-<div class="hook-card">
-  <div class="hook-text" data-aweme="7619455638150358641">失眠认真听完</div>
-  <a class="beat-btn" data-aweme="7619455638150358641" href="https://www.douyin.com/music/7590592368231877412" target="_blank" rel="noopener">🎬 拍同款（原声） →</a>
-</div>
-<div class="hook-card">
-  <div class="hook-text" data-aweme="7636571018282300027">失眠</div>
-  <a class="beat-btn" data-aweme="7636571018282300027" href="https://www.douyin.com/music/7590592368231877412" target="_blank" rel="noopener">🎬 拍同款（原声） →</a>
-</div>
-<div class="hook-card">
-  <div class="hook-text" data-aweme="7622982150023187635">失眠睡不着</div>
-  <a class="beat-btn" data-aweme="7622982150023187635" href="https://www.douyin.com/music/7590592368231877412" target="_blank" rel="noopener">🎬 拍同款（原声） →</a>
-</div>
-<div class="hook-card">
-  <div class="hook-text" data-aweme="7636554868623002789">睡不着怎么办</div>
-  <a class="beat-btn" data-aweme="7636554868623002789" href="https://www.douyin.com/music/7590592368231877412" target="_blank" rel="noopener">🎬 拍同款（原声） →</a>
-</div>
-  <details class="acc-fold">
-    <summary>🎬 爆过的视频（5个 · 点击展开）</summary>
-    <div class="acc-inner">
-      
-<div class="video-card">
-  <div class="video-head"><span class="video-no">视频1</span><div class="video-stats">👍2171 评0 藏0</div></div>
-  <div class="card-label">🖼 画面上的字</div>
-  <div class="copy-area" id="ocr-p7-7649192416659376057" data-ocr="7649192416659376057">（未识别到画面文字）</div>
-  <button class="copy-btn" onclick="copyText('ocr-p7-7649192416659376057', this)">📋 复制画面字</button>
-  <div class="card-label" style="margin-top:10px">📦 内容包（文案+标签）</div>
-  <div class="copy-area" id="pack-p7-7649192416659376057">痛苦是觉醒的必经之路。不寐三把火，心火，肝火，痰火 失眠不要再盲目吃安眠药了，问题没找到，伤害了自己！珍惜老祖宗留下来的智慧！
-#中医 #中医养生 #中医文化</div>
-  <button class="copy-btn" onclick="copyText('pack-p7-7649192416659376057', this)">📋 复制内容包</button>
-  <a class="beat-btn" href="https://www.douyin.com/video/7649192416659376057" target="_blank" rel="noopener">🎬 去原视频拍同款 →</a>
+  <div class="copy-area" id="pack-p6-7619455638150358641">平安喜乐开心快乐在抖音记录美好生活20260321</div>
+  <button class="copy-btn" onclick="copyText('pack-p6-7619455638150358641', this)">📋 复制内容包</button>
+  <a class="beat-btn" href="https://www.douyin.com/video/7619455638150358641" target="_blank" rel="noopener">🎬 去原视频拍同款 →</a>
 </div>
 <div class="video-card">
   <div class="video-head"><span class="video-no">视频2</span></div>
   <div class="card-label">🖼 画面上的字</div>
-  <div class="copy-area" id="ocr-p7-7619455638150358641" data-ocr="7619455638150358641">失眠认真听完</div>
-  <button class="copy-btn" onclick="copyText('ocr-p7-7619455638150358641', this)">📋 复制画面字</button>
+  <div class="copy-area" id="ocr-p6-7636571018282300027" data-ocr="7636571018282300027">失眠</div>
+  <button class="copy-btn" onclick="copyText('ocr-p6-7636571018282300027', this)">📋 复制画面字</button>
   <div class="card-label" style="margin-top:10px">📦 内容包（文案+标签）</div>
-  <div class="copy-area" id="pack-p7-7619455638150358641">平安喜乐开心快乐在抖音记录美好生活20260321</div>
-  <button class="copy-btn" onclick="copyText('pack-p7-7619455638150358641', this)">📋 复制内容包</button>
-  <a class="beat-btn" href="https://www.douyin.com/video/7619455638150358641" target="_blank" rel="noopener">🎬 去原视频拍同款 →</a>
+  <div class="copy-area" id="pack-p6-7636571018282300027">#失眠
+#失眠</div>
+  <button class="copy-btn" onclick="copyText('pack-p6-7636571018282300027', this)">📋 复制内容包</button>
+  <a class="beat-btn" href="https://www.douyin.com/video/7636571018282300027" target="_blank" rel="noopener">🎬 去原视频拍同款 →</a>
 </div>
 <div class="video-card">
   <div class="video-head"><span class="video-no">视频3</span></div>
   <div class="card-label">🖼 画面上的字</div>
-  <div class="copy-area" id="ocr-p7-7636571018282300027" data-ocr="7636571018282300027">失眠</div>
-  <button class="copy-btn" onclick="copyText('ocr-p7-7636571018282300027', this)">📋 复制画面字</button>
+  <div class="copy-area" id="ocr-p6-7622982150023187635" data-ocr="7622982150023187635">失眠睡不着</div>
+  <button class="copy-btn" onclick="copyText('ocr-p6-7622982150023187635', this)">📋 复制画面字</button>
   <div class="card-label" style="margin-top:10px">📦 内容包（文案+标签）</div>
-  <div class="copy-area" id="pack-p7-7636571018282300027">#失眠
-#失眠</div>
-  <button class="copy-btn" onclick="copyText('pack-p7-7636571018282300027', this)">📋 复制内容包</button>
-  <a class="beat-btn" href="https://www.douyin.com/video/7636571018282300027" target="_blank" rel="noopener">🎬 去原视频拍同款 →</a>
+  <div class="copy-area" id="pack-p6-7622982150023187635">#失眠的夜
+#失眠的夜</div>
+  <button class="copy-btn" onclick="copyText('pack-p6-7622982150023187635', this)">📋 复制内容包</button>
+  <a class="beat-btn" href="https://www.douyin.com/video/7622982150023187635" target="_blank" rel="noopener">🎬 去原视频拍同款 →</a>
 </div>
 <div class="video-card">
   <div class="video-head"><span class="video-no">视频4</span></div>
   <div class="card-label">🖼 画面上的字</div>
-  <div class="copy-area" id="ocr-p7-7622982150023187635" data-ocr="7622982150023187635">失眠睡不着</div>
-  <button class="copy-btn" onclick="copyText('ocr-p7-7622982150023187635', this)">📋 复制画面字</button>
+  <div class="copy-area" id="ocr-p6-7636554868623002789" data-ocr="7636554868623002789">睡不着怎么办</div>
+  <button class="copy-btn" onclick="copyText('ocr-p6-7636554868623002789', this)">📋 复制画面字</button>
   <div class="card-label" style="margin-top:10px">📦 内容包（文案+标签）</div>
-  <div class="copy-area" id="pack-p7-7622982150023187635">#失眠的夜
-#失眠的夜</div>
-  <button class="copy-btn" onclick="copyText('pack-p7-7622982150023187635', this)">📋 复制内容包</button>
-  <a class="beat-btn" href="https://www.douyin.com/video/7622982150023187635" target="_blank" rel="noopener">🎬 去原视频拍同款 →</a>
-</div>
-<div class="video-card">
-  <div class="video-head"><span class="video-no">视频5</span></div>
-  <div class="card-label">🖼 画面上的字</div>
-  <div class="copy-area" id="ocr-p7-7636554868623002789" data-ocr="7636554868623002789">睡不着怎么办</div>
-  <button class="copy-btn" onclick="copyText('ocr-p7-7636554868623002789', this)">📋 复制画面字</button>
-  <div class="card-label" style="margin-top:10px">📦 内容包（文案+标签）</div>
-  <div class="copy-area" id="pack-p7-7636554868623002789">中超山东泰山4：1上海申花。克雷桑帽子戏法
+  <div class="copy-area" id="pack-p6-7636554868623002789">中超山东泰山4：1上海申花。克雷桑帽子戏法
 #中超 #山东泰山 #上海申花 #足球 #克雷桑</div>
-  <button class="copy-btn" onclick="copyText('pack-p7-7636554868623002789', this)">📋 复制内容包</button>
+  <button class="copy-btn" onclick="copyText('pack-p6-7636554868623002789', this)">📋 复制内容包</button>
   <a class="beat-btn" href="https://www.douyin.com/video/7636554868623002789" target="_blank" rel="noopener">🎬 去原视频拍同款 →</a>
 </div>
     </div>
   </details>
-  <details class="acc-fold">
-    <summary>👤 爆过的账号（5个 · 点击展开）</summary>
+<details class="acc-fold">
+    <summary>🎬 开运堂带货视频（2个 · 点击展开）</summary>
+    <div class="acc-inner">
+<div class="video-card">
+  <div class="video-head"><span class="video-no">视频1</span><div class="video-stats">开运堂同款</div></div>
+  <div class="card-label">🖼 画面上的字</div>
+  <div class="copy-area" id="ocr-k-7586336224248466738" data-ocr="7586336224248466738">失眠别再吃褪黑素了</div>
+  <button class="copy-btn" onclick="copyText('ocr-k-7586336224248466738', this)">📋 复制画面字</button>
+  <div class="card-label" style="margin-top:10px">📦 内容包（文案+标签）</div>
+  <div class="copy-area" id="pack-k-7586336224248466738">失眠别再吃褪黑素了</div>
+  <button class="copy-btn" onclick="copyText('pack-k-7586336224248466738', this)">📋 复制内容包</button>
+  <a class="beat-btn" href="https://www.douyin.com/video/7586336224248466738" target="_blank" rel="noopener">🎬 去原视频拍同款 →</a>
+</div>    </div>
+  </details>
+
+  
+</div>
+<div class="product-section" data-product="p7" style="display:none">
+  <div class="section-title">🎵 爆款画面字 · 同音频钩子（4个）</div>
+<div class="audio-group" data-music="7585883553599376138">
+  <div class="hook-tabs"><button class="hook-tab active" onclick="switchHook(this,'p7a2')">牙齿松动，病根可能不在牙</button></div>
+  <div class="hook-display"><div class="copy-area" id="hd-p7a2-0" data-hook="0">牙齿松动，病根可能不在牙</div><button class="copy-btn" data-hook="0" style="margin-top:6px" onclick="copyText('hd-p7a2-0', this)">📋 复制此钩子</button></div>
+  <a class="beat-btn" href="https://www.douyin.com/music/7585883553599376138" target="_blank" rel="noopener">🎬 拍同款（原声）→</a>
+</div>
+
+  
+<div class="audio-group" data-music="7591328362153495305">
+  <div class="hook-tabs"><button class="hook-tab active" onclick="switchHook(this,'p7a495305')">菜市场几块钱的补血王，比阿胶强</button><button class="hook-tab" onclick="switchHook(this,'p7a495305')">天天吃阿胶补血，可能越补越糟</button><button class="hook-tab" onclick="switchHook(this,'p7a495305')">猪肝切开又黑又硬，真能补血吗</button></div>
+  <div class="hook-display"><div class="copy-area" id="hd-p7a495305-0" data-hook="0">菜市场几块钱的补血王，比阿胶强</div><button class="copy-btn" data-hook="0" style="margin-top:6px" onclick="copyText('hd-p7a495305-0', this)">📋 复制此钩子</button><div class="copy-area" id="hd-p7a495305-1" data-hook="1" style="display:none">天天吃阿胶补血，可能越补越糟</div><button class="copy-btn" data-hook="1" style="display:none;margin-top:6px" onclick="copyText('hd-p7a495305-1', this)">📋 复制此钩子</button><div class="copy-area" id="hd-p7a495305-2" data-hook="2" style="display:none">猪肝切开又黑又硬，真能补血吗</div><button class="copy-btn" data-hook="2" style="display:none;margin-top:6px" onclick="copyText('hd-p7a495305-2', this)">📋 复制此钩子</button></div>
+  <a class="beat-btn" href="https://www.douyin.com/music/7591328362153495305" target="_blank" rel="noopener">🎬 拍同款（开运堂·169赞）→</a>
+</div>
+</div>
+<div class="product-section" data-product="p8" style="display:none">
+  <div class="section-title">🎵 爆款画面字 · 同音频钩子（1个）</div>
+<div class="audio-group" data-music="7626704049731291940">
+  <div class="hook-tabs"><button class="hook-tab active" onclick="switchHook(this,'p8a0')">鸡内金配陈皮，积食自己往下走</button></div>
+  <div class="hook-display"><div class="copy-area" id="hd-p8a0-0" data-hook="0">鸡内金配陈皮，积食自己往下走</div><button class="copy-btn" data-hook="0" style="margin-top:6px" onclick="copyText('hd-p8a0-0', this)">📋 复制此钩子</button></div>
+  <a class="beat-btn" href="https://www.douyin.com/music/7626704049731291940" target="_blank" rel="noopener">🎬 拍同款（原声）→</a>
+</div>
+</div>
+<div class="product-section" data-product="p9" style="display:none">
+  <div class="section-title">🎵 爆款画面字 · 同音频钩子（4个）</div>
+<div class="audio-group" data-music="7660384505118591807">
+  <div class="hook-tabs"><button class="hook-tab active" onclick="switchHook(this,'p9a0')">把结节消除掉</button></div>
+  <div class="hook-display"><div class="copy-area" id="hd-p9a0-0" data-hook="0">把结节消除掉</div><button class="copy-btn" data-hook="0" style="margin-top:6px" onclick="copyText('hd-p9a0-0', this)">📋 复制此钩子</button></div>
+  <a class="beat-btn" href="https://www.douyin.com/music/7660384505118591807" target="_blank" rel="noopener">🎬 拍同款（原声）→</a>
+</div>
+<div class="audio-group" data-music="7591308762210241318">
+  <div class="hook-tabs"><button class="hook-tab active" onclick="switchHook(this,'p9a241318')">冬天越补，肝毒越重</button><button class="hook-tab" onclick="switchHook(this,'p9a241318')">进补的人躺满了急诊室</button><button class="hook-tab" onclick="switchHook(this,'p9a241318')">70岁农妇的土方：蒲公英根煮水</button></div>
+  <div class="hook-display"><div class="copy-area" id="hd-p9a241318-0" data-hook="0">冬天越补，肝毒越重</div><button class="copy-btn" data-hook="0" style="margin-top:6px" onclick="copyText('hd-p9a241318-0', this)">📋 复制此钩子</button><div class="copy-area" id="hd-p9a241318-1" data-hook="1" style="display:none">进补的人躺满了急诊室</div><button class="copy-btn" data-hook="1" style="display:none;margin-top:6px" onclick="copyText('hd-p9a241318-1', this)">📋 复制此钩子</button><div class="copy-area" id="hd-p9a241318-2" data-hook="2" style="display:none">70岁农妇的土方：蒲公英根煮水</div><button class="copy-btn" data-hook="2" style="display:none;margin-top:6px" onclick="copyText('hd-p9a241318-2', this)">📋 复制此钩子</button></div>
+  <a class="beat-btn" href="https://www.douyin.com/music/7591308762210241318" target="_blank" rel="noopener">🎬 拍同款（开运堂·74赞）→</a>
+</div>
+<details class="acc-fold">
+    <summary>🎬 爆过的视频（2个 · 点击展开）</summary>
+    <div class="acc-inner">
+      
+<div class="video-card">
+  <div class="video-head"><span class="video-no">视频1</span><div class="video-stats">👍2388 评0 藏0</div></div>
+  <div class="card-label">🖼 画面上的字</div>
+  <div class="copy-area" id="ocr-p9-7671302471793217012" data-ocr="7671302471793217012">把结节消除掉</div>
+  <button class="copy-btn" onclick="copyText('ocr-p9-7671302471793217012', this)">📋 复制画面字</button>
+  <div class="card-label" style="margin-top:10px">📦 内容包（文案+标签）</div>
+  <div class="copy-area" id="pack-p9-7671302471793217012">马刺还是太年轻了，关键失误＆绝杀不中，马刺主场再负尼克斯
+#文班亚马 #尼克斯105比104险胜马刺 #倪海厦 #倪海厦105比104险胜马刺</div>
+  <button class="copy-btn" onclick="copyText('pack-p9-7671302471793217012', this)">📋 复制内容包</button>
+  <a class="beat-btn" href="https://www.douyin.com/note/7671302471793217012" target="_blank" rel="noopener">🎬 去原视频拍同款 →</a>
+</div>
+<div class="video-card">
+  <div class="video-head"><span class="video-no">视频2</span><div class="video-stats">👍2122 评114 藏2958 转695</div></div>
+  <div class="card-label">🖼 画面上的字</div>
+  <div class="copy-area" id="ocr-p9-7672378760708018809" data-ocr="7672378760708018809">把结节消除掉</div>
+  <button class="copy-btn" onclick="copyText('ocr-p9-7672378760708018809', this)">📋 复制画面字</button>
+  <div class="card-label" style="margin-top:10px">📦 内容包（文案+标签）</div>
+  <div class="copy-area" id="pack-p9-7672378760708018809">WNBA 常规赛达拉斯飞翼主场以96-91逆转战胜芝加哥天空，#李月汝 中国球员李月汝替补出战23分钟，高效砍下10分10篮板，外加1抢断1盖帽，正负值＋17全场最高，助球队取胜。
+#中国女篮 #为国争光 #女篮姑娘太棒了</div>
+  <button class="copy-btn" onclick="copyText('pack-p9-7672378760708018809', this)">📋 复制内容包</button>
+  <a class="beat-btn" href="https://www.douyin.com/note/7672378760708018809" target="_blank" rel="noopener">🎬 去原视频拍同款 →</a>
+</div>
+    </div>
+  </details>
+<details class="acc-fold">
+    <summary>👤 爆过的账号（2个 · 点击展开）</summary>
     <div class="acc-inner">
       
 <div class="account-card">
   <div class="acc-top">
-    <img class="acc-avatar" src="media/avatar_7683b547c5.jpg" alt="头像" onerror="this.style.display=&apos;none&apos;">
+    <img class="acc-avatar" src="media/avatar_1d1fdf23bc.jpg" alt="头像" onerror="this.style.display=&apos;none&apos;">
     <div class="acc-info">
-      <div class="acc-nick">年轻</div>
-      <div class="acc-meta">抖音号 207083185 · 粉丝 1000+</div>
+      <div class="acc-nick">倪师经典语</div>
+      <div class="acc-meta">抖音号 79967531845 · 粉丝 1.1万</div>
     </div>
   </div>
   <div class="card-label">🖼 头像（直接下载上传）</div>
-  <a class="dl-btn" href="media/avatar_7683b547c5.jpg" download>⬇️ 下载此头像</a>
+  <a class="dl-btn" href="media/avatar_1d1fdf23bc.jpg" download>⬇️ 下载此头像</a>
   <div class="card-label" style="margin-top:10px">✨ 相似名字（点击即复制，风格一致）</div>
-  <div class="name-row"><button class="name-chip" onclick="copyTextByName(&apos;年轻说&apos;, this)">年轻说</button><button class="name-chip" onclick="copyTextByName(&apos;年轻日常&apos;, this)">年轻日常</button></div>
+  <div class="name-row"><button class="name-chip" onclick="copyTextByName(&apos;倪师经典说&apos;, this)">倪师经典说</button><button class="name-chip" onclick="copyTextByName(&apos;倪师经典谈&apos;, this)">倪师经典谈</button><button class="name-chip" onclick="copyTextByName(&apos;倪师经典话&apos;, this)">倪师经典话</button></div>
   <div class="card-label" style="margin-top:10px">📝 简介（照抄，一键复制）</div>
-  <div class="copy-area" id="acc-sig-p7-1">（无简介）</div>
-  <button class="copy-btn" onclick="copyText('acc-sig-p7-1', this)">📋 复制简介</button>
+  <div class="copy-area" id="acc-sig-p9-1">需要购买商品点击这里👉👉@倪师语 👈👈的橱窗下单</div>
+  <button class="copy-btn" onclick="copyText('acc-sig-p9-1', this)">📋 复制简介</button>
 </div>
 <div class="account-card">
   <div class="acc-top">
-    <img class="acc-avatar" src="media/avatar_8efd4d46a1.jpg" alt="头像" onerror="this.style.display=&apos;none&apos;">
+    <img class="acc-avatar" src="media/avatar_e762c48ca2.jpg" alt="头像" onerror="this.style.display=&apos;none&apos;">
     <div class="acc-info">
-      <div class="acc-nick">平安喜乐开心快乐</div>
-      <div class="acc-meta">抖音号 szfg666666888888 · 粉丝 4000+</div>
+      <div class="acc-nick">倪师传风起日常</div>
+      <div class="acc-meta">抖音号 55805304736 · 粉丝 1493</div>
     </div>
   </div>
   <div class="card-label">🖼 头像（直接下载上传）</div>
-  <a class="dl-btn" href="media/avatar_8efd4d46a1.jpg" download>⬇️ 下载此头像</a>
+  <a class="dl-btn" href="media/avatar_e762c48ca2.jpg" download>⬇️ 下载此头像</a>
   <div class="card-label" style="margin-top:10px">✨ 相似名字（点击即复制，风格一致）</div>
-  <div class="name-row"><button class="name-chip" onclick="copyTextByName(&apos;平安喜乐开心快号&apos;, this)">平安喜乐开心快号</button><button class="name-chip" onclick="copyTextByName(&apos;平安喜乐开心快乐日常&apos;, this)">平安喜乐开心快乐日常</button><button class="name-chip" onclick="copyTextByName(&apos;平安喜乐开心快乐说&apos;, this)">平安喜乐开心快乐说</button></div>
+  <div class="name-row"><button class="name-chip" onclick="copyTextByName(&apos;倪师传风起生活&apos;, this)">倪师传风起生活</button><button class="name-chip" onclick="copyTextByName(&apos;倪师传风起随记&apos;, this)">倪师传风起随记</button><button class="name-chip" onclick="copyTextByName(&apos;倪师传风起笔记&apos;, this)">倪师传风起笔记</button></div>
   <div class="card-label" style="margin-top:10px">📝 简介（照抄，一键复制）</div>
-  <div class="copy-area" id="acc-sig-p7-2">（无简介）</div>
-  <button class="copy-btn" onclick="copyText('acc-sig-p7-2', this)">📋 复制简介</button>
-</div>
-<div class="account-card">
-  <div class="acc-top">
-    <img class="acc-avatar" src="media/avatar_c9c5f0e17f.jpg" alt="头像" onerror="this.style.display=&apos;none&apos;">
-    <div class="acc-info">
-      <div class="acc-nick">倪宗本草</div>
-      <div class="acc-meta">抖音号 79972179099 · 粉丝 1000+</div>
-    </div>
-  </div>
-  <div class="card-label">🖼 头像（直接下载上传）</div>
-  <a class="dl-btn" href="media/avatar_c9c5f0e17f.jpg" download>⬇️ 下载此头像</a>
-  <div class="card-label" style="margin-top:10px">✨ 相似名字（点击即复制，风格一致）</div>
-  <div class="name-row"><button class="name-chip" onclick="copyTextByName(&apos;倪宗本号&apos;, this)">倪宗本号</button><button class="name-chip" onclick="copyTextByName(&apos;倪宗本草日常&apos;, this)">倪宗本草日常</button><button class="name-chip" onclick="copyTextByName(&apos;倪宗本草说&apos;, this)">倪宗本草说</button></div>
-  <div class="card-label" style="margin-top:10px">📝 简介（照抄，一键复制）</div>
-  <div class="copy-area" id="acc-sig-p7-3">分享中医养生
-健康养生，好物
-↓  ↓  ↓   ↓</div>
-  <button class="copy-btn" onclick="copyText('acc-sig-p7-3', this)">📋 复制简介</button>
-</div>
-<div class="account-card">
-  <div class="acc-top">
-    <img class="acc-avatar" src="media/avatar_a7b2ac44f2.jpg" alt="头像" onerror="this.style.display=&apos;none&apos;">
-    <div class="acc-info">
-      <div class="acc-nick">倪師傳奇</div>
-      <div class="acc-meta">抖音号 41873038630 · 粉丝 2000+</div>
-    </div>
-  </div>
-  <div class="card-label">🖼 头像（直接下载上传）</div>
-  <a class="dl-btn" href="media/avatar_a7b2ac44f2.jpg" download>⬇️ 下载此头像</a>
-  <div class="card-label" style="margin-top:10px">✨ 相似名字（点击即复制，风格一致）</div>
-  <div class="name-row"><button class="name-chip" onclick="copyTextByName(&apos;倪師傳号&apos;, this)">倪師傳号</button><button class="name-chip" onclick="copyTextByName(&apos;倪師傳奇日常&apos;, this)">倪師傳奇日常</button><button class="name-chip" onclick="copyTextByName(&apos;倪師傳奇说&apos;, this)">倪師傳奇说</button></div>
-  <div class="card-label" style="margin-top:10px">📝 简介（照抄，一键复制）</div>
-  <div class="copy-area" id="acc-sig-p7-4">私信太多，回不过来。
-倪师推荐商品在橱窗里
-... 更多</div>
-  <button class="copy-btn" onclick="copyText('acc-sig-p7-4', this)">📋 复制简介</button>
-</div>
-<div class="account-card">
-  <div class="acc-top">
-    <img class="acc-avatar" src="media/avatar_ba70faa326.jpg" alt="头像" onerror="this.style.display=&apos;none&apos;">
-    <div class="acc-info">
-      <div class="acc-nick">倪师说</div>
-      <div class="acc-meta">抖音号 50261029302 · 粉丝 1.3万+</div>
-    </div>
-  </div>
-  <div class="card-label">🖼 头像（直接下载上传）</div>
-  <a class="dl-btn" href="media/avatar_ba70faa326.jpg" download>⬇️ 下载此头像</a>
-  <div class="card-label" style="margin-top:10px">✨ 相似名字（点击即复制，风格一致）</div>
-  <div class="name-row"><button class="name-chip" onclick="copyTextByName(&apos;倪师讲&apos;, this)">倪师讲</button><button class="name-chip" onclick="copyTextByName(&apos;倪师谈&apos;, this)">倪师谈</button><button class="name-chip" onclick="copyTextByName(&apos;倪师话&apos;, this)">倪师话</button><button class="name-chip" onclick="copyTextByName(&apos;倪师道&apos;, this)">倪师道</button><button class="name-chip" onclick="copyTextByName(&apos;倪师聊&apos;, this)">倪师聊</button></div>
-  <div class="card-label" style="margin-top:10px">📝 简介（照抄，一键复制）</div>
-  <div class="copy-area" id="acc-sig-p7-5">视频里说的好东西都在下面👇👇👇👇👇橱窗里。点击进入即可</div>
-  <button class="copy-btn" onclick="copyText('acc-sig-p7-5', this)">📋 复制简介</button>
+  <div class="copy-area" id="acc-sig-p9-2">所有作品，仅学习交流分享，不做任何指导作用
+👀购买同款点她👉👉@大医倪师</div>
+  <button class="copy-btn" onclick="copyText('acc-sig-p9-2', this)">📋 复制简介</button>
 </div>
     </div>
   </details>
-</div></div>
-
-<div class="footer">黑狐照抄工具 · 数据来自原视频 · 拍同款用原声</div>
-
+</div>
+</div>
+<div class="footer">黑狐照抄工具 · 数据来自原视频 · 拍同款用原声
+  
+</div>
 <script>
+function switchHook(btn, gid) {
+  var group = btn.parentElement.parentElement;
+  var tabs = group.querySelectorAll('.hook-tab');
+  var idx = 0;
+  for (var i=0;i<tabs.length;i++) { tabs[i].classList.remove('active'); if (tabs[i]===btn) idx=i; }
+  btn.classList.add('active');
+  var items = group.querySelectorAll('[data-hook]');
+  for (var j=0;j<items.length;j++) {
+    items[j].style.display = (parseInt(items[j].getAttribute('data-hook'))===idx)?'':'none';
+  }
+}
 function copyText(id, btn) {
   var text = document.getElementById(id).innerText;
   var fn = navigator.clipboard ? function(){navigator.clipboard.writeText(text).then(function(){s(btn)}).catch(function(){f(text,btn)})} : function(){f(text,btn)};
@@ -1496,5 +1486,528 @@ function loadOcrConfig() {
   }).catch(function(){});
 }
 </script>
+<div class="product-section" data-product="p10" style="display:none">
+
+  <div class="section-title">🎵 开运堂 · 不带货引流视频（18个）</div>
+  <div class="card">
+    <div class="card-label">📌 类型：婚姻情感｜梦境命理｜生活禁忌｜国学智慧｜倪师语录 · 不带货，用于引流/养号/带货匹配</div>
+  </div>
+<div class="audio-group" data-music="7601361480595934002">
+  <div class="hook-tabs"><button class="hook-tab active" onclick="switchHook(this,'_k7601361480595934002')">婚姻选择，也是一种养生</button></div>
+  <div class="hook-display"><div class="copy-area" id="hd-_k7601361480595934002-0" data-hook="0">婚姻选择，也是一种养生</div><button class="copy-btn" data-hook="0" style="margin-top:6px" onclick="copyText('hd-_k7601361480595934002-0', this)">📋 复制此钩子</button></div>
+  <a class="beat-btn" href="https://www.douyin.com/music/7601361480595934002" target="_blank" rel="noopener">🎬 拍同款（开运堂（6350赞））→</a>
+</div>
+<div class="audio-group" data-music="7592444195118369546">
+  <div class="hook-tabs"><button class="hook-tab active" onclick="switchHook(this,'_k7592444195118369546')">婚前不看这一点，婚后必遭殃</button></div>
+  <div class="hook-display"><div class="copy-area" id="hd-_k7592444195118369546-0" data-hook="0">婚前不看这一点，婚后必遭殃</div><button class="copy-btn" data-hook="0" style="margin-top:6px" onclick="copyText('hd-_k7592444195118369546-0', this)">📋 复制此钩子</button></div>
+  <a class="beat-btn" href="https://www.douyin.com/music/7592444195118369546" target="_blank" rel="noopener">🎬 拍同款（开运堂（6017赞））→</a>
+</div>
+<div class="audio-group" data-music="7583295374803094299">
+  <div class="hook-tabs"><button class="hook-tab active" onclick="switchHook(this,'_k7583295374803094299')">为何老伴走后，不送最后一程</button></div>
+  <div class="hook-display"><div class="copy-area" id="hd-_k7583295374803094299-0" data-hook="0">为何老伴走后，不送最后一程</div><button class="copy-btn" data-hook="0" style="margin-top:6px" onclick="copyText('hd-_k7583295374803094299-0', this)">📋 复制此钩子</button></div>
+  <a class="beat-btn" href="https://www.douyin.com/music/7583295374803094299" target="_blank" rel="noopener">🎬 拍同款（开运堂（4670赞））→</a>
+</div>
+<div class="audio-group" data-music="7583605973953104691">
+  <div class="hook-tabs"><button class="hook-tab active" onclick="switchHook(this,'_k7583605973953104691')">你的命运不用找别人看</button></div>
+  <div class="hook-display"><div class="copy-area" id="hd-_k7583605973953104691-0" data-hook="0">你的命运不用找别人看</div><button class="copy-btn" data-hook="0" style="margin-top:6px" onclick="copyText('hd-_k7583605973953104691-0', this)">📋 复制此钩子</button></div>
+  <a class="beat-btn" href="https://www.douyin.com/music/7583605973953104691" target="_blank" rel="noopener">🎬 拍同款（开运堂（2193赞））→</a>
+</div>
+<div class="audio-group" data-music="7584489230341065522">
+  <div class="hook-tabs"><button class="hook-tab active" onclick="switchHook(this,'_k7584489230341065522')">什么样的梦是发财梦</button></div>
+  <div class="hook-display"><div class="copy-area" id="hd-_k7584489230341065522-0" data-hook="0">什么样的梦是发财梦</div><button class="copy-btn" data-hook="0" style="margin-top:6px" onclick="copyText('hd-_k7584489230341065522-0', this)">📋 复制此钩子</button></div>
+  <a class="beat-btn" href="https://www.douyin.com/music/7584489230341065522" target="_blank" rel="noopener">🎬 拍同款（开运堂（1911赞））→</a>
+</div>
+<div class="audio-group" data-music="7590334980258728704">
+  <div class="hook-tabs"><button class="hook-tab active" onclick="switchHook(this,'_k7590334980258728704')">不管家里多大，这个地方留盏灯</button></div>
+  <div class="hook-display"><div class="copy-area" id="hd-_k7590334980258728704-0" data-hook="0">不管家里多大，这个地方留盏灯</div><button class="copy-btn" data-hook="0" style="margin-top:6px" onclick="copyText('hd-_k7590334980258728704-0', this)">📋 复制此钩子</button></div>
+  <a class="beat-btn" href="https://www.douyin.com/music/7590334980258728704" target="_blank" rel="noopener">🎬 拍同款（开运堂（1514赞））→</a>
+</div>
+<div class="audio-group" data-music="7590279518527572782">
+  <div class="hook-tabs"><button class="hook-tab active" onclick="switchHook(this,'_k7590279518527572782')">女人婚姻背后的秘密</button></div>
+  <div class="hook-display"><div class="copy-area" id="hd-_k7590279518527572782-0" data-hook="0">女人婚姻背后的秘密</div><button class="copy-btn" data-hook="0" style="margin-top:6px" onclick="copyText('hd-_k7590279518527572782-0', this)">📋 复制此钩子</button></div>
+  <a class="beat-btn" href="https://www.douyin.com/music/7590279518527572782" target="_blank" rel="noopener">🎬 拍同款（开运堂（1331赞））→</a>
+</div>
+<div class="audio-group" data-music="7595178658329348905">
+  <div class="hook-tabs"><button class="hook-tab active" onclick="switchHook(this,'_k7595178658329348905')">开电热毯睡觉，就是把身体烤干</button></div>
+  <div class="hook-display"><div class="copy-area" id="hd-_k7595178658329348905-0" data-hook="0">开电热毯睡觉，就是把身体烤干</div><button class="copy-btn" data-hook="0" style="margin-top:6px" onclick="copyText('hd-_k7595178658329348905-0', this)">📋 复制此钩子</button></div>
+  <a class="beat-btn" href="https://www.douyin.com/music/7595178658329348905" target="_blank" rel="noopener">🎬 拍同款（开运堂（921赞））→</a>
+</div>
+<div class="audio-group" data-music="7586360515081915155">
+  <div class="hook-tabs"><button class="hook-tab active" onclick="switchHook(this,'_k7586360515081915155')">女人是家里的风水</button></div>
+  <div class="hook-display"><div class="copy-area" id="hd-_k7586360515081915155-0" data-hook="0">女人是家里的风水</div><button class="copy-btn" data-hook="0" style="margin-top:6px" onclick="copyText('hd-_k7586360515081915155-0', this)">📋 复制此钩子</button></div>
+  <a class="beat-btn" href="https://www.douyin.com/music/7586360515081915155" target="_blank" rel="noopener">🎬 拍同款（开运堂（727赞））→</a>
+</div>
+<div class="audio-group" data-music="7583581978391808774">
+  <div class="hook-tabs"><button class="hook-tab active" onclick="switchHook(this,'_k7583581978391808774')">梦不到去世的亲人，反而说明你身体好</button></div>
+  <div class="hook-display"><div class="copy-area" id="hd-_k7583581978391808774-0" data-hook="0">梦不到去世的亲人，反而说明你身体好</div><button class="copy-btn" data-hook="0" style="margin-top:6px" onclick="copyText('hd-_k7583581978391808774-0', this)">📋 复制此钩子</button></div>
+  <a class="beat-btn" href="https://www.douyin.com/music/7583581978391808774" target="_blank" rel="noopener">🎬 拍同款（开运堂（494赞））→</a>
+</div>
+<div class="audio-group" data-music="7586324296251886355">
+  <div class="hook-tabs"><button class="hook-tab active" onclick="switchHook(this,'_k7586324296251886355')">层次越低的人，越爱说的五种话</button></div>
+  <div class="hook-display"><div class="copy-area" id="hd-_k7586324296251886355-0" data-hook="0">层次越低的人，越爱说的五种话</div><button class="copy-btn" data-hook="0" style="margin-top:6px" onclick="copyText('hd-_k7586324296251886355-0', this)">📋 复制此钩子</button></div>
+  <a class="beat-btn" href="https://www.douyin.com/music/7586324296251886355" target="_blank" rel="noopener">🎬 拍同款（开运堂（409赞））→</a>
+</div>
+<div class="audio-group" data-music="7586179244479105834">
+  <div class="hook-tabs"><button class="hook-tab active" onclick="switchHook(this,'_k7586179244479105834')">夫妻属相相冲，真的会克彼此吗</button></div>
+  <div class="hook-display"><div class="copy-area" id="hd-_k7586179244479105834-0" data-hook="0">夫妻属相相冲，真的会克彼此吗</div><button class="copy-btn" data-hook="0" style="margin-top:6px" onclick="copyText('hd-_k7586179244479105834-0', this)">📋 复制此钩子</button></div>
+  <a class="beat-btn" href="https://www.douyin.com/music/7586179244479105834" target="_blank" rel="noopener">🎬 拍同款（开运堂（353赞））→</a>
+</div>
+<div class="audio-group" data-music="7595082088213269289">
+  <div class="hook-tabs"><button class="hook-tab active" onclick="switchHook(this,'_k7595082088213269289')">人老容易发福的真相</button></div>
+  <div class="hook-display"><div class="copy-area" id="hd-_k7595082088213269289-0" data-hook="0">人老容易发福的真相</div><button class="copy-btn" data-hook="0" style="margin-top:6px" onclick="copyText('hd-_k7595082088213269289-0', this)">📋 复制此钩子</button></div>
+  <a class="beat-btn" href="https://www.douyin.com/music/7595082088213269289" target="_blank" rel="noopener">🎬 拍同款（开运堂（269赞））→</a>
+</div>
+<div class="audio-group" data-music="7589479943143475987">
+  <div class="hook-tabs"><button class="hook-tab active" onclick="switchHook(this,'_k7589479943143475987')">梦不到爸妈，不是你不孝顺</button></div>
+  <div class="hook-display"><div class="copy-area" id="hd-_k7589479943143475987-0" data-hook="0">梦不到爸妈，不是你不孝顺</div><button class="copy-btn" data-hook="0" style="margin-top:6px" onclick="copyText('hd-_k7589479943143475987-0', this)">📋 复制此钩子</button></div>
+  <a class="beat-btn" href="https://www.douyin.com/music/7589479943143475987" target="_blank" rel="noopener">🎬 拍同款（开运堂（233赞））→</a>
+</div>
+<div class="audio-group" data-music="7587392893553953586">
+  <div class="hook-tabs"><button class="hook-tab active" onclick="switchHook(this,'_k7587392893553953586')">睡觉像投降，身体到底缺了什么</button></div>
+  <div class="hook-display"><div class="copy-area" id="hd-_k7587392893553953586-0" data-hook="0">睡觉像投降，身体到底缺了什么</div><button class="copy-btn" data-hook="0" style="margin-top:6px" onclick="copyText('hd-_k7587392893553953586-0', this)">📋 复制此钩子</button></div>
+  <a class="beat-btn" href="https://www.douyin.com/music/7587392893553953586" target="_blank" rel="noopener">🎬 拍同款（开运堂（218赞））→</a>
+</div>
+<div class="audio-group" data-music="7601532005049928491">
+  <div class="hook-tabs"><button class="hook-tab active" onclick="switchHook(this,'_k7601532005049928491')">每天一碗燕麦，是在喂大寒湿</button></div>
+  <div class="hook-display"><div class="copy-area" id="hd-_k7601532005049928491-0" data-hook="0">每天一碗燕麦，是在喂大寒湿</div><button class="copy-btn" data-hook="0" style="margin-top:6px" onclick="copyText('hd-_k7601532005049928491-0', this)">📋 复制此钩子</button></div>
+  <a class="beat-btn" href="https://www.douyin.com/music/7601532005049928491" target="_blank" rel="noopener">🎬 拍同款（开运堂（214赞））→</a>
+</div>
+<div class="audio-group" data-music="7587354930197957414">
+  <div class="hook-tabs"><button class="hook-tab active" onclick="switchHook(this,'_k7587354930197957414')">夫妻感情淡了，三招重新点燃</button></div>
+  <div class="hook-display"><div class="copy-area" id="hd-_k7587354930197957414-0" data-hook="0">夫妻感情淡了，三招重新点燃</div><button class="copy-btn" data-hook="0" style="margin-top:6px" onclick="copyText('hd-_k7587354930197957414-0', this)">📋 复制此钩子</button></div>
+  <a class="beat-btn" href="https://www.douyin.com/music/7587354930197957414" target="_blank" rel="noopener">🎬 拍同款（开运堂（198赞））→</a>
+</div>
+<div class="audio-group" data-music="7592596626884037419">
+  <div class="hook-tabs"><button class="hook-tab active" onclick="switchHook(this,'_k7592596626884037419')">血管里的水垢，一杯醋蛋液化开</button></div>
+  <div class="hook-display"><div class="copy-area" id="hd-_k7592596626884037419-0" data-hook="0">血管里的水垢，一杯醋蛋液化开</div><button class="copy-btn" data-hook="0" style="margin-top:6px" onclick="copyText('hd-_k7592596626884037419-0', this)">📋 复制此钩子</button></div>
+  <a class="beat-btn" href="https://www.douyin.com/music/7592596626884037419" target="_blank" rel="noopener">🎬 拍同款（开运堂（191赞））→</a>
+</div>
+
+</div>
+
+<script>
+// === 已发标记功能（localStorage 本机独立） ===
+(function() {
+  var KEY = 'xyshop_used_items_v1';
+  var used = {};
+  try { used = JSON.parse(localStorage.getItem(KEY) || '{}'); } catch(e) { used = {}; }
+  window.__used = used;
+
+  function saveUsed() {
+    try { localStorage.setItem(KEY, JSON.stringify(used)); } catch(e) {}
+    applyFilter();
+  }
+
+  function getItemId(el) {
+    // audio-group: data-music；video-card: data-ocr；account-card: 昵称
+    if (el.classList.contains('audio-group')) return 'a:' + (el.getAttribute('data-music') || '');
+    var ocr = el.querySelector('[data-ocr]');
+    if (el.classList.contains('video-card') && ocr) return 'v:' + ocr.getAttribute('data-ocr');
+    if (el.classList.contains('account-card')) {
+      var nick = el.querySelector('.acc-nick');
+      return 'acct:' + (nick ? nick.innerText.trim().slice(0, 30) : '');
+    }
+    return '';
+  }
+
+  window.toggleUsedFilter = function() {
+    var btn = document.getElementById('filterBtn');
+    var onlyUnused = btn.classList.toggle('off');
+    btn.innerText = onlyUnused ? '显示全部' : '只看未发';
+    applyFilter();
+  };
+
+  function applyFilter() {
+    var btn = document.getElementById('filterBtn');
+    if (!btn) return;
+    var onlyUnused = btn.classList.contains('off');
+    var items = document.querySelectorAll('.audio-group, .video-card, .account-card');
+    items.forEach(function(el) {
+      var id = getItemId(el);
+      if (!id) return;
+      var isUsed = !!window.__used[id];
+      el.classList.toggle('used', isUsed);
+      var markBtn = el.querySelector('.mark-used-btn');
+      if (markBtn) markBtn.innerText = isUsed ? '↩️ 撤销已发' : '✅ 标记已发';
+      if (onlyUnused && isUsed) el.style.display = 'none';
+      else el.style.display = '';
+    });
+    // 更新统计
+    var n = Object.keys(window.__used).length;
+    var cnt = document.getElementById('usedCount');
+    if (cnt) cnt.innerText = n;
+  }
+
+  window.markUsed = function(btn) {
+    var card = btn.closest('.audio-group, .video-card, .account-card');
+    if (!card) return;
+    var id = getItemId(card);
+    if (!id) return;
+    if (window.__used[id]) {
+      delete window.__used[id];
+      btn.innerText = '✅ 标记已发';
+    } else {
+      window.__used[id] = Date.now();
+      btn.innerText = '↩️ 撤销已发';
+    }
+    saveUsed();
+  };
+
+  window.resetUsed = function() {
+    if (!confirm('确定重置全部已发记录？本机所有标记将清空。')) return;
+    used = {};
+    window.__used = used;
+    saveUsed();
+  };
+
+  function injectButtons() {
+    // 给每个素材卡加"标记已发"按钮（如果没有）
+    var items = document.querySelectorAll('.audio-group, .video-card, .account-card');
+    items.forEach(function(el) {
+      if (el.querySelector('.mark-used-btn')) return;
+      var b = document.createElement('button');
+      b.className = 'mark-used-btn';
+      b.type = 'button';
+      b.innerText = '✅ 标记已发';
+      b.onclick = function() { window.markUsed(b); };
+      el.appendChild(b);
+    });
+  }
+
+  window.addEventListener('load', function() {
+    injectButtons();
+    applyFilter();
+  });
+})();
+</script>
+
+<div class="product-section" data-product="p11" style="display:none">
+
+  <div class="section-title">🎵 黄精苁蓉膏 · 原声拍同款（1个）</div>
+  <div class="card">
+    <div class="card-label">📌 类型：男性滋补膏方（肝肾同补）｜竞品爆款原声 · 黄精/肉苁蓉/枸杞/熟地黄</div>
+  </div>
+<div class="audio-group" data-music="7671867843511831305">
+  <div class="hook-tabs"><button class="hook-tab active" onclick="switchHook(this,'_g7671867843511831305')">过了三十就走下坡路？肝肾同补是关键</button><button class="hook-tab" onclick="switchHook(this,'_g7671867843511831305')">夫妻功能下降，其实很好调</button><button class="hook-tab" onclick="switchHook(this,'_g7671867843511831305')">花小钱办大事，肝肾同补的膏方</button></div>
+  <div class="hook-display"><div class="copy-area" id="hd-_g7671867843511831305-0" data-hook="0">过了三十就走下坡路？肝肾同补是关键</div><button class="copy-btn" data-hook="0" style="margin-top:6px" onclick="copyText('hd-_g7671867843511831305-0', this)">📋 复制此钩子</button><div class="copy-area" id="hd-_g7671867843511831305-1" data-hook="1" style="display:none">夫妻功能下降，其实很好调</div><button class="copy-btn" data-hook="1" style="display:none;margin-top:6px" onclick="copyText('hd-_g7671867843511831305-1', this)">📋 复制此钩子</button><div class="copy-area" id="hd-_g7671867843511831305-2" data-hook="2" style="display:none">花小钱办大事，肝肾同补的膏方</div><button class="copy-btn" data-hook="2" style="display:none;margin-top:6px" onclick="copyText('hd-_g7671867843511831305-2', this)">📋 复制此钩子</button></div>
+  <a class="beat-btn" href="https://www.douyin.com/music/7671867843511831305" target="_blank" rel="noopener">🎬 拍同款（黄精苁蓉膏原声·倪师拾光）→</a>
+</div>
+<details class="acc-fold">
+    <summary>🎬 爆过的图文（1个 · 点击展开）</summary>
+    <div class="acc-inner">
+<div class="video-card">
+  <div class="video-head"><span class="video-no">图文1</span><div class="video-stats">👍472 评9 藏579 转103</div></div>
+  <div class="card-label">🖼 画面上的字</div>
+  <div class="copy-area" id="ocr-p11-7673690877185475904" data-ocr="7673690877185475904">绝杀封王！吴宜泽力克墨菲，成斯诺克世锦赛首位00后冠军</div>
+  <button class="copy-btn" onclick="copyText('ocr-p11-7673690877185475904', this)">📋 复制画面字</button>
+  <div class="card-label" style="margin-top:10px">📦 内容包（文案+标签）</div>
+  <div class="copy-area" id="pack-p11-7673690877185475904">绝杀封王！吴宜泽力克墨菲，成斯诺克世锦赛首位00后冠军。恭喜中国斯诺克新王诞生！小六爱台球，中国斯诺克军团齐祝贺。
+#吴宜泽发文庆祝夺冠 #倪海厦 #路拍记录 #途景随拍 #路上视角</div>
+  <button class="copy-btn" onclick="copyText('pack-p11-7673690877185475904', this)">📋 复制内容包</button>
+  <a class="beat-btn" href="https://www.douyin.com/note/7673690877185475904" target="_blank" rel="noopener">🎬 去原图文拍同款 →</a>
+</div>
+    </div>
+  </details>
+  <div class="card">
+    <div class="card-label">🏷 标签（照抄）</div>
+    <div class="copy-area" id="p11-tags">#倪海厦 #倪师 #中医养生 #男性健康 #肝肾同补</div>
+    <button class="copy-btn" onclick="copyText('p11-tags', this)">📋 复制标签</button>
+  </div>
+
+</div>
+
+<div class="product-section" data-product="p12" style="display:none">
+  <div class="section-title">🆕 新号专供 · 每次随机2条爆过音频（本机用掉自动排除，不跨号重复）</div>
+  <div id="naCards"></div>
+  <div id="naEmpty" style="display:none;padding:16px;text-align:center;color:#999;font-size:13px;">🎉 本机池子里的音频全部用完了</div>
+  <div style="text-align:center;margin:10px 0;"><button type="button" id="naNext" class="copy-btn" style="display:none;">🎲 抽下一组（2条）</button></div>
+  <div class="card"><div class="card-label" id="naStatus">剩余 -- 条</div></div>
+</div>
+
+<script>
+(function () {
+  const NA_KEY = 'xyshop_newacc_v1';
+  let naPool = [];
+
+  function getUsed() {
+    try {
+      const used = JSON.parse(localStorage.getItem(NA_KEY) || '{}');
+      return used && typeof used === 'object' && !Array.isArray(used) ? used : {};
+    } catch (e) {
+      return {};
+    }
+  }
+
+  function saveUsed(used) {
+    try {
+      localStorage.setItem(NA_KEY, JSON.stringify(used));
+    } catch (e) {}
+  }
+
+  function getVerifiedPool() {
+    const vp = naPool.filter(function (item) { return item.boss_verified || item.friend_verified; });
+    return vp.length ? vp : naPool; // 无实测爆过标记时兑底用全池，避免功能失效
+  }
+
+  function updateStatus() {
+    const used = getUsed();
+    const vp = getVerifiedPool();
+    const usedCount = vp.reduce(function (count, item) {
+      return count + (used[String(item.id)] ? 1 : 0);
+    }, 0);
+    const remaining = Math.max(0, vp.length - usedCount);
+    document.getElementById('naCnt').textContent = String(remaining);
+    document.getElementById('naStatus').textContent = '剩余 ' + remaining + ' 条';
+    return remaining;
+  }
+
+  function pickTwo() {
+    const used = getUsed();
+    const vp = getVerifiedPool();
+    const available = vp.filter(function (item) {
+      return !used[String(item.id)];
+    });
+    for (let i = available.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      const temp = available[i];
+      available[i] = available[j];
+      available[j] = temp;
+    }
+    return available.slice(0, 2);
+  }
+
+  function renderCards(items) {
+    const cards = document.getElementById('naCards');
+    cards.innerHTML = items.map(function (item) {
+      const id = String(item.id);
+      return '<div class="card" data-na-id="' + id + '" style="margin:12px 0;">' +
+        '<div class="card-label">📦 商品：' + item.product + ' ｜ 音频ID：' + id + '</div>' +
+        '<div class="card-label" style="margin-top:8px;">✍️ 钩子（照抄）</div>' +
+        '<div class="copy-area" id="na-hook-' + id + '">' + item.hook + '</div>' +
+        '<button class="copy-btn" onclick="copyText(\'na-hook-' + id + '\', this)" style="margin-top:6px;">📋 复制钩子</button>' +
+        '<a class="beat-btn" href="' + item.music_url + '" target="_blank" rel="noopener" style="margin-top:8px;">🎬 拍同款（' + item.product + '）→</a>' +
+        '<button type="button" class="mark-used-btn" onclick="markNaUsed(\'' + id + '\', this)" style="display:block;margin-top:8px;">✅ 用掉了（本机不再推）</button>' +
+        '</div>';
+    }).join('');
+    document.getElementById('naEmpty').style.display = items.length ? 'none' : 'block';
+    document.getElementById('naNext').style.display = items.length || !updateStatus() ? 'none' : 'inline-block';
+    updateStatus();
+  }
+
+  window.markNaUsed = function (id, btn) {
+    const used = getUsed();
+    used[String(id)] = true;
+    saveUsed(used);
+    const card = btn.closest('.card');
+    if (card) card.remove();
+    const remaining = updateStatus();
+    if (!document.querySelector('#naCards .card')) {
+      document.getElementById('naEmpty').style.display = 'block';
+      document.getElementById('naNext').style.display = remaining ? 'inline-block' : 'none';
+    }
+  };
+
+  function loadPool() {
+    return fetch('newacc_pool.json')
+      .then(function (response) {
+        if (!response.ok) throw new Error('HTTP ' + response.status);
+        return response.json();
+      })
+      .then(function (pool) {
+        naPool = Array.isArray(pool) ? pool : [];
+        return naPool;
+      })
+      .catch(function () {
+        document.getElementById('naStatus').textContent = '池子加载失败';
+        return null;
+      });
+  }
+
+  document.getElementById('naNext').addEventListener('click', function () {
+    document.getElementById('naNext').style.display = 'none';
+    document.getElementById('naEmpty').style.display = 'none';
+    renderCards(pickTwo());
+  });
+
+  loadPool().then(function (pool) {
+    if (pool) renderCards(pickTwo());
+  });
+})();
+</script>
+
+
+<!-- P13_REPLY_ASSISTANT_START -->
+<style>
+  .p13-wrap{max-width:760px;margin:0 auto}.p13-card{background:#fff;border:1px solid #e5e7eb;border-radius:14px;padding:16px;margin:12px 0;box-shadow:0 2px 10px rgba(0,0,0,.05)}
+  .p13-label{display:block;font-size:14px;font-weight:700;color:#374151;margin:12px 0 7px}.p13-select,.p13-textarea{width:100%;box-sizing:border-box;border:1px solid #d1d5db;border-radius:10px;background:#fff;color:#1f2937;font:14px/1.6 inherit;padding:11px}
+  .p13-textarea{min-height:110px;resize:vertical}.p13-examples{display:flex;flex-wrap:wrap;gap:7px;margin-top:10px}.p13-example{border:1px solid #dbeafe;background:#eff6ff;color:#2563eb;border-radius:18px;padding:5px 10px;font-size:12px;cursor:pointer}
+  .p13-actions{display:flex;gap:10px;margin-top:14px}.p13-btn{flex:1;border:0;border-radius:10px;padding:11px;font-weight:700;font-size:14px;cursor:pointer}.p13-generate{background:#2563eb;color:#fff}.p13-copy{background:#f3f4f6;color:#374151}
+  .p13-btn:disabled{opacity:.55;cursor:not-allowed}.p13-status{min-height:20px;margin-top:10px;color:#6b7280;font-size:13px}.p13-reply{white-space:pre-wrap;background:#f8fafc;border:1px dashed #cbd5e1;border-radius:10px;padding:14px;line-height:1.8;color:#1f2937}
+  .p13-meta{font-size:12px;color:#6b7280;line-height:1.8;margin-top:10px}.p13-meta b{color:#374151}.p13-warn{margin-top:10px;background:#fff7ed;border:1px solid #fed7aa;color:#9a3412;border-radius:9px;padding:9px 11px;font-size:12px;line-height:1.6}
+</style>
+<div class="product-section" data-product="p13" style="display:none">
+  <div class="p13-wrap">
+    <div class="section-title">🤖 评论区回复助手 · 纯前端版</div>
+    <div class="p13-card">
+      <label class="p13-label" for="p13Product">当前视频产品</label>
+      <select id="p13Product" class="p13-select">
+        <option value="">🔍 自动识别（推荐）</option>
+        <option value="xingrenfen">杏仁粉（纯杏仁）— 便秘/润肺</option>
+        <option value="xingren_qibaiyin">杏仁七白饮 — 养肺/美白</option>
+        <option value="suanzaoren">酸枣仁粉 — 失眠/安神</option>
+        <option value="wuzhimao">五指毛桃茯苓糕 — 祛湿/健脾</option>
+        <option value="danggui_heidou">当归黑豆 — 补血/养肝肾</option>
+        <option value="rougui">肉桂粉 — 温阳/散寒</option>
+        <option value="jineijin">鸡内金 — 结石/脾胃</option>
+        <option value="shihu_niubangcha">石斛牛蒡茶 — 养肝/明目</option>
+        <option value="sibaofen">四宝粉 — 活血/血管</option>
+        <option value="jiangzaocha">姜枣茶 — 温中/祛寒湿</option>
+        <option value="wumei_pugongying">乌梅蒲公英根茶 — 结节/散结</option>
+      </select>
+      <label class="p13-label" for="p13Question">粉丝评论 / 问题</label>
+      <textarea id="p13Question" class="p13-textarea" placeholder="例：便秘好几年了，吃什么能调理？"></textarea>
+      <div class="p13-examples">
+        <button type="button" class="p13-example">便秘很严重怎么办</button><button type="button" class="p13-example">失眠半夜总醒</button>
+        <button type="button" class="p13-example">湿气重舌苔厚</button><button type="button" class="p13-example">手脚冰凉怕冷</button>
+        <button type="button" class="p13-example">眼睛干涩迎风流泪</button><button type="button" class="p13-example">脾胃不好胀气</button>
+      </div>
+      <div class="p13-actions"><button type="button" id="p13Generate" class="p13-btn p13-generate">⚡ 生成回复</button><button type="button" id="p13Copy" class="p13-btn p13-copy" style="display:none">📋 复制</button></div>
+      <div id="p13Status" class="p13-status">正在加载知识库…</div>
+    </div>
+    <div id="p13Result" class="p13-card" style="display:none">
+      <div class="p13-label">生成回复</div><div id="p13Reply" class="p13-reply"></div><div id="p13Meta" class="p13-meta"></div>
+      <div class="p13-warn">⚠️ 发布前自查：确认禁忌人群、吃法和语气准确；回复已自动过滤营销词、方剂信息与医疗宣称。</div>
+    </div>
+  </div>
+</div>
+<script>
+(function(){
+  'use strict';
+  const API_KEY="sk-kuuxvdmbbmyrdomklzjrnyvpkqwclfdyoqvtwwcryseqnovx", API_URL='https://api.siliconflow.cn/v1/chat/completions', MODEL='deepseek-ai/DeepSeek-V3';
+  const PRODUCT_GUIDES={"xingrenfen":{"name":"杏仁粉（纯杏仁）","eat":"温水冲一勺，早上空腹或早餐后喝，一天一次就行","suitable":"大便偏干、容易便秘、皮肤干、总干咳、想润肺的人","not_suitable":"正在拉肚子的人别吃（通便类会加重）；杏仁过敏的别碰；孕妇和3岁以下小孩不建议","note":"3岁以上小孩想喝，一次半勺少量试，观察大便情况"},"xingren_qibaiyin":{"name":"杏仁七白饮","eat":"开水或温水冲泡一包，当饮品喝，一天一到两杯","suitable":"想养肺润肤、脸色暗黄、皮肤干燥、爱美的女性；秋燥季节想润肺的人","not_suitable":"正在拉肚子的人别喝（润肠会加重）；杏仁过敏的别碰；孕妇和3岁以下小孩不建议","note":"七白饮偏滋润，脾胃虚寒容易拉肚子的人别天天喝；美白是慢功夫，坚持两三周看变化"},"wuzhimao":{"name":"五指毛桃茯苓糕","eat":"当小点心吃，一次一两块，一天两次","suitable":"舌苔厚、大便粘、容易累、虚胖、湿气重的人","not_suitable":"本身就严重腹泻的人先别吃；对豆类过敏的注意","note":"小孩可以少量吃，一次半块就行"},"danggui_heidou":{"name":"当归黑豆","eat":"当零食嚼，一次一小把，一天一次","suitable":"脸黄、气色差、头晕、月经量少、头发早白、手脚凉的血亏人群","not_suitable":"孕妇不能吃（当归活血）；月经量大、经期的人别吃；感冒发烧、嗓子疼的时候停","note":"小孩不需要吃这个，青少年以上再说"},"suanzaoren":{"name":"酸枣仁粉","eat":"睡前温水冲一勺，一天一次","suitable":"入睡难、半夜总醒、多梦、睡眠浅的人","not_suitable":"白天吃了犯困就别白天吃；孕妇慎用；小孩不建议","note":"搭配泡脚放松效果更好，别指望一口见效，坚持一两周"},"rougui":{"name":"肉桂粉","eat":"温水或蜂蜜水冲一小勺，一天一次","suitable":"手脚冰凉、怕冷、上热下寒、阳虚体寒的人","not_suitable":"孕妇不能吃（温燥活血）；小孩不建议（纯阳之体不受补）；正在上火、口腔溃疡、嗓子疼的别吃；阴虚火旺的别碰","note":"肉桂性热，一次别多，小半勺到一勺就够"},"jineijin":{"name":"鸡内金","eat":"温水冲服或拌粥里，一次一小勺，一天一次","suitable":"有结石、脾胃弱、积食、没胃口、胀气的人","not_suitable":"孕妇慎用；本身胃溃疡出血的别吃","note":"小孩积食可以少量吃，一次半勺，配老陈醋口感好"},"shihu_niubangcha":{"name":"石斛牛蒡茶","eat":"开水泡一包，当茶喝，一天一到两杯","suitable":"眼睛干涩、迎风流泪、熬夜多、肝血不足的人","not_suitable":"脾胃虚寒、一吃凉的就拉肚子的人少喝；孕妇慎用；小孩不需要","note":"泡的时候用开水闷几分钟，别当饭前空腹猛灌"},"sibaofen":{"name":"四宝粉","eat":"温水冲一小勺，一天一次，饭后吃","suitable":"血管堵、血脂高、血瘀、这里痛那里酸、上了年纪的人","not_suitable":"孕妇绝对不能吃（三七丹参活血）；月经量大、经期的人别吃；有出血倾向、刚手术完的别吃；低血压的慎用；小孩不用吃","note":"里面有西洋参，感冒发热的时候停一停"},"jiangzaocha":{"name":"姜枣茶","eat":"早上煮开泡一杯，上午喝，一天一杯","suitable":"怕冷、手脚凉、胃寒、夏天贪凉、大便不成形的人","not_suitable":"正在上火、口腔溃疡、嗓子痛的别喝；阴虚内热的人少喝","note":"小孩可以少量喝，半杯就行；下午晚上别喝，容易睡不着"},"wumei_pugongying":{"name":"乌梅蒲公英根茶","eat":"取蒲公英根、乌梅、山楂、红枣、重瓣玫瑰煮水喝，一天一杯，饭后温饮","suitable":"有结节（肺结节、乳腺结节、甲状腺结节）、肝气郁结、爱生气、痰多、喉咙有异物感的人","not_suitable":"孕妇慎用（蒲公英偏凉）；脾胃虚寒、容易拉肚子的人少喝；经期量大的别喝；正在感冒发热的停一停","note":"乌梅偏酸，胃酸多、反酸的人别空腹喝；调理是慢功夫，别指望一两天"}};
+  const SYMPTOM_PRODUCT_MAP={
+    xingrenfen:['便秘','拉不出','大便干','大便难','肺','咳嗽','咳','痰','气管','鼻','大便','拉屎','排便'],
+    xingren_qibaiyin:['七白','养肺','润肺','美白','变白','皮肤','肤色','脸色','暗黄','黄气','气色','干燥','津液','秋燥','润肤','细腻','斑','女生','女性','胶原','白色食物','肺主皮毛'],
+    wuzhimao:['湿气','舌苔','大便粘','齿痕','虚胖','水肿','浮肿','出油','长痘','痘痘','脾虚','祛湿','黏','粘马桶','困重','没精神','头昏沉'],
+    danggui_heidou:['气血','血虚','贫血','脸黄','面色','苍白','头晕','头发','脱发','白发','早白','月经','经量','量少','血块','补血','手脚冰凉','气色','暗沉','黑眼圈','指甲','唇色'],
+    suanzaoren:['失眠','睡不着','多梦','半夜醒','早醒','睡不好','安神','心火','睡眠','入睡','难睡','惊醒','睡眠浅','心悸','心慌'],
+    rougui:['手脚冰凉','怕冷','畏寒','体寒','宫寒','上热下寒','阳虚','炎症','寒','引火归元','痛经','冻','冰','凉手','凉脚','膝盖凉'],
+    jineijin:['结石','胆结石','肾结石','尿结石','脾胃','胃胀','积食','消化不良','没胃口','反酸','烧心','胀气','打嗝','食积','健脾','消食','胃'],
+    shihu_niubangcha:['眼睛','眼干','眼涩','迎风流泪','视力','视物','肝','养肝','肝血','肝火','眼屎','红血丝','明目','熬夜'],
+    sibaofen:['血管','血瘀','血栓','堵','痛','通则不痛','三高','血压','血脂','血糖','心梗','脑梗','中风','瘀','酸痛','腰酸','腿麻','手麻','血脂稠','血液'],
+    jiangzaocha:['姜枣','温中','脾胃寒','寒湿','大便粘','空调','贪凉','冰饮','冷饮','胃寒','夏天','驱寒','暖胃'],
+    wumei_pugongying:['结节','乳腺结节','肺结节','甲状腺结节','淋巴','瘰疬','瘿','痰核','硬块','增生','囊肿','肌瘤','散结','软坚','肝气郁结','气滞','郁结','爱生气','生气','乳腺','甲状腺','乌梅','蒲公英','喉咙异物感','梅核气']
+  };
+  const PRODUCT_PRIORITY=['xingrenfen','xingren_qibaiyin','suanzaoren','wuzhimao','danggui_heidou','rougui','jineijin','shihu_niubangcha','sibaofen','jiangzaocha','wumei_pugongying'];
+  const PRODUCT_CONTRAINDICATIONS={xingrenfen:['拉肚子','腹泻','杏仁过敏','孕妇','怀孕','3岁以下'],xingren_qibaiyin:['拉肚子','腹泻','杏仁过敏','孕妇','怀孕','3岁以下','脾胃虚寒'],wuzhimao:['严重腹泻','豆类过敏'],danggui_heidou:['孕妇','怀孕','月经量大','经期','感冒','发烧','咽痛','嗓子疼'],suanzaoren:['孕妇','怀孕','小孩','宝宝','孩子'],rougui:['孕妇','怀孕','小孩','宝宝','孩子','上火','口腔溃疡','咽痛','嗓子疼','阴虚'],jineijin:['孕妇','怀孕','胃溃疡','出血'],shihu_niubangcha:['脾胃虚寒','拉肚子','腹泻','孕妇','怀孕','小孩','宝宝','孩子'],sibaofen:['孕妇','怀孕','月经量大','经期','出血','手术','低血压','小孩','宝宝','孩子','感冒','发热'],jiangzaocha:['上火','口腔溃疡','咽痛','嗓子疼','阴虚'],wumei_pugongying:['孕妇','怀孕','脾胃虚寒','拉肚子','腹泻','经期量大','感冒','发热','胃酸','反酸']};
+  const URGENT_WORDS=['胸痛','胸闷喘不过气','呼吸困难','昏迷','晕厥','意识不清','大出血','呕血','便血','突发偏瘫','口角歪斜'];
+  const HARD_BLOCK=['治愈','根治','治疗','特效','药到病除','包治','包好','百分百','100%','癌症','肿瘤','癌','化疗','放疗','糖尿病','高血压','冠心病','尿毒症','肾衰竭','白血病','血癌','艾滋病','绝症','仙丹','神药','妙手回春','死人','死亡','救命','救心','立竿见影','奇效','神效','保证','三天就好','几天就好','马上见效','立刻见效','永不复发','断根','除根','吃好','治好','痊愈','包好','无效退款','彻底消除','完全消失','神速'];
+  const ECOMM_WORDS=['买','下单','购买','商品','链接','优惠','价格','多少钱','店铺','购物','秒杀','包邮','促销','带货','小黄车','拍下','付款','交易','订单','快递','发货','卖','客服','红包','橱窗'];
+  const FORMULA_PAT=/[\d一二三四五六七八九十两]+[克钱两gG]|汤|丸|散剂|膏方|丹方|方子|煎服|水煎服|内服|处方|开方|麻黄|附子|大黄|芒硝|石膏|细辛|半夏|柴胡|朱砂|雄黄|硫磺|铅丹|轻粉|斑蝥|水蛭|虻虫|土鳖|蜈蚣|全蝎|僵蚕|蝉蜕|蛤蚧|麝香|牛黄|熊胆|虎骨|羚羊角/;
+  const QUITUI_TEMPLATE='你这个情况，这个就先不要买/不要碰了。';
+  const GUIDE_TEMPLATES=['感兴趣的朋友点我主页，简介里有介绍~','喜欢的话点进我主页，简介里能看到~'];
+  const SYSTEM_PROMPT="你是倪海厦风格的温和派中医养生博主，帮老板用亲切的口吻回答抖音评论区粉丝的养生健康问题，结尾带一句软性橱窗引导。\n\n【口吻要点】（倪师弟子/温和博主，不是倪师本尊！）\n- 语气亲切平和，像懂中医的邻家博主聊天，不拍桌子、不瞪眼、不凶人不教育人\n- 家常口语：\"对不？\"\"记住\"\"其实\"\"可以试试\"\n- 总共3-4句话，60-100字，短小精悍\n\n【开头多样化铁律】（防同质化！评论区一排回复不能全是\"倪师常说\"开头）\n开头句在下面几种里轮换，同一批回复不要重复用同一种：\n1. 直接摆中医原理型：如\"肺与大肠相表里，肺干了肠道也跟着干。\"（不说倪师，直接讲理）\n2. 古籍/内经引用型：如\"黄帝内经讲，脾为后天之本。\"（引书不引倪师）\n3. 倪师引用型：如\"倪师讲过，肝气郁结是结节的根。\"（只能占一部分，不要每次都用）\n4. 反问/共鸣型：如\"你是不是也总觉得身体发沉、睡不醒？\"\n5. 结论先行型：如\"结节这东西，中医看的不是切不切，是看为什么长。\"\n原则：每句开头尽量不同，专业感优先，倪师引用最多三分之一。\n\n【回答结构】（主体2句 + 最后1句引导，总40-80字，精简干练）\n1. 第一句：按【开头多样化铁律】选一种开头，观点+一个具体知识点一气呵成（可以是中医理论/古籍/倪师引用，如\"黄帝内经讲肺与大肠相表里\"\"中医讲肝主疏泄，气顺了结才散\"）。第一句不要用\"但/不过/其实\"开头\n2. 第二句：直接回答他问的点——问怎么吃→给吃法；问能不能吃→\"能吃/不要吃\"直接表态+原因；**问\"有用吗/管用吗/真的吗\"→第一句就要明确表态（\"有调理作用，贵在坚持\"），再给具体方向**；问症状→给具体调理方向；不适合的人（孕妇/小孩/上火/拉肚子）直接劝退\n3. 最后一句：软引导——\"感兴趣的朋友点我主页，简介里有介绍~\"（一句话同时带主页+简介，绝对不提\"橱窗/下单/买\"）\n主体没说完之前不要出现引导句！【引导规则】引导句只能出现一次且必须放在最后。\n\n【知识引用铁律】必须真的引用知识片段或产品话术里的具体内容（如\"肺与大肠相表里\"\"酸枣仁养心肝之血、安神\"\"肉桂温肾阳引火归元\"\"脾主运化\"），不要编造术语，不要用泛泛的健康建议凑数。至少保证回复里有一个具体的中医概念。\n【引用真实性铁律】凡是说\"倪师讲/倪师说/按倪师的说法/老师讲过\"的，具体内容必须能在【倪师知识库原文片段】里找到对应依据（如瘰疬、软坚、甲状腺大脖子用海藻牡蛎、肝气郁结用郁金疏肝、乌梅丸酸收等）；【知识库没有支撑的内容一律不许挂倪师名义】。即使开头没用倪师引用，正文也可以引用知识库原理，但同样必须真实。\n\n【异议/质疑回应规则】（评论区有人提不同见解、质疑、甚至抬杠时）\n- 先接住再讲理：不要怼人，先认可对方感受（\"你这么说我也理解\"\"确实很多人这么想\"），再温和地按中医思路讲\n- 用原理说话：讲清楚中医看这个问题的逻辑（如\"中医不只看那个疙瘩，看的是气顺不顺、痰化不化\"），用知识库里的真实理论回应\n- 不贬低西医：可以说\"西医有西医的治法，中医有中医的思路，各有各的适用\"，绝不贬低医院医生\n- 不绝对化：对方说\"西医检查没事\"，回\"检查没问题是好事，中医调理讲究的是日常的平衡\"，不反驳、不制造焦虑\n- 只讲调理方向，不跟对方争对错\n\n【劝退规则】用户是在当前产品（【产品说明】第一个）的视频底下提问的。如果用户的症状/体质不适合这个产品（如：拉肚子的人问杏仁粉、上火/口腔溃疡的人问肉桂、孕妇问四宝粉、小孩问肉桂），必须用一句话明确劝退：\"你这个情况，这个就先不要买/不要碰了\"，然后再给一句适合他体质的调理建议（如拉肚子先健脾止泻、饮食清淡）。这是对用户负责，必须直说，别为了卖货含糊。\n\n【格式铁律】禁止括号！禁止\"（笑）（拍桌）（叹气）\"等任何括号注释和动作描写，禁止【】等符号标记，全部用纯文字表达。\n\n【铁律】\n- 全程禁止：买、下单、购买、商品、链接、优惠、多少钱、店铺、购物、卖、小黄车、带货、拍下、付款\n- 回答吃法必须严格按【产品说明】里的吃法，禁止自己发明（禁止提咖啡）\n- 不出现具体药方、剂量（克/两/汤/丸）和\"治疗/治愈/根治/特效/百分百/保证\"等医疗宣称词\n- **绝对禁止夸大宣传**：不承诺疗效（不说\"三天就好\"\"保证消掉\"\"吃了就断根\"），不制造恐慌（不说\"再不调就晚了\"\"会癌变\"），不贬低医院医生，不诱导盲目购买。只能说\"调理/辅助/日常养护\"方向的温和表述\n- 口语化、短句，像真人博主回复，不像广告文案";
+  let kb={}, lastReply='';
+
+  function setStatus(msg){document.getElementById('p13Status').textContent=msg;}
+  async function loadKB(){try{const r=await fetch('nishi_kb.json',{cache:'no-cache'});if(!r.ok)throw new Error();kb=await r.json();setStatus('知识库已加载');}catch(e){kb={};setStatus('知识库加载失败，但仍可生成');}}
+  function matchProducts(q,forceId){
+    if(forceId&&PRODUCT_GUIDES[forceId])return [{id:forceId,name:PRODUCT_GUIDES[forceId].name,hit:['当前视频产品'],guide:PRODUCT_GUIDES[forceId]}];
+    return Object.keys(SYMPTOM_PRODUCT_MAP).map(function(id){return {id:id,hit:SYMPTOM_PRODUCT_MAP[id].filter(function(w){return q.indexOf(w)!==-1;})};})
+      .filter(function(x){return x.hit.length;}).sort(function(a,b){return PRODUCT_PRIORITY.indexOf(a.id)-PRODUCT_PRIORITY.indexOf(b.id);}).slice(0,2)
+      .map(function(x){return {id:x.id,name:PRODUCT_GUIDES[x.id].name,hit:x.hit,guide:PRODUCT_GUIDES[x.id]};});
+  }
+  function searchKB(q,productIds){
+    const symptomWords=[];productIds.forEach(function(id){(SYMPTOM_PRODUCT_MAP[id]||[]).forEach(function(w){if(q.indexOf(w)!==-1&&symptomWords.indexOf(w)<0)symptomWords.push(w);});});
+    const fragments=(q.match(/[\u4e00-\u9fff]{2,}/g)||[]).reduce(function(a,s){for(let n=2;n<=Math.min(6,s.length);n++){for(let i=0;i+n<=s.length;i++){const x=s.slice(i,i+n);if(a.indexOf(x)<0)a.push(x);}}return a;},[]);
+    const terms=symptomWords.concat(fragments.filter(function(x){return symptomWords.indexOf(x)<0;}));
+    let rows=[];productIds.forEach(function(id){(kb[id]||[]).forEach(function(row){let score=Number(row.score)||0;let hit=[];terms.forEach(function(t){let pos=0,count=0;while((pos=row.text.indexOf(t,pos))!==-1){count++;pos+=t.length;}if(count){score+=count*(symptomWords.indexOf(t)>=0?5:1)+Math.min(t.length,5);hit.push(t);}});if(score>0)rows.push({text:row.text,file:row.file||'',score:score,hit:hit});});});
+    return rows.sort(function(a,b){return b.score-a.score;}).slice(0,3);
+  }
+  function buildPrompt(q,matched,kbParas,quitui){
+    let user='【粉丝评论】'+q+'\n';
+    if(matched.length){user+='【产品说明】（用户问到这个产品时，以此为准回答吃法和适宜性）\n'+matched.map(function(p){const g=p.guide||{};return '- 产品：'+p.name+'（用户问题涉及）\n  吃法：'+(g.eat||'')+'\n  适宜：'+(g.suitable||'')+'\n  禁忌：'+(g.not_suitable||'')+'\n  注意：'+(g.note||'');}).join('\n')+'\n';}
+    if(kbParas.length)user+='【倪师知识库原文片段】\n'+kbParas.slice(0,3).map(function(r,i){return '〔片段'+(i+1)+'〕'+r.text.slice(0,300);}).join('\n')+'\n';
+    if(quitui)user+='【强制指令】检测到该用户的症状与当前产品禁忌冲突！第一句必须明确劝退（如：你这个情况，这个就先不要买/不要碰了），然后给一句适合他体质的调理建议；绝对禁止给出该产品的吃法和任何推荐。\n';
+    user+='【任务】请以倪师口吻生成回复。';return [SYSTEM_PROMPT,user];
+  }
+  async function callLLM(sysP,userP){
+    let response;try{response=await fetch(API_URL,{method:'POST',headers:{Authorization:'Bearer '+API_KEY,'Content-Type':'application/json'},body:JSON.stringify({model:MODEL,messages:[{role:'system',content:sysP},{role:'user',content:userP}],max_tokens:500,temperature:.8})});}catch(e){throw new Error('生成服务暂时不可用，请稍后重试');}
+    let data;try{data=await response.json();}catch(e){throw new Error(response.ok?'生成服务返回格式异常，请稍后重试':'生成服务请求失败（HTTP '+response.status+'）');}
+    if(!response.ok)throw new Error('生成服务请求失败（HTTP '+response.status+'）');
+    if(!data.choices||!data.choices[0]||!data.choices[0].message||typeof data.choices[0].message.content!=='string')throw new Error('生成服务返回格式异常，请稍后重试');
+    return data.choices[0].message.content.trim();
+  }
+  function sanitize(text,guide){
+    const ecommPat=new RegExp(ECOMM_WORDS.join('|'));let kept=text.split(/(?<=[。！？!?])/).map(function(s){return s.trim();}).filter(function(s){if(!s||FORMULA_PAT.test(s))return false;if(ecommPat.test(s)&&!/(不要买|别买|先别买|别急着买|不用买|别碰|不要碰)/.test(s))return false;return true;});
+    text=kept.join('');HARD_BLOCK.forEach(function(w){text=text.split(w).join('调理');});text=text.replace(/\n{2,}/g,'\n').trim().replace(/。。/g,'。').replace(/！！/g,'！').replace(/？？/g,'？').replace(/[（(][^（）()]{0,12}[)）]/g,'');
+    if(text.length<50){const refuse=['不行','不能','别','不要','绝对','上火','孕妇','小孩','停'].some(function(w){return text.indexOf(w)!==-1;});if(text&&!refuse&&guide&&guide.eat)text=text.replace(/[。！？!?]+$/,'')+'。'+guide.eat;else if(text&&refuse)text=text.replace(/[。！？!?]+$/,'')+'。身体状态不对的时候先别碰，等调理好了再说。';else if(!text&&guide)text=guide.eat||'';}
+    if(text.length>140){text=text.slice(0,140);const idx=Math.max(text.lastIndexOf('。'),text.lastIndexOf('！'),text.lastIndexOf('？'));if(idx>60)text=text.slice(0,idx+1);}return text;
+  }
+  function diversifyOpening(text){
+    if(!text)return text;const pat=/^\s*(?:(?:按倪师的说法|倪师常说|倪师讲过|倪师说过|倪师说|倪师讲|老师常说|老师讲过|老师说过|老师说|老师讲|倪老师讲过|倪老师说过|倪老师说|师父常说|师父说|师傅说|常说|说|讲|讲过|说过|认为|提到))+(?:[，,:：]\s*)?/;let rest=text.replace(pat,'').trim();rest=rest.replace(pat,'').trim();return rest.length>=4?rest:text;
+  }
+  async function generateReply(q,forceId){
+    if(URGENT_WORDS.some(function(w){return q.indexOf(w)!==-1;}))return {reply:'你描述的情况可能需要尽快处理，先不要自行用养生产品。请立即联系急救或尽快到医院就诊；若症状正在加重，请让身边人陪同。',products:[],kb_sources:[],safety:'urgent'};
+    const matched=matchProducts(q,forceId);const quitui=matched.length>0&&(PRODUCT_CONTRAINDICATIONS[matched[0].id]||[]).some(function(w){return q.indexOf(w)!==-1;});
+    const kbParas=searchKB(q,matched.map(function(p){return p.id;}));const prompts=buildPrompt(q,matched,kbParas,quitui);const raw=await callLLM(prompts[0],prompts[1]);
+    let reply=diversifyOpening(sanitize(raw,matched.length?matched[0].guide:{}));reply=reply.replace(/[^。！？!?~]*(?:主页|简介)[^。！？!?~]*[。！？!?~]?/g,'');
+    if(quitui&&!/(不要买|别买|别碰|不要碰|不要吃|先别碰|不能吃|不建议|别吃|不能碰|先别吃|尽量别碰)/.test(reply))reply=reply.replace(/[。！？!?~]+$/,'')+'。'+QUITUI_TEMPLATE;
+    reply=reply.replace(/[。！？!?~]+$/,'')+'。'+GUIDE_TEMPLATES[0];return {reply:reply,products:matched,kb_sources:kbParas.slice(0,3).map(function(r){return {file:r.file,score:r.score};})};
+  }
+  function escapeHtml(s){return String(s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
+  document.querySelectorAll('.p13-example').forEach(function(el){el.addEventListener('click',function(){document.getElementById('p13Question').value=el.textContent;});});
+  document.getElementById('p13Generate').addEventListener('click',async function(){
+    const input=document.getElementById('p13Question'),q=input.value.trim();if(!q){setStatus('请先粘贴粉丝评论');return;}const btn=this;btn.disabled=true;setStatus('正在生成，请稍候…');
+    try{const data=await generateReply(q,document.getElementById('p13Product').value);lastReply=data.reply;document.getElementById('p13Reply').textContent=data.reply;
+      const ps=data.products.length?data.products.map(function(p){return escapeHtml(p.name)+'（命中：'+escapeHtml(p.hit.join('/'))+'）<br><span style="color:#b45309">⚠️ 禁忌：'+escapeHtml((p.guide||{}).not_suitable||'无')+'</span>';}).join('<br>'):'未匹配到产品';
+      const src=data.kb_sources.map(function(s){return escapeHtml(String(s.file||'').split(/[\\/]/).pop());}).filter(Boolean).join('、')||'无';
+      document.getElementById('p13Meta').innerHTML='<b>匹配产品：</b>'+ps+'<br><b>知识来源：</b>'+src;document.getElementById('p13Result').style.display='block';document.getElementById('p13Copy').style.display='block';setStatus('✅ 生成完成，检查后复制');input.value='';
+    }catch(e){setStatus('❌ '+(e&&e.message?e.message:'生成失败，请稍后重试'));}finally{btn.disabled=false;}
+  });
+  document.getElementById('p13Copy').addEventListener('click',async function(){if(!lastReply)return;try{if(navigator.clipboard&&window.isSecureContext)await navigator.clipboard.writeText(lastReply);else{const ta=document.createElement('textarea');ta.value=lastReply;document.body.appendChild(ta);ta.select();document.execCommand('copy');ta.remove();}this.textContent='✅ 已复制';const b=this;setTimeout(function(){b.textContent='📋 复制';},1500);}catch(e){setStatus('复制失败，请长按回复文本手动复制');}});
+  loadKB();
+})();
+</script>
+<!-- P13_REPLY_ASSISTANT_END -->
+
+<div class="product-section" data-product="p14" style="display:none">
+
+  <div class="section-title">🎵 杏仁七白饮 · 爆款原声（1个）</div>
+  <div class="card">
+    <div class="card-label">📌 类型：七白复方（杏仁+百合+银耳+莲子+山药+茯苓+白扁豆）｜养肺润肤美白 · 女性向</div>
+  </div>
+<div class="audio-group" data-music="7654202480884026153">
+  <div class="hook-tabs"><button class="hook-tab active" onclick="switchHook(this,'_q7654202480884026153')">肺部最怕的三个坏习惯（七白饮养肺）</button></div>
+  <div class="hook-display"><div class="copy-area" id="hd-_q7654202480884026153-0" data-hook="0">肺部最怕的三个坏习惯（七白饮养肺）</div><button class="copy-btn" data-hook="0" style="margin-top:6px" onclick="copyText('hd-_q7654202480884026153-0', this)">📋 复制此钩子</button></div>
+  <a class="beat-btn" href="https://www.douyin.com/music/7654202480884026153" target="_blank" rel="noopener">🎬 拍同款（50+的新生活·肺部最怕的）→</a>
+</div>
+  <div class="card">
+    <div class="card-label">🏷 标签（照抄）</div>
+    <div class="copy-area" id="p14-tags">#杏仁七白饮 #七白饮 #养肺 #润肺 #美白 #食养 #立秋养生</div>
+    <button class="copy-btn" onclick="copyText('p14-tags', this)">📋 复制标签</button>
+  </div>
+
+</div>
+
+
+<div class="product-section" data-product="p15" style="display:none">
+
+  <div class="section-title">🎵 桑叶双瓜茶 · 爆款原声（1个）</div>
+  <div class="card">
+    <div class="card-label">📌 类型：桑叶+苦瓜+冬瓜 ｜清糖毒 · 稳血糖 · 养护胰岛（控糖食疗）</div>
+  </div>
+<div class="audio-group" data-music="7645232430156417846">
+  <div class="hook-tabs"><button class="hook-tab active" onclick="switchHook(this,'_q7645232430156417846')">糖尿病人最忌惮的东西是什么（控糖双瓜）</button></div>
+  <div class="hook-display"><div class="copy-area" id="hd-_q7645232430156417846-0" data-hook="0">糖尿病人最忌惮的东西是什么（控糖双瓜）</div><button class="copy-btn" data-hook="0" style="margin-top:6px" onclick="copyText('hd-_q7645232430156417846-0', this)">💼 复制此钩子</button></div>
+  <a class="beat-btn" href="https://www.douyin.com/music/7645232430156417846" target="_blank" rel="noopener">🎞️ 拍同款（天天爆单哟·糖尿病人最忌惮的）→</a>
+</div>
+  <div class="card">
+    <div class="card-label">🏷️ 标签（照抄）</div>
+    <div class="copy-area" id="p15-tags">#桑叶双瓜茶 #控糖 #血糖 #糖尿病 #桑叶苦瓜冬瓜 #食疗 #中老年养生</div>
+    <button class="copy-btn" onclick="copyText('p15-tags', this)">💼 复制标签</button>
+  </div>
+
+</div>
 </body>
 </html>
