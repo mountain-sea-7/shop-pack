@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-<!--deploy-mark:202608281830-->
+<!--deploy-mark:202608281843-->
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>全部商品 照抄包</title>
@@ -1592,55 +1592,37 @@ function loadHotSportsPack() {
 loadSportsPack();
 loadHotSportsPack();
 function copySportsPack(btn) {
-  if (hotSportsPackCache && hotSportsPackCache.items.length) {
-    var hotItems = hotSportsPackCache.items.filter(function(x){ return x && x.text; });
-    if (hotItems.length) {
-      var qualifiedHotItems = hotItems.filter(function(x){
-        var tagCount = (x.text.match(/#[^\s#]+/g) || []).length;
-        return x.text.replace(/\s/g, '').length >= 60 && tagCount >= 4;
-      });
-      var selectedHotItem = (qualifiedHotItems.length ? qualifiedHotItems : hotItems)[Math.floor(Math.random() * (qualifiedHotItems.length ? qualifiedHotItems.length : hotItems.length))];
-      var selectedHotText = selectedHotItem.text;
-      var selectedTagCount = (selectedHotText.match(/#[^\s#]+/g) || []).length;
-      if (selectedTagCount < 4) {
-        selectedHotText += '\n#体育 #养生 #健康生活';
-      }
-      copyAny(selectedHotText, btn);
-      return;
-    }
-  }
   if (!sportsPackCache) {
     loadSportsPack();
-    s(btn, sportsPackLoading ? '加载中，请稍后再试' : '拉取失败');
+  }
+  var items = [];
+  // 具体赛事包优先：遍历所有 music_id 分组收集文案。
+  if (sportsPackCache) {
+    Object.keys(sportsPackCache).forEach(function(mid){
+      (sportsPackCache[mid] || []).forEach(function(x){ if (x && x.text) items.push(x); });
+    });
+  }
+  // sports 包为空或加载失败时，hot 包作为兜底。
+  if (!items.length && hotSportsPackCache && hotSportsPackCache.items.length) {
+    items = hotSportsPackCache.items.filter(function(x){ return x && x.text; });
+  }
+  if (!items.length) {
+    s(btn, sportsPackLoading ? '加载中，请稍后再试' : '无内容包');
     return;
   }
-  var group = btn.closest ? btn.closest('.audio-group') : null;
-  var section = btn.closest ? btn.closest('.product-section') : null;
-  // 同商品下所有音频 id（优先来源）
-  var sameProductIds = [];
-  if (section) {
-    section.querySelectorAll('.audio-group').forEach(function(g){
-      var mid = g.getAttribute('data-music');
-      if (mid) sameProductIds.push(mid);
-    });
-  }
-  var texts = [];
-  // 1. 同商品音频的内容包（优先）
-  sameProductIds.forEach(function(mid){
-    if (sportsPackCache[mid]) sportsPackCache[mid].forEach(function(x){ if (x && x.text) texts.push(x.text); });
+  var uniqueItems = items.filter(function(x, i, all){
+    return all.findIndex(function(y){ return y.text === x.text; }) === i;
   });
-  // 2. 不足 5 条 → 从全局其他音频补
-  if (texts.length < 5) {
-    Object.keys(sportsPackCache).forEach(function(mid){
-      if (sameProductIds.indexOf(mid) < 0) {
-        (sportsPackCache[mid] || []).forEach(function(x){ if (x && x.text) texts.push(x.text); });
-      }
-    });
+  var qualifiedItems = uniqueItems.filter(function(x){
+    var tagCount = (x.text.match(/#[^\s#]+/g) || []).length;
+    return x.text.replace(/\s/g, '').length >= 60 && tagCount >= 4;
+  });
+  var pool = qualifiedItems.length ? qualifiedItems : uniqueItems;
+  var selectedText = pool[Math.floor(Math.random() * pool.length)].text;
+  if ((selectedText.match(/#[^\s#]+/g) || []).length < 4) {
+    selectedText += '\n#体育 #养生 #健康生活';
   }
-  // 去重
-  texts = texts.filter(function(t, i){ return texts.indexOf(t) === i; });
-  if (!texts.length) { s(btn, '无内容包'); return; }
-  copyAny(texts[Math.floor(Math.random() * texts.length)], btn);
+  copyAny(selectedText, btn);
 }
 function copyAny(text, btn) {
   var done = function(){ s(btn); };
