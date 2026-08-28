@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-<!--deploy-mark:202608280909-->
+<!--deploy-mark:202608281748-->
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>全部商品 照抄包</title>
@@ -1595,7 +1595,17 @@ function copySportsPack(btn) {
   if (hotSportsPackCache && hotSportsPackCache.items.length) {
     var hotItems = hotSportsPackCache.items.filter(function(x){ return x && x.text; });
     if (hotItems.length) {
-      copyAny(hotItems[Math.floor(Math.random() * hotItems.length)].text, btn);
+      var qualifiedHotItems = hotItems.filter(function(x){
+        var tagCount = (x.text.match(/#[^\s#]+/g) || []).length;
+        return x.text.replace(/\s/g, '').length >= 60 && tagCount >= 4;
+      });
+      var selectedHotItem = (qualifiedHotItems.length ? qualifiedHotItems : hotItems)[Math.floor(Math.random() * (qualifiedHotItems.length ? qualifiedHotItems.length : hotItems.length))];
+      var selectedHotText = selectedHotItem.text;
+      var selectedTagCount = (selectedHotText.match(/#[^\s#]+/g) || []).length;
+      if (selectedTagCount < 4) {
+        selectedHotText += '\n#体育 #养生 #健康生活';
+      }
+      copyAny(selectedHotText, btn);
       return;
     }
   }
