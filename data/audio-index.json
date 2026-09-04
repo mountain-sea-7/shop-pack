@@ -1,0 +1,986 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-09-03T16:12:27.552Z",
+  "items": [
+    {
+      "productId": "p0",
+      "musicId": "7648773588509952777",
+      "fingerprint": null,
+      "duplicateOf": null,
+      "state": "active"
+    },
+    {
+      "productId": "p0",
+      "musicId": "7625929040960015145",
+      "fingerprint": null,
+      "duplicateOf": null,
+      "state": "active"
+    },
+    {
+      "productId": "p0",
+      "musicId": "7625925684396870454",
+      "fingerprint": null,
+      "duplicateOf": null,
+      "state": "active"
+    },
+    {
+      "productId": "p1",
+      "musicId": "7618117389879954219",
+      "fingerprint": null,
+      "duplicateOf": null,
+      "state": "active"
+    },
+    {
+      "productId": "p1",
+      "musicId": "7647734322123885362",
+      "fingerprint": null,
+      "duplicateOf": null,
+      "state": "active"
+    },
+    {
+      "productId": "p1",
+      "musicId": "7635818379667901211",
+      "fingerprint": "a66de82123fd16d1248b62d90baecf49",
+      "duplicateOf": "7647734322123885362",
+      "state": "standby"
+    },
+    {
+      "productId": "p1",
+      "musicId": "7600403135269866249",
+      "fingerprint": null,
+      "duplicateOf": "7663050600325647147",
+      "state": "standby"
+    },
+    {
+      "productId": "p1",
+      "musicId": "7656676673916095272",
+      "fingerprint": null,
+      "duplicateOf": null,
+      "state": "active"
+    },
+    {
+      "productId": "p1",
+      "musicId": "7641402663787154191",
+      "fingerprint": null,
+      "duplicateOf": "7656676673916095272",
+      "state": "standby"
+    },
+    {
+      "productId": "p1",
+      "musicId": "7622685526625848064",
+      "fingerprint": "81944f8b2a0b1f2c35651501f5e187e8",
+      "duplicateOf": "7656676673916095272",
+      "state": "standby"
+    },
+    {
+      "productId": "p1",
+      "musicId": "7641032016401599283",
+      "fingerprint": "a66de82123fd16d1248b62d90baecf49",
+      "duplicateOf": "7647734322123885362",
+      "state": "standby"
+    },
+    {
+      "productId": "p1",
+      "musicId": "7613579780257565494",
+      "fingerprint": null,
+      "duplicateOf": null,
+      "state": "active"
+    },
+    {
+      "productId": "p1",
+      "musicId": "7650399870255745798",
+      "fingerprint": null,
+      "duplicateOf": "7647734322123885362",
+      "state": "standby"
+    },
+    {
+      "productId": "p1",
+      "musicId": "7640350177877822260",
+      "fingerprint": null,
+      "duplicateOf": null,
+      "state": "active"
+    },
+    {
+      "productId": "p1",
+      "musicId": "7653275907825634058",
+      "fingerprint": "48af8375da279304c2d56a83f02c6ba9",
+      "duplicateOf": "7647734322123885362",
+      "state": "standby"
+    },
+    {
+      "productId": "p1",
+      "musicId": "7643634800053472036",
+      "fingerprint": null,
+      "duplicateOf": "7647734322123885362",
+      "state": "standby"
+    },
+    {
+      "productId": "p1",
+      "musicId": "7623680719897856814",
+      "fingerprint": null,
+      "duplicateOf": "7613579780257565494",
+      "state": "standby"
+    },
+    {
+      "productId": "p1",
+      "musicId": "7655222460867955508",
+      "fingerprint": null,
+      "duplicateOf": "7647734322123885362",
+      "state": "standby"
+    },
+    {
+      "productId": "p1",
+      "musicId": "7609836227100986127",
+      "fingerprint": null,
+      "duplicateOf": null,
+      "state": "active"
+    },
+    {
+      "productId": "p1",
+      "musicId": "7599507311656241929",
+      "fingerprint": null,
+      "duplicateOf": "7613579780257565494",
+      "state": "standby"
+    },
+    {
+      "productId": "p1",
+      "musicId": "7645472941857147683",
+      "fingerprint": "a66de82123fd16d1248b62d90baecf49",
+      "duplicateOf": "7647734322123885362",
+      "state": "standby"
+    },
+    {
+      "productId": "p1",
+      "musicId": "7598831939583888168",
+      "fingerprint": null,
+      "duplicateOf": "7656676673916095272",
+      "state": "standby"
+    },
+    {
+      "productId": "p1",
+      "musicId": "7649263522601388842",
+      "fingerprint": "5ae4e4444b21036350b6a1af703dbcb1",
+      "duplicateOf": "7656676673916095272",
+      "state": "standby"
+    },
+    {
+      "productId": "p1",
+      "musicId": "7627392230696766208",
+      "fingerprint": null,
+      "duplicateOf": "7647734322123885362",
+      "state": "standby"
+    },
+    {
+      "productId": "p1",
+      "musicId": "7623977933610306342",
+      "fingerprint": null,
+      "duplicateOf": "7656676673916095272",
+      "state": "standby"
+    },
+    {
+      "productId": "p1",
+      "musicId": "7650063893187939106",
+      "fingerprint": "aa9b29026767672e34dcdc4e04c7ca8a",
+      "duplicateOf": "7647734322123885362",
+      "state": "standby"
+    },
+    {
+      "productId": "p1",
+      "musicId": "7568291361347078948",
+      "fingerprint": null,
+      "duplicateOf": null,
+      "state": "active"
+    },
+    {
+      "productId": "p1",
+      "musicId": "7655640800528780084",
+      "fingerprint": null,
+      "duplicateOf": null,
+      "state": "active"
+    },
+    {
+      "productId": "p1",
+      "musicId": "7616665637259135790",
+      "fingerprint": null,
+      "duplicateOf": null,
+      "state": "active"
+    },
+    {
+      "productId": "p1",
+      "musicId": "7618430443448847142",
+      "fingerprint": null,
+      "duplicateOf": null,
+      "state": "active"
+    },
+    {
+      "productId": "p1",
+      "musicId": "7605357537709312808",
+      "fingerprint": null,
+      "duplicateOf": "7663050600325647147",
+      "state": "standby"
+    },
+    {
+      "productId": "p1",
+      "musicId": "7622692036939942697",
+      "fingerprint": null,
+      "duplicateOf": "7663050600325647147",
+      "state": "standby"
+    },
+    {
+      "productId": "p1",
+      "musicId": "7663050600325647147",
+      "fingerprint": null,
+      "duplicateOf": null,
+      "state": "active"
+    },
+    {
+      "productId": "p3",
+      "musicId": "7632320941976324914",
+      "fingerprint": null,
+      "duplicateOf": null,
+      "state": "active"
+    },
+    {
+      "productId": "p3",
+      "musicId": "7655495198713121587",
+      "fingerprint": null,
+      "duplicateOf": "7632320941976324914",
+      "state": "standby"
+    },
+    {
+      "productId": "p3",
+      "musicId": "7659684631951739658",
+      "fingerprint": null,
+      "duplicateOf": null,
+      "state": "active"
+    },
+    {
+      "productId": "p4",
+      "musicId": "7644796808966703926",
+      "fingerprint": null,
+      "duplicateOf": null,
+      "state": "active"
+    },
+    {
+      "productId": "p4",
+      "musicId": "7638588370470996742",
+      "fingerprint": null,
+      "duplicateOf": null,
+      "state": "active"
+    },
+    {
+      "productId": "p5",
+      "musicId": "7632122617671306036",
+      "fingerprint": null,
+      "duplicateOf": null,
+      "state": "active"
+    },
+    {
+      "productId": "p5",
+      "musicId": "7622194263639755539",
+      "fingerprint": null,
+      "duplicateOf": null,
+      "state": "active"
+    },
+    {
+      "productId": "p5",
+      "musicId": "7651432211568151338",
+      "fingerprint": null,
+      "duplicateOf": null,
+      "state": "active"
+    },
+    {
+      "productId": "p5",
+      "musicId": "7622072855186000666",
+      "fingerprint": null,
+      "duplicateOf": null,
+      "state": "active"
+    },
+    {
+      "productId": "p6",
+      "musicId": "7613303863629679370",
+      "fingerprint": null,
+      "duplicateOf": null,
+      "state": "active"
+    },
+    {
+      "productId": "p6",
+      "musicId": "7641387307714644774",
+      "fingerprint": null,
+      "duplicateOf": null,
+      "state": "active"
+    },
+    {
+      "productId": "p6",
+      "musicId": "7590592368231877412",
+      "fingerprint": null,
+      "duplicateOf": null,
+      "state": "active"
+    },
+    {
+      "productId": "p7",
+      "musicId": "7646719216183216923",
+      "fingerprint": null,
+      "duplicateOf": null,
+      "state": "active"
+    },
+    {
+      "productId": "p7",
+      "musicId": "7591368851074747172",
+      "fingerprint": null,
+      "duplicateOf": null,
+      "state": "active"
+    },
+    {
+      "productId": "p7",
+      "musicId": "7629133314087078691",
+      "fingerprint": null,
+      "duplicateOf": null,
+      "state": "active"
+    },
+    {
+      "productId": "p7",
+      "musicId": "7655910396263418630",
+      "fingerprint": null,
+      "duplicateOf": null,
+      "state": "active"
+    },
+    {
+      "productId": "p7",
+      "musicId": "7568356024579083050",
+      "fingerprint": null,
+      "duplicateOf": null,
+      "state": "active"
+    },
+    {
+      "productId": "p7",
+      "musicId": "7628640350982245183",
+      "fingerprint": null,
+      "duplicateOf": null,
+      "state": "active"
+    },
+    {
+      "productId": "p7",
+      "musicId": "7618914965249542921",
+      "fingerprint": null,
+      "duplicateOf": null,
+      "state": "active"
+    },
+    {
+      "productId": "p7",
+      "musicId": "7633124019432114986",
+      "fingerprint": null,
+      "duplicateOf": null,
+      "state": "active"
+    },
+    {
+      "productId": "p7",
+      "musicId": "7631923600383052550",
+      "fingerprint": null,
+      "duplicateOf": null,
+      "state": "active"
+    },
+    {
+      "productId": "p7",
+      "musicId": "7672407826895375147",
+      "fingerprint": null,
+      "duplicateOf": null,
+      "state": "active"
+    },
+    {
+      "productId": "p7",
+      "musicId": "7637107690669411106",
+      "fingerprint": null,
+      "duplicateOf": null,
+      "state": "active"
+    },
+    {
+      "productId": "p7",
+      "musicId": "7585883553599376138",
+      "fingerprint": null,
+      "duplicateOf": null,
+      "state": "active"
+    },
+    {
+      "productId": "p8",
+      "musicId": "7626704049731291940",
+      "fingerprint": null,
+      "duplicateOf": null,
+      "state": "active"
+    },
+    {
+      "productId": "p9",
+      "musicId": "7660384505118591807",
+      "fingerprint": null,
+      "duplicateOf": null,
+      "state": "active"
+    },
+    {
+      "productId": "p17",
+      "musicId": "7629247574192425780",
+      "fingerprint": null,
+      "duplicateOf": null,
+      "state": "active"
+    },
+    {
+      "productId": "p17",
+      "musicId": "7665381481402436406",
+      "fingerprint": null,
+      "duplicateOf": null,
+      "state": "active"
+    },
+    {
+      "productId": "p11",
+      "musicId": "7618814627367242515",
+      "fingerprint": null,
+      "duplicateOf": null,
+      "state": "active"
+    },
+    {
+      "productId": "p14",
+      "musicId": "7654202480884026153",
+      "fingerprint": null,
+      "duplicateOf": null,
+      "state": "active"
+    },
+    {
+      "productId": "p15",
+      "musicId": "7627076349145795363",
+      "fingerprint": null,
+      "duplicateOf": null,
+      "state": "active"
+    },
+    {
+      "productId": "p15",
+      "musicId": "7649628718318635816",
+      "fingerprint": null,
+      "duplicateOf": null,
+      "state": "active"
+    },
+    {
+      "productId": "p16",
+      "musicId": "7603293191219006234",
+      "fingerprint": null,
+      "duplicateOf": null,
+      "state": "active"
+    },
+    {
+      "productId": "p18",
+      "musicId": "7655862141404056346",
+      "fingerprint": null,
+      "duplicateOf": null,
+      "state": "active"
+    },
+    {
+      "productId": "p18",
+      "musicId": "7669375941067541289",
+      "fingerprint": null,
+      "duplicateOf": null,
+      "state": "active"
+    },
+    {
+      "productId": "p10",
+      "musicId": "7638820719146322751",
+      "fingerprint": null,
+      "duplicateOf": null,
+      "state": "active"
+    },
+    {
+      "productId": "p10",
+      "musicId": "7608492773783784211",
+      "fingerprint": null,
+      "duplicateOf": null,
+      "state": "active"
+    },
+    {
+      "productId": "p10",
+      "musicId": "7581989200090745615",
+      "fingerprint": null,
+      "duplicateOf": null,
+      "state": "active"
+    },
+    {
+      "productId": "p10",
+      "musicId": "7587377966254934826",
+      "fingerprint": null,
+      "duplicateOf": null,
+      "state": "active"
+    },
+    {
+      "productId": "p10",
+      "musicId": "7591288933632232238",
+      "fingerprint": null,
+      "duplicateOf": null,
+      "state": "active"
+    },
+    {
+      "productId": "p10",
+      "musicId": "7616511784760937257",
+      "fingerprint": null,
+      "duplicateOf": null,
+      "state": "active"
+    },
+    {
+      "productId": "p10",
+      "musicId": "7606621037767052070",
+      "fingerprint": null,
+      "duplicateOf": null,
+      "state": "active"
+    },
+    {
+      "productId": "p10",
+      "musicId": "7583300513758268223",
+      "fingerprint": null,
+      "duplicateOf": null,
+      "state": "active"
+    },
+    {
+      "productId": "p10",
+      "musicId": "7612657657031248655",
+      "fingerprint": null,
+      "duplicateOf": null,
+      "state": "active"
+    },
+    {
+      "productId": "p10",
+      "musicId": "7613330173718547238",
+      "fingerprint": null,
+      "duplicateOf": null,
+      "state": "active"
+    },
+    {
+      "productId": "p10",
+      "musicId": "7643835334220073743",
+      "fingerprint": null,
+      "duplicateOf": null,
+      "state": "active"
+    },
+    {
+      "productId": "p10",
+      "musicId": "7627072752742042387",
+      "fingerprint": null,
+      "duplicateOf": null,
+      "state": "active"
+    },
+    {
+      "productId": "p10",
+      "musicId": "7587419527796919082",
+      "fingerprint": null,
+      "duplicateOf": null,
+      "state": "active"
+    },
+    {
+      "productId": "p10",
+      "musicId": "7591173181877029678",
+      "fingerprint": null,
+      "duplicateOf": null,
+      "state": "active"
+    },
+    {
+      "productId": "p10",
+      "musicId": "7589595669664549666",
+      "fingerprint": null,
+      "duplicateOf": null,
+      "state": "active"
+    },
+    {
+      "productId": "p10",
+      "musicId": "7595091391936498459",
+      "fingerprint": null,
+      "duplicateOf": null,
+      "state": "active"
+    },
+    {
+      "productId": "p10",
+      "musicId": "7587340023603776298",
+      "fingerprint": null,
+      "duplicateOf": null,
+      "state": "active"
+    },
+    {
+      "productId": "p10",
+      "musicId": "7644112350877944616",
+      "fingerprint": null,
+      "duplicateOf": null,
+      "state": "active"
+    },
+    {
+      "productId": "p10",
+      "musicId": "7589281452003052315",
+      "fingerprint": null,
+      "duplicateOf": null,
+      "state": "active"
+    },
+    {
+      "productId": "p10",
+      "musicId": "7637456774341167907",
+      "fingerprint": null,
+      "duplicateOf": null,
+      "state": "active"
+    },
+    {
+      "productId": "p10",
+      "musicId": "7601751422752934675",
+      "fingerprint": null,
+      "duplicateOf": null,
+      "state": "active"
+    },
+    {
+      "productId": "p10",
+      "musicId": "7595164586754083647",
+      "fingerprint": null,
+      "duplicateOf": null,
+      "state": "active"
+    },
+    {
+      "productId": "p10",
+      "musicId": "7586169880152394502",
+      "fingerprint": null,
+      "duplicateOf": null,
+      "state": "active"
+    },
+    {
+      "productId": "p10",
+      "musicId": "7586178298702695231",
+      "fingerprint": null,
+      "duplicateOf": null,
+      "state": "active"
+    },
+    {
+      "productId": "p10",
+      "musicId": "7584444420248455999",
+      "fingerprint": null,
+      "duplicateOf": null,
+      "state": "active"
+    },
+    {
+      "productId": "p10",
+      "musicId": "7618540971566910246",
+      "fingerprint": null,
+      "duplicateOf": null,
+      "state": "active"
+    },
+    {
+      "productId": "p10",
+      "musicId": "7586334110336240393",
+      "fingerprint": null,
+      "duplicateOf": null,
+      "state": "active"
+    },
+    {
+      "productId": "p10",
+      "musicId": "7601158050472397606",
+      "fingerprint": null,
+      "duplicateOf": null,
+      "state": "active"
+    },
+    {
+      "productId": "p10",
+      "musicId": "7583575071491820339",
+      "fingerprint": null,
+      "duplicateOf": null,
+      "state": "active"
+    },
+    {
+      "productId": "p10",
+      "musicId": "7589516633392073515",
+      "fingerprint": null,
+      "duplicateOf": null,
+      "state": "active"
+    },
+    {
+      "productId": "p10",
+      "musicId": "7589475715100281638",
+      "fingerprint": null,
+      "duplicateOf": null,
+      "state": "active"
+    },
+    {
+      "productId": "p10",
+      "musicId": "7586294132125354786",
+      "fingerprint": null,
+      "duplicateOf": null,
+      "state": "active"
+    },
+    {
+      "productId": "p10",
+      "musicId": "7584665509719853887",
+      "fingerprint": null,
+      "duplicateOf": null,
+      "state": "active"
+    },
+    {
+      "productId": "p10",
+      "musicId": "7584409343370578707",
+      "fingerprint": null,
+      "duplicateOf": null,
+      "state": "active"
+    },
+    {
+      "productId": "p10",
+      "musicId": "7584665853380037402",
+      "fingerprint": null,
+      "duplicateOf": null,
+      "state": "active"
+    },
+    {
+      "productId": "p10",
+      "musicId": "7589491933359803162",
+      "fingerprint": null,
+      "duplicateOf": null,
+      "state": "active"
+    },
+    {
+      "productId": "p10",
+      "musicId": "7591321889264503593",
+      "fingerprint": null,
+      "duplicateOf": null,
+      "state": "active"
+    },
+    {
+      "productId": "p10",
+      "musicId": "7592456566574549766",
+      "fingerprint": null,
+      "duplicateOf": null,
+      "state": "active"
+    },
+    {
+      "productId": "p10",
+      "musicId": "7664513972632111926",
+      "fingerprint": null,
+      "duplicateOf": null,
+      "state": "active"
+    },
+    {
+      "productId": "p10",
+      "musicId": "7592250527887461126",
+      "fingerprint": null,
+      "duplicateOf": null,
+      "state": "active"
+    },
+    {
+      "productId": "p10",
+      "musicId": "7590036166540495670",
+      "fingerprint": null,
+      "duplicateOf": null,
+      "state": "active"
+    },
+    {
+      "productId": "p10",
+      "musicId": "7586336597143030537",
+      "fingerprint": null,
+      "duplicateOf": null,
+      "state": "active"
+    },
+    {
+      "productId": "p10",
+      "musicId": "7583391316283312905",
+      "fingerprint": null,
+      "duplicateOf": null,
+      "state": "active"
+    },
+    {
+      "productId": "p10",
+      "musicId": "7587378661066541843",
+      "fingerprint": null,
+      "duplicateOf": null,
+      "state": "active"
+    },
+    {
+      "productId": "p10",
+      "musicId": "7591328362153495305",
+      "fingerprint": null,
+      "duplicateOf": null,
+      "state": "active"
+    },
+    {
+      "productId": "p10",
+      "musicId": "7647379429475322634",
+      "fingerprint": null,
+      "duplicateOf": null,
+      "state": "active"
+    },
+    {
+      "productId": "p10",
+      "musicId": "7591308762210241318",
+      "fingerprint": null,
+      "duplicateOf": null,
+      "state": "active"
+    },
+    {
+      "productId": "p10",
+      "musicId": "7584415466949446438",
+      "fingerprint": null,
+      "duplicateOf": null,
+      "state": "active"
+    },
+    {
+      "productId": "p10",
+      "musicId": "7601361480595934002",
+      "fingerprint": null,
+      "duplicateOf": null,
+      "state": "active"
+    },
+    {
+      "productId": "p10",
+      "musicId": "7592444195118369546",
+      "fingerprint": null,
+      "duplicateOf": null,
+      "state": "active"
+    },
+    {
+      "productId": "p10",
+      "musicId": "7583295374803094299",
+      "fingerprint": null,
+      "duplicateOf": null,
+      "state": "active"
+    },
+    {
+      "productId": "p10",
+      "musicId": "7583605973953104691",
+      "fingerprint": null,
+      "duplicateOf": null,
+      "state": "active"
+    },
+    {
+      "productId": "p10",
+      "musicId": "7584489230341065522",
+      "fingerprint": null,
+      "duplicateOf": null,
+      "state": "active"
+    },
+    {
+      "productId": "p10",
+      "musicId": "7590334980258728704",
+      "fingerprint": null,
+      "duplicateOf": null,
+      "state": "active"
+    },
+    {
+      "productId": "p10",
+      "musicId": "7590279518527572782",
+      "fingerprint": null,
+      "duplicateOf": null,
+      "state": "active"
+    },
+    {
+      "productId": "p10",
+      "musicId": "7595178658329348905",
+      "fingerprint": null,
+      "duplicateOf": null,
+      "state": "active"
+    },
+    {
+      "productId": "p10",
+      "musicId": "7586360515081915155",
+      "fingerprint": null,
+      "duplicateOf": null,
+      "state": "active"
+    },
+    {
+      "productId": "p10",
+      "musicId": "7583581978391808774",
+      "fingerprint": null,
+      "duplicateOf": null,
+      "state": "active"
+    },
+    {
+      "productId": "p10",
+      "musicId": "7586324296251886355",
+      "fingerprint": null,
+      "duplicateOf": null,
+      "state": "active"
+    },
+    {
+      "productId": "p10",
+      "musicId": "7586179244479105834",
+      "fingerprint": null,
+      "duplicateOf": null,
+      "state": "active"
+    },
+    {
+      "productId": "p10",
+      "musicId": "7595082088213269289",
+      "fingerprint": null,
+      "duplicateOf": null,
+      "state": "active"
+    },
+    {
+      "productId": "p10",
+      "musicId": "7589479943143475987",
+      "fingerprint": null,
+      "duplicateOf": null,
+      "state": "active"
+    },
+    {
+      "productId": "p10",
+      "musicId": "7587392893553953586",
+      "fingerprint": null,
+      "duplicateOf": null,
+      "state": "active"
+    },
+    {
+      "productId": "p10",
+      "musicId": "7601532005049928491",
+      "fingerprint": null,
+      "duplicateOf": null,
+      "state": "active"
+    },
+    {
+      "productId": "p10",
+      "musicId": "7587354930197957414",
+      "fingerprint": null,
+      "duplicateOf": null,
+      "state": "active"
+    },
+    {
+      "productId": "p10",
+      "musicId": "7592596626884037419",
+      "fingerprint": null,
+      "duplicateOf": null,
+      "state": "active"
+    },
+    {
+      "productId": "p10",
+      "musicId": "7614509200001600265",
+      "fingerprint": null,
+      "duplicateOf": null,
+      "state": "active"
+    },
+    {
+      "productId": "p10",
+      "musicId": "7638952674683194138",
+      "fingerprint": null,
+      "duplicateOf": null,
+      "state": "active"
+    },
+    {
+      "productId": "p10",
+      "musicId": "7671867843511831305",
+      "fingerprint": null,
+      "duplicateOf": null,
+      "state": "active"
+    },
+    {
+      "productId": "p10",
+      "musicId": "7672745706623978266",
+      "fingerprint": null,
+      "duplicateOf": null,
+      "state": "active"
+    },
+    {
+      "productId": "p10",
+      "musicId": "7645232430156417846",
+      "fingerprint": null,
+      "duplicateOf": null,
+      "state": "active"
+    },
+    {
+      "productId": "p10",
+      "musicId": "7589663399110363940",
+      "fingerprint": null,
+      "duplicateOf": null,
+      "state": "active"
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+# Local history and developer-only files must never be published.
+.git/
+bak/
+*.bak
+*.bak_*
+index.html.bak*
+_surge_*
+bookmarklet.html
+comment_guard.user.js
+hooks_delivery_0826.md
+long_*.json

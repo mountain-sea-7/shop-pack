@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "pool_type": "legacy_event_caption",
+  "items": [
+    {
+      "id": "table-tennis-team-title",
+      "type": "legacy_event_caption",
+      "sport": "乒乓球",
+      "text": "国乒男团3:0横扫日本，伦敦世乒赛完成团体12连冠。少年意气挥如剑，问鼎乒坛天下惊，这份统治力谁看了不热血？ #国乒 #乒乓球 #王楚钦 #伦敦世乒赛 #体育"
+    },
+    {
+      "id": "snooker-title-decider",
+      "type": "legacy_event_caption",
+      "sport": "斯诺克",
+      "text": "2026斯诺克世锦赛决赛，吴宜泽18:17双赛点力克肖恩·墨菲夺冠。关键时刻敢出手，才是大赛经验最硬的底气。 #吴宜泽 #肖恩墨菲 #斯诺克 #世锦赛 #比赛现场"
+    },
+    {
+      "id": "li-yueru-wnba",
+      "type": "legacy_event_caption",
+      "sport": "篮球",
+      "text": "WNBA常规赛，李月汝替补出战23分钟砍下10分10篮板，正负值+17全场最高，帮助飞翼逆转取胜。中国女篮姑娘太争气了！ #李月汝 #中国女篮 #WNBA #篮球 #为国争光"
+    },
+    {
+      "id": "wemby-west-finals",
+      "type": "legacy_event_caption",
+      "sport": "NBA",
+      "text": "文班亚马拿下西决MVP，马刺抢七淘汰雷霆晋级总决赛。年轻球队一路高歌猛进，这次他们能把势头带到最后吗？ #文班亚马 #马刺 #雷霆 #NBA总决赛 #NBA"
+    },
+    {
+      "id": "wemby-overtime-three",
+      "type": "legacy_event_caption",
+      "sport": "NBA",
+      "text": "马刺加时落后3分，文班亚马过半场直接命中超远三分扳平比分。这个射程加上敢出手的气魄，确实让人服气。 #文班亚马 #马刺 #NBA季后赛 #篮球 #关键球"
+    },
+    {
+      "id": "table-tennis-comeback",
+      "type": "legacy_event_caption",
+      "sport": "乒乓球",
+      "text": "绝境里的每一次相持，才最能看出冠军队的底色。国乒团体赛顶住压力拿下关键分，拼到最后就是不服输。 #国乒 #乒乓球 #团体赛 #关键分 #体育"
+    }
+  ]
+}
